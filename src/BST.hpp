@@ -71,6 +71,7 @@ void BSTree<K,T>::insert_from(const K& key, const T& value, BSTNode<K,T>* currNo
 
 template <typename K, typename T>
 BSTNode<K,T>* BSTree<K,T>::get_most_left(BSTNode<K,T>* currNode) const {
+
   auto tmp = currNode;
   while (tmp -> left != nullptr) {
     tmp = tmp -> left.get();
@@ -88,7 +89,7 @@ class BSTree<K,T>::Iterator {
   const T& operator*() const {return currNode -> content.second;}
 
 
-  BSTNode<K,T>* get() { return currNode; }
+  BSTNode<K,T>* get() { return currNode; } //returns pointer to the node the iterator is on
 
   Iterator& operator++() {
     currNode = currNode -> get_next();
@@ -101,29 +102,35 @@ class BSTree<K,T>::Iterator {
 };
 
 
+
 template <typename K, typename T>
-typename BSTree<K,T>::Iterator BSTree<K,T>::position_of(const K& key) {
+typename BSTree<K,T>::Iterator BSTree<K,T>::position_of(const K& key) { // need ‘typename’ before ‘BSTree<K, T>::Iterator’ because ‘BSTree<K, T>’ is a dependent scope
 
   auto currNode = root.get();
 
   while(currNode){
+    
     if (key < currNode -> content.first) {
       if (currNode -> hasLChild()) {
         currNode = currNode -> left.get();
       } else {
-        return Iterator{currNode};
+        return Iterator{currNode}; 
       }
+      
     } else if (key > currNode -> content.first) {
       if (currNode -> hasRChild()) {
         currNode = currNode -> right.get();
       } else {
         return Iterator{currNode};
       }
-    } else
+    }
+     else
       return Iterator{currNode};
   }
+  
+  std::cout<<"Weird"<<std::endl;
   return end(); //for when the tree is empty maybe? probably it serves no purpose
-
+  //ERROR HANDLING HERE!
 }
 
 template <typename K, typename T>
@@ -135,10 +142,10 @@ void BSTree<K,T>::insert(const K& key, const T& value) {
     return;
   }
 
-  auto currNode = this -> position_of(key).get();
+  auto currNode = this -> position_of(key).get();//it's positioned where you need to append 
   
   if (key > currNode -> content.first){
-    currNode -> right.reset( new BSTNode<K,T>(key, value, nullptr, nullptr, currNode)); 
+    currNode -> right.reset( new BSTNode<K,T>(key, value, nullptr, nullptr, currNode->parent)); 
     size += 1;
   } else if (key < currNode -> content.first){
     currNode -> left.reset( new BSTNode<K,T>(key, value, nullptr, nullptr, currNode));
@@ -156,11 +163,25 @@ typename BSTree<K,T>::Iterator BSTree<K,T>::find(const K& key) {
 
   if (root == nullptr || currNode ->content.first != key ) {
     std::cout<<"key not found"<<std::endl;
-    return end();
+    return end(); //error handling
   }
 
   return Iterator{currNode};
 
+}
+
+template <typename K, typename T>
+void BSTree<K,T>::clear(){
+  root.reset();
+  std::cout<<"Emptying your tree"<<std::endl;
+}
+
+
+template <typename K, typename T>
+void BSTree<K,T>::print(){
+   for (auto it=(*this).begin(); it!=nullptr; ++it){
+    std::cout<<*it<<std::endl;
+  }
 }
 
 
