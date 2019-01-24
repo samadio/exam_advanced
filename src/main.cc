@@ -33,15 +33,16 @@ int main() {
   auto find_it = tree.position_of(3);
   std::cout<<*find_it<<std::endl;
 
-  for (auto it=tree.begin(); it!=nullptr; ++it){
-    std::cout<<*it<<std::endl;
-  }  
+  tree.print();
+//  tree.clear();
 
+/*
   auto newit = tree.find(3);
   std::cout<<*newit<<std::endl;
 
   newit = tree.find(1212);
-
+  */
+ 
 
 
   return 0;

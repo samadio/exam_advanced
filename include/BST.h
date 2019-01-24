@@ -36,30 +36,25 @@ public:
   bool hasLChild(){ return left!=nullptr; }
   bool hasRChild(){ return right!=nullptr; }
 
-  bool isLChild(){ return ( parent && (this == parent -> left.get()) ); }
-  bool isRChild(){ return ( parent && (this == parent -> right.get()) ); }
-
-  BSTNode* get_next() { // const iterators are needed
+  BSTNode* get_next() {
     auto currNode = this;
     if (currNode -> hasRChild()) {
       currNode = currNode ->right.get();
-      while (currNode -> hasLChild()) {
-        currNode = currNode -> left.get();
+      while(currNode->left!=nullptr){
+        currNode=currNode->left.get();
       }
       return currNode;
-    } else {
-      while ( currNode -> isLChild() == false && currNode -> parent != nullptr ) {
-        currNode = currNode -> parent;
-      }
-      return currNode -> parent;
+    } else {  //if there's no right child
+    return currNode -> parent;	}
+//        currNode = currNode -> parent;
+      //}
+//      return currNode -> parent;	}
     }
-  }
 
 
 };
 
 }
-
 
 
 
@@ -82,7 +77,7 @@ class BSTree {
   
   class Iterator;
   class ConstIterator;
-  Iterator begin() { return Iterator{get_most_left(root.get())}; }
+  Iterator begin() { return Iterator{get_most_left(root.get())  }; }
   Iterator end() { return Iterator{nullptr}; }
   
 
@@ -92,11 +87,15 @@ class BSTree {
 
   Iterator position_of(const K& key);
   
+  void clear();
+  
+  void print();
+  
   private:
 
   //void insert_from(const K& key, const T& value, BSTNode<K,T>* currNode) const;
 
-  BSTNode<K,T>* get_most_left(BSTNode<K,T>* currNode) const;
+  BSTNode<K,T>* get_most_left(BSTNode<K,T>* currNode) const; 
 
 
 
