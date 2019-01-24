@@ -34,6 +34,8 @@ int main() {
   std::cout<<*find_it<<std::endl;
 
   tree.print();
+  
+  std::cout<<tree<<std::endl;
 //  tree.clear();
 
 /*

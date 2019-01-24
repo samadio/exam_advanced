@@ -86,7 +86,7 @@ class BSTree<K,T>::Iterator {
 
   public:
   Iterator(BSTNode<K,T>* n) : currNode{n} {}
-  const T& operator*() const {return currNode -> content.second;}
+  T& operator*() const {return currNode -> content.second;}
 
 
   BSTNode<K,T>* get() { return currNode; } //returns pointer to the node the iterator is on
@@ -163,7 +163,7 @@ typename BSTree<K,T>::Iterator BSTree<K,T>::find(const K& key) {
 
   if (root == nullptr || currNode ->content.first != key ) {
     std::cout<<"key not found"<<std::endl;
-    return end(); //error handling
+    return end(); //error handling? No: assignment asks for it
   }
 
   return Iterator{currNode};
@@ -184,5 +184,25 @@ void BSTree<K,T>::print(){
   }
 }
 
+//REASON FOR CONSTITERATOR
+
+
+template <typename K, typename T>
+std::ostream& operator<<(std::ostream& os, const BSTree<K,T>& t){
+
+  for (const auto& nodes : t)
+    os << nodes << " ";
+  os << std::endl;
+  
+return os;
+}
+
+template <typename K,typename T>
+class BSTree<K,T>::ConstIterator : public BSTree<K,T>::Iterator {
+ public:
+  using parent = BSTree<K,T>::Iterator;
+  using parent::Iterator;
+  const T& operator*() const { return parent::operator*(); }
+};
 
 #endif

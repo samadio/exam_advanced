@@ -21,7 +21,7 @@ class BSTNode {
 
 public:
 
-  std::pair<const K, const T> content;
+  std::pair<K, T> content;
   std::unique_ptr<BSTNode> left;
   std::unique_ptr<BSTNode> right;
   BSTNode* parent;
@@ -80,6 +80,9 @@ class BSTree {
   Iterator begin() { return Iterator{get_most_left(root.get())  }; }
   Iterator end() { return Iterator{nullptr}; }
   
+  ConstIterator cbegin() { return ConstIterator{get_most_left(root.get())  }; }
+  ConstIterator cend() { return ConstIterator{nullptr}; }
+  
 
   void insert(const K& key, const T& value);
 
@@ -91,15 +94,13 @@ class BSTree {
   
   void print();
   
+//  std::ostream& operator<<(std::ostream& os, const BSTree<K,T>& tree);
+
   private:
 
   //void insert_from(const K& key, const T& value, BSTNode<K,T>* currNode) const;
 
   BSTNode<K,T>* get_most_left(BSTNode<K,T>* currNode) const; 
-
-
-
-
 
 };
 
