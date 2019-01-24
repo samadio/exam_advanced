@@ -21,7 +21,7 @@ class BSTNode {
 
 public:
 
-  std::pair<K, T> content;
+  std::pair<const K, T> content;
   std::unique_ptr<BSTNode> left;
   std::unique_ptr<BSTNode> right;
   BSTNode* parent;
@@ -29,7 +29,10 @@ public:
 
   BSTNode() {std::cout<<"CIAO"<<std::endl;};
 
-  BSTNode(const K& key, const T& value, BSTNode* _left=nullptr, BSTNode* _right=nullptr, BSTNode* _parent=nullptr) : content{std::make_pair(key, value)}, left{_left}, right{_right}, parent{_parent} {std::cout<<"Constructing Node"<<std::endl;};
+  BSTNode(const K& key, T& value, BSTNode* _left=nullptr, BSTNode* _right=nullptr, BSTNode* _parent=nullptr) : content{std::make_pair(key, value)}, left{_left}, right{_right}, parent{_parent} {std::cout<<"Constructing Const Node"<<std::endl;};
+
+  BSTNode(std::pair<const K,T> _content, BSTNode* _left=nullptr, BSTNode* _right=nullptr, BSTNode* _parent=nullptr) : content{_content}, left{_left}, right{_right}, parent{_parent} {std::cout<<"Constructing pair Node"<<std::endl;};
+
 
   ~BSTNode() noexcept = default;
 
@@ -84,7 +87,9 @@ class BSTree {
   ConstIterator cend() const { return ConstIterator{nullptr}; }
   
 
-  void insert(const K& key, const T& value);
+  void insert(const K& key, T value);
+  
+  void insert_pair(std::pair<const K, T>);
 
   Iterator find(const K& key);
 
