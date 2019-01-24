@@ -29,17 +29,19 @@ int main() {
   tree.insert(13,13);
   tree.insert(1,1);
 
-
+  std::cout<<"Searching for key 3"<<std::endl;
   auto find_it = tree.position_of(3);
-  std::cout<<*find_it<<std::endl;
+  std::cout<<(*find_it).second<<std::endl;
 
+  std::cout<<"tree print"<<std::endl;
   tree.print();
   
+  std::cout<<"cout tree"<<std::endl;
   std::cout<<tree<<std::endl;
-  tree.clear();
   tree.insert(5,5);
   tree.insert(6,6);
   tree.print();
+  tree.clear();
 
 /*
   auto newit = tree.find(3);

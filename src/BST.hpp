@@ -27,48 +27,6 @@ template <typename K, typename T>
 using BSTNode =  NodeNamespace::BSTNode<K,T>;
 
 
-
-/*
-template <typename K, typename T>
-void BSTree<K,T>::insert(K&& key, T&& value) {
-  if (root == nullptr){
-    root.reset(new BSTNode<K,T>{key, value, nullptr, nullptr, nullptr});
-    size = 1;
-    return;
-  } else {
-    std::cout<<"Is not root, will add BSTNode, by rvalue ref"<<std::endl;
-    insert_from(key, value, root.get());
-    size += 1;
-  }
-}
-*/
-
-
-/*
-//must increase size
-template <typename K, typename T>
-void BSTree<K,T>::insert_from(const K& key, const T& value, BSTNode<K,T>* currNode) const {
-  if (key == currNode -> content.first) {
-    std::cout << "key already present, nothing happens" << std::endl;
-  }
-  if (key < currNode -> content.first) {
-    if (currNode -> hasLChild()) {
-      insert_from(key, value, currNode -> left.get());
-    } else {
-      currNode -> left.reset( new BSTNode<K,T>(key, value, nullptr, nullptr, currNode));
-    }
-  }
-  if (key > currNode -> content.first) {
-    if (currNode -> hasRChild()) {
-      insert_from(key, value, currNode -> right.get());
-    } else {
-      currNode -> right.reset( new BSTNode<K,T>(key, value, nullptr, nullptr, currNode));
-    }
-  }
-}
-*/
-
-
 template <typename K, typename T>
 BSTNode<K,T>* BSTree<K,T>::get_most_left(BSTNode<K,T>* currNode) const {
 
@@ -86,7 +44,7 @@ class BSTree<K,T>::Iterator {
 
   public:
   Iterator(BSTNode<K,T>* n) : currNode{n} {}
-  T& operator*() const {return currNode -> content.second;}
+  std::pair<K,T> operator*() const {return currNode -> content;}
 
 
   BSTNode<K,T>* get() { return currNode; } //returns pointer to the node the iterator is on
@@ -180,7 +138,7 @@ void BSTree<K,T>::clear(){
 template <typename K, typename T>
 void BSTree<K,T>::print(){
    for (auto it=(*this).begin(); it!=nullptr; ++it){
-    std::cout<<*it<<std::endl;
+    std::cout<<(*it).second<<std::endl;
   }
 }
 
@@ -191,7 +149,7 @@ template <typename K, typename T>
 std::ostream& operator<<(std::ostream& os, const BSTree<K,T>& t){
 
   for (auto it=t.cbegin();it!=nullptr;++it){
-    os << *it << " ";
+    os << (*it).first << " " <<(*it).second<< "\n";
   }
 return os;
 }
@@ -201,7 +159,7 @@ class BSTree<K,T>::ConstIterator : public BSTree<K,T>::Iterator {
  public:
   using parent = BSTree<K,T>::Iterator;
   using parent::Iterator;
-  const T& operator*() const { return parent::operator*(); }
+  const std::pair<K,T> operator*() const { return parent::operator*(); }
 };
 
 #endif
