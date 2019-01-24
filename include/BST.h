@@ -71,6 +71,33 @@ class BSTree {
   int size = 0;
 
   BSTree() {std::cout<<"Defalut Tree constructor"<<std::endl;};
+  ~BSTree() noexcept=default;
+  
+  /*copy ctor
+  BSTree (const BSTree& t): root{}, size{0} {
+  std::cout << "copy ctor\n";
+  
+  }
+
+  
+  
+  //copy assignment
+  
+  BSTree& operator=(BSTree& t) {
+    root.reset();
+    
+  }
+  
+  BSTree& operator=(const BSTree& t){
+    root.reset();
+    auto temp= t;
+    (*this) = std::move(temp);
+    return *this;
+  }*/
+  
+  // default move semantic works good
+  BSTree<K,T>(BSTree<K,T>&&) = default;
+  BSTree<K,T>&	 operator=(BSTree<K,T>&&) = default;
 
   //void insert(const K& key, const T& value);
   //void insert( K&& key, T&& value);
