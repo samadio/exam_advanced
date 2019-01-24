@@ -1,4 +1,3 @@
-# exam_advanced
 Private repository for advanced programming exam
 
 To do:
@@ -14,3 +13,4 @@ where to use const keyword, where to use pairs instead of the single K,T (privat
 tests and report
 
 python
+

@@ -36,7 +36,10 @@ int main() {
   tree.print();
   
   std::cout<<tree<<std::endl;
-//  tree.clear();
+  tree.clear();
+  tree.insert(5,5);
+  tree.insert(6,6);
+  tree.print();
 
 /*
   auto newit = tree.find(3);
