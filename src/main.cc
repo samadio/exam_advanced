@@ -41,6 +41,7 @@ int main() {
   tree.insert(5,5);
   tree.insert(6,6);
   tree.print();
+  std::cout<<"Content of key 6 is "<<tree[6]<<std::endl;
   tree.clear();
 
 /*

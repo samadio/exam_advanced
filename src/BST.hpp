@@ -44,7 +44,7 @@ class BSTree<K,T>::Iterator {
 
   public:
   Iterator(BSTNode<K,T>* n) : currNode{n} {}
-  std::pair<K,T> operator*() const {return currNode -> content;}
+  std::pair<K,T>& operator*() const {return currNode -> content;}
 
 
   BSTNode<K,T>* get() { return currNode; } //returns pointer to the node the iterator is on
@@ -57,6 +57,14 @@ class BSTree<K,T>::Iterator {
   bool operator==(const Iterator& other) { return currNode == other.currNode; }
   bool operator!=(const Iterator& other) { return !(*this == other); }
 
+};
+
+template <typename K,typename T>
+class BSTree<K,T>::ConstIterator : public BSTree<K,T>::Iterator {
+ public:
+  using parent = BSTree<K,T>::Iterator;
+  using parent::Iterator;
+  const std::pair<K,T>& operator*() const { return parent::operator*(); }
 };
 
 
@@ -142,9 +150,6 @@ void BSTree<K,T>::print(){
   }
 }
 
-//REASON FOR CONSTITERATOR
-
-
 template <typename K, typename T>
 std::ostream& operator<<(std::ostream& os, const BSTree<K,T>& t){
 
@@ -154,12 +159,24 @@ std::ostream& operator<<(std::ostream& os, const BSTree<K,T>& t){
 return os;
 }
 
-template <typename K,typename T>
-class BSTree<K,T>::ConstIterator : public BSTree<K,T>::Iterator {
- public:
-  using parent = BSTree<K,T>::Iterator;
-  using parent::Iterator;
-  const std::pair<K,T> operator*() const { return parent::operator*(); }
-};
+/*
+optional implement the value_type& operator[](const key_type& k) function int the const and non-const versions). This functions, should return a reference to the value associated to the key k. If the key is not present, a new node with key k is allocated having the value value_type{}.
+*/
+
+template <typename K, typename T>
+T& BSTree<K,T>::operator[](const K& k){
+  if(find(k)!=end())return (*find(k)).second;
+  std::cout<<"no key found, inserting new node with content default value"<<std::endl;;
+  insert(k,T{});
+  return (*find(k)).second;
+}
+
+template <typename K, typename T>
+const T& BSTree<K,T>::operator[](const K& k) const{
+  if(find(k)!=end())return (*find(k)).second;
+  std::cout<<"no key found, inserting new node with content default value"<<std::endl;;
+  insert(k,T{});
+  return (*find(k)).second;
+}
 
 #endif

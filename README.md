@@ -7,7 +7,7 @@ copy and move semantics for the tree
 
 (optionals): operator []
 
-where to use const keyword, where to use pairs instead of the single K,T (private/public?)
+where to use const keyword, where to use pairs instead of the single K,T. noexcept!!
 
 
 tests and report

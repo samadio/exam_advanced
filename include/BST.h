@@ -94,7 +94,8 @@ class BSTree {
   
   void print();
   
-//  std::ostream& operator<<(std::ostream& os, const BSTree<K,T>& tree);
+  T& operator[](const K& k) ;
+  const T& operator[](const K& k) const;
 
   private:
 
