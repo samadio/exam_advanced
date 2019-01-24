@@ -13,13 +13,13 @@
 
 int main() {
   
-  int a = 1;
+  const int a = 3;
   NodeNamespace::BSTNode<int,int> test;
 
   auto tree = BSTree<int,int>();
   tree.insert(8,8);
-  tree.insert(3,3);
   tree.insert(a,a);
+  tree.insert(1,1);
   tree.insert(10,10);
   tree.insert(6,6);
   tree.insert(4,4);
@@ -43,10 +43,10 @@ int main() {
   tree.print();
   tree.clear();
  
-
+  const int b = 3;
   auto testtree = BSTree<int,int>();
   testtree.insert_pair(std::make_pair(8,8));
-  testtree.insert_pair(std::make_pair(3,3));
+  testtree.insert_pair(std::make_pair(b,b));
   testtree.insert_pair(std::make_pair(1,1));
   testtree.insert_pair(std::make_pair(10,10));
   testtree.insert_pair(std::make_pair(6,6));
