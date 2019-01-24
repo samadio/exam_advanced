@@ -29,7 +29,7 @@ public:
 
   BSTNode() {std::cout<<"CIAO"<<std::endl;};
 
-  BSTNode(const K& key, T& value, BSTNode* _left=nullptr, BSTNode* _right=nullptr, BSTNode* _parent=nullptr) : content{std::make_pair(key, value)}, left{_left}, right{_right}, parent{_parent} {std::cout<<"Constructing Const Node"<<std::endl;};
+  BSTNode(const K& key, T& value, BSTNode* _left=nullptr, BSTNode* _right=nullptr, BSTNode* _parent=nullptr) : content{std::make_pair(key, value)}, left{_left}, right{_right}, parent{_parent} {std::cout<<"Constructing Node"<<std::endl;};
 
   BSTNode(std::pair<const K,T> _content, BSTNode* _left=nullptr, BSTNode* _right=nullptr, BSTNode* _parent=nullptr) : content{_content}, left{_left}, right{_right}, parent{_parent} {std::cout<<"Constructing pair Node"<<std::endl;};
 

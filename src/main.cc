@@ -13,14 +13,13 @@
 
 int main() {
   
-  int a =1, b=2;
+  int a = 1;
   NodeNamespace::BSTNode<int,int> test;
-//  auto test2 = BSTNode<int,int>(a,b);
 
   auto tree = BSTree<int,int>();
   tree.insert(8,8);
   tree.insert(3,3);
-  tree.insert(1,1);
+  tree.insert(a,a);
   tree.insert(10,10);
   tree.insert(6,6);
   tree.insert(4,4);
@@ -29,9 +28,10 @@ int main() {
   tree.insert(13,13);
   tree.insert(1,1);
 
-  std::cout<<"Searching for key 3"<<std::endl;
+  std::cout<<"Searching for key 3 and editing the content to 3000"<<std::endl;
   auto find_it = tree.position_of(3);
-  std::cout<<(*find_it).second<<std::endl;
+  find_it .get() -> content.second = 3000;
+ // find_it.get() -> content.first = 3000; //compiler error
 
   std::cout<<"tree print"<<std::endl;
   tree.print();
@@ -42,13 +42,6 @@ int main() {
   tree.insert(6,6);
   tree.print();
   tree.clear();
-
-/*
-  auto newit = tree.find(3);
-  std::cout<<*newit<<std::endl;
-
-  newit = tree.find(1212);
-  */
  
 
   auto testtree = BSTree<int,int>();
@@ -63,7 +56,14 @@ int main() {
   testtree.insert_pair(std::make_pair(13,13));
   testtree.insert_pair(std::make_pair(1,1));
 
+  std::cout<<"Searching for key 3 and editing the content to 3000"<<std::endl;
+  auto test_it = testtree.position_of(3);
+  test_it.get() -> content.second = 3000; //works fine
+ // test_it.get() -> content.first = 3000; //compiler error
+  
+
   testtree.print();
+
 
   return 0;
 }
