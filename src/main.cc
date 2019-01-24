@@ -51,6 +51,19 @@ int main() {
   */
  
 
+  auto testtree = BSTree<int,int>();
+  testtree.insert_pair(std::make_pair(8,8));
+  testtree.insert_pair(std::make_pair(3,3));
+  testtree.insert_pair(std::make_pair(1,1));
+  testtree.insert_pair(std::make_pair(10,10));
+  testtree.insert_pair(std::make_pair(6,6));
+  testtree.insert_pair(std::make_pair(4,4));
+  testtree.insert_pair(std::make_pair(7,7));
+  testtree.insert_pair(std::make_pair(14,14));
+  testtree.insert_pair(std::make_pair(13,13));
+  testtree.insert_pair(std::make_pair(1,1));
+
+  testtree.print();
 
   return 0;
 }

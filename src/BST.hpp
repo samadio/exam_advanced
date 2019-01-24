@@ -92,8 +92,8 @@ typename BSTree<K,T>::Iterator BSTree<K,T>::position_of(const K& key) { // need 
 }
 
 template <typename K, typename T>
-void BSTree<K,T>::insert(const K& key, const T& value) {
-
+void BSTree<K,T>::insert(const K& key, T value) {
+// now value is passed by-value, so it can be edited
   if (root == nullptr){
     root.reset(new BSTNode<K,T>{key, value, nullptr, nullptr, nullptr});
     size = 1;
@@ -113,6 +113,32 @@ void BSTree<K,T>::insert(const K& key, const T& value) {
   }
 }
 
+
+
+
+//test insert pair
+template <typename K, typename T>
+void BSTree<K,T>::insert_pair(std::pair<const K, T> d) {
+
+  if (root == nullptr){
+    root.reset(new BSTNode<K,T>{d, nullptr, nullptr, nullptr});
+    size = 1;
+    return;
+  }
+
+  auto currNode = this -> position_of(d.first).get();//it's positioned where you need to append 
+  
+  if (d.first > currNode -> content.first){
+    currNode -> right.reset( new BSTNode<K,T>(d, nullptr, nullptr, currNode->parent)); 
+    size += 1;
+  } else if (d.first < currNode -> content.first){
+    currNode -> left.reset( new BSTNode<K,T>(d, nullptr, nullptr, currNode));
+    size += 1;
+  } else {
+    std::cout<<"key already present, nothing happens"<<std::endl;
+  }
+}
+//end test insert pair
 
 template <typename K, typename T>
 typename BSTree<K,T>::Iterator BSTree<K,T>::find(const K& key) {
