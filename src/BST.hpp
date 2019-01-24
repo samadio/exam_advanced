@@ -190,10 +190,9 @@ void BSTree<K,T>::print(){
 template <typename K, typename T>
 std::ostream& operator<<(std::ostream& os, const BSTree<K,T>& t){
 
-  for (const auto& nodes : t)
-    os << nodes << " ";
-  os << std::endl;
-  
+  for (auto it=t.cbegin();it!=nullptr;++it){
+    os << *it << " ";
+  }
 return os;
 }
 

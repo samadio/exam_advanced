@@ -80,8 +80,8 @@ class BSTree {
   Iterator begin() { return Iterator{get_most_left(root.get())  }; }
   Iterator end() { return Iterator{nullptr}; }
   
-  ConstIterator cbegin() { return ConstIterator{get_most_left(root.get())  }; }
-  ConstIterator cend() { return ConstIterator{nullptr}; }
+  ConstIterator cbegin() const { return ConstIterator{get_most_left(root.get())  }; }
+  ConstIterator cend() const { return ConstIterator{nullptr}; }
   
 
   void insert(const K& key, const T& value);
