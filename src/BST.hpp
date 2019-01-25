@@ -150,8 +150,9 @@ void BSTree<K,T>::clear(){
 template <typename K, typename T>
 void BSTree<K,T>::print() const {
    for (auto it=(*this).cbegin(); it!=nullptr; ++it){
-    std::cout<<(*it).second<<" "<<std::endl;
+    std::cout<<(*it).second<<" ";
   }
+  std::cout<<std::endl;
 }
 
 template <typename K, typename T>
@@ -202,6 +203,16 @@ std::ostream& operator<<(std::ostream& os, const BSTree<K,T>& t) {
     os << (*it).first << ": " <<(*it).second<< "\n";
   }
 return os;
+}
+
+
+template <typename K, typename T>
+void BSTree<K,T>::copy_tree(const BSTNode<K,T>* currNode) {
+  if (currNode != nullptr){
+    insert(currNode -> content);
+    copy_tree(currNode -> left.get());
+    copy_tree(currNode -> right.get());
+  }
 }
 
 #endif

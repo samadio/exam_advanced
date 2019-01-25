@@ -17,8 +17,7 @@ int main() {
 //  NodeNamespace::BSTNode<int,int> test;
 
 //  auto test2 = BSTNode<int,int>(a,b);
-  auto copy = BSTree<int,int>();
-  auto tree = BSTree<const int, const int>();
+  auto tree = BSTree<int,int>();
 
 
   tree.insert(8,8);
@@ -35,7 +34,14 @@ int main() {
   tree.print();
   std::cout<<"Balancing time"<<std::endl;
   tree.balance();
+  
   tree.print();
+
+
+  BSTree<int,int> test_copy{tree};
+  test_copy.print();
+
+
 /*  for(auto& x:tree){			for works
   std::cout<<*x<<std::endl;
   } */

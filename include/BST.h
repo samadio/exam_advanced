@@ -32,7 +32,7 @@ public:
 
   BSTNode() {std::cout<<"CIAO"<<std::endl;};
 
-  BSTNode(const K& key, const T& value, BSTNode* _left=nullptr, BSTNode* _right=nullptr, BSTNode* _parent=nullptr) : content{std::make_pair(key, value)}, left{_left}, right{_right}, parent{_parent} {std::cout<<"Constructing Node"<<std::endl;};
+  BSTNode(const K& key, const T& value, BSTNode* _left=nullptr, BSTNode* _right=nullptr, BSTNode* _parent=nullptr) : content{std::make_pair(key, value)}, left{_left}, right{_right}, parent{_parent} {};
 
   ~BSTNode() noexcept = default;
 
@@ -88,21 +88,14 @@ class BSTree {
   
 
   public:
+
   //  copy ctor
-  BSTree (const BSTree& t): root{}, size{} {
-    std::cout << "copy ctor\n";
-    //creating a map with insert order
-    std::map<int, std::pair<const K,T>> vine;
-    for (auto it=t.cbegin();it!=nullptr;++it){  
-      vine.insert(std::pair<int,std::pair<const K,T>>(it.get()->insert_order,*it));
-    }
-    //inserting nodes in new tree according to insert order
-    for(auto it=vine.begin();it!=vine.end();++it){
-      (*this).insert(it->second);
-    }
+  BSTree (const BSTree& t) {
+    copy_tree(t.get_root());
+    std::cout<<"uouooo copiooo"<<std::endl;
   }
-  
-  
+ 
+
   //copy assignments
   
   BSTree& operator=(const BSTree& t){
@@ -117,11 +110,22 @@ class BSTree {
   BSTree<K,T>(BSTree<K,T>&&) = default;
   BSTree<K,T>& operator=(BSTree<K,T>&&) = default;
   
+  /*! BSTree iterator */
   class Iterator;
+  /*! BSTree constiterator */
   class ConstIterator;
+  /*! 
+   * @brief first element for iterating a BSTree.
+   * @return iterator to the leftmost node.
+   */
   Iterator begin() { return Iterator{get_most_left(root.get())  }; }
+  /*! 
+   * @brief last element for iterating a BSTree
+   * @return iterator to nullptr.
+   */
   Iterator end() { return Iterator{nullptr}; }
   
+
   ConstIterator cbegin() const { return ConstIterator{get_most_left(root.get())  }; }
   ConstIterator cend() const { return ConstIterator{nullptr}; }
   
@@ -180,9 +184,15 @@ class BSTree {
   */
   T& operator[](const K& k) ;
 
-//  const T& operator[](const K& k) const;
+  // const T& operator[](const K& k) const;
 
   private:
+
+  //! Auxiliary function for the copy constructor, returns pointer to root node.
+  BSTNode<K,T>* get_root() const {return root.get();}
+
+  //! Auxiliary function for the copy constructor.
+  void copy_tree(const BSTNode<K,T>* currNode);
 
   //! Auxiliary function for the insert(key, value) and find(key) methods.
   /*!
@@ -215,3 +225,21 @@ class BSTree {
 #include "../src/BST.hpp"
 
 #endif //BST_H
+
+
+
+
+  /*
+  BSTree (const BSTree& t): root{}, size{} {
+    std::cout << "copy ctor\n";
+    //creating a map with insert order
+    std::map<int, std::pair<const K,T>> vine;
+    for (auto it=t.cbegin();it!=nullptr;++it){  
+      vine.insert(std::pair<int,std::pair<const K,T>>(it.get()->insert_order,*it));
+    }
+    //inserting nodes in new tree according to insert order
+    for(auto it=vine.begin();it!=vine.end();++it){
+      (*this).insert(it->second);
+    }
+  }
+ */ 
