@@ -4,10 +4,10 @@
 /**
  * @file BST.h
  * @brief BST header file
- * @author Patrick Indri
- * @date 26/12/18
+ * @author Amadio Simone, Indri Patrick
+ * @date 25/01/19
  * 
- * More detailed description of what the file contains/declares/implements.
+ * 
 */
 
 #include <memory>
@@ -23,7 +23,7 @@ class BSTNode {
 
 public:
 
-  std::pair<K, T> content;
+  std::pair<const K, T> content;
   std::unique_ptr<BSTNode> left;
   std::unique_ptr<BSTNode> right;
   BSTNode* parent;
@@ -62,6 +62,12 @@ public:
 template <typename K, typename T>
 using BSTNode =  NodeNamespace::BSTNode<K,T>;
 
+/**
+ * @class BSTree
+ * @breif Binary Search Tree implementation.
+ *
+ *
+ */
 template <typename K, typename T>
 class BSTree {
 
@@ -71,9 +77,17 @@ class BSTree {
 
   int size = 0;
 
-  BSTree() {std::cout<<"Defalut Tree constructor"<<std::endl;};
+  BSTree() = default;
+  BSTree(const K& key, const T& value) : root{}, size{} {insert(key, value);}
+  BSTree(const std::pair<const K, T>& data) : root{}, size{} {insert(data);}
+  
   ~BSTree() noexcept=default;
   
+  private:
+  BSTNode<K,T>* get_most_left(BSTNode<K,T>* currNode) const; 
+  
+
+  public:
   //  copy ctor
   BSTree (const BSTree& t): root{}, size{} {
     std::cout << "copy ctor\n";
@@ -85,9 +99,7 @@ class BSTree {
     //inserting nodes in new tree according to insert order
     for(auto it=vine.begin();it!=vine.end();++it){
       (*this).insert(it->second);
-//      std::cout<<it->second.first<<std::endl;
     }
- 
   }
   
   
@@ -103,7 +115,7 @@ class BSTree {
     
   // default move semantic works good
   BSTree<K,T>(BSTree<K,T>&&) = default;
-  BSTree<K,T>&	 operator=(BSTree<K,T>&&) = default;
+  BSTree<K,T>& operator=(BSTree<K,T>&&) = default;
   
   class Iterator;
   class ConstIterator;
@@ -113,29 +125,89 @@ class BSTree {
   ConstIterator cbegin() const { return ConstIterator{get_most_left(root.get())  }; }
   ConstIterator cend() const { return ConstIterator{nullptr}; }
   
-
+  //! Inserts a node passing a key and a value separately.
+  /*! Calls position_of(key) to find where the node should be appended. If the key
+   * is already present, does nothing. Otherwise a new node is created.
+   *
+   * @param key key entry of the node.
+   * @param value content associated to key.
+   * @return none
+   */
   void insert(const K& key, const T& value);
+
+  //! Inserts a node passing a std::pair<key, value>.
+  /*! Separates std::pair and calls insert(key, value).
+   *
+   * @param d pair of key-value
+   * @return none
+   */
   void insert(const std::pair<const K, T>& d);
 
-  Iterator find(const K& key);
+  Iterator find(const K& key) const;
 
-  Iterator position_of(const K& key);
-  
+  //! Wipes out the tree.
+  /*! 
+   * Resets the root to nullptr, causing all the other nodes to be deleted.
+   * The tree is left uninitialized, but still usable.
+   *
+   * @param none
+   * @return none
+   */
   void clear();
   
-  void print();
+  /*! Prints the value in all the nodes, traversing the tree in order.
+   *
+   * @param none
+   * @return none
+   */
+  void print() const;
   
+  //! Balances the tree.
+  /*!
+   * The tree is linearized into a vector of std::pair<key,value>.
+   * Then calls clear() and the auxiliary function balance(vector, begin, end).
+   *
+   * @param none
+   * @return none
+   */
   void balance();
-  void balance(std::vector<std::pair<const K, T>>& vine, const int&  begin, const int& end);
   
+  /*! Returns the value associated with key if found. Otherwise, appends a node
+  * with the desired key and the default value.
+  *
+  * @param k key to be found/inserted.
+  * @return the value associated with the key k.
+  */
   T& operator[](const K& k) ;
-  const T& operator[](const K& k) const;
+
+//  const T& operator[](const K& k) const;
 
   private:
 
-  //void insert_from(const K& key, const T& value, BSTNode<K,T>* currNode) const;
+  //! Auxiliary function for the insert(key, value) and find(key) methods.
+  /*!
+   * If the requested key is present, returns and iterator pointing to the node
+   * that contains it (exploited by find(key)). Otherwise, it returns an iterator
+   * pointing to the node N. The key should be contained in a node inserted as a
+   * child of N (exploited by the insert(key,value)).
+   *
+   * @param key key to be found.
+   * @return iterator to node required.
+   */
+  Iterator position_of(const K& key) const;
 
-  BSTNode<K,T>* get_most_left(BSTNode<K,T>* currNode) const; 
+  //! Iteratively builds a balanced tree starting from an ordered std::vector
+  /*!
+   * Builds a balanced tree appending the middle element of the vector,
+   * and then iteratively calling itself to append the middle element of the
+   * two halves, with begin and end as the extremes of the halves.
+   *
+   * @param vine std::vector of std::pair<key, value> ordered by key.
+   * @param begin index of the first element to be considered.
+   * @param end index of the last element to be considered.
+   */
+  void balance(std::vector<std::pair<const K, T>>& vine, const int&  begin, const int& end);
+
 
 };
 

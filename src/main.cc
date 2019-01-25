@@ -13,15 +13,16 @@
 
 int main() {
   
-  const int a =1, b=3;
+   const int a =1, b=3;
 //  NodeNamespace::BSTNode<int,int> test;
 
 //  auto test2 = BSTNode<int,int>(a,b);
   auto copy = BSTree<int,int>();
-  auto tree = BSTree<int,int>();
+  auto tree = BSTree<const int, const int>();
+
 
   tree.insert(8,8);
-  tree.insert(b,b);
+  tree.insert(3,3);
   tree.insert(a,a);
   tree.insert(10,10);
   tree.insert(6,6);
@@ -70,13 +71,20 @@ int main() {
   newtree.print(); //check's fine
   tree.insert(42,42); 
   tree.print();
+*/
 
-  auto newit = tree.find(3);
-  std::cout<<*newit<<std::endl;
+//  auto newit = tree.find(3);
+//  std::cout<<(*newit).first<<std::endl;
+ // (*newit).first = 223432; // compiler errror, as expected
+//  (*newit).second = 223432; // compiler errror, as expected
 
-  newit = tree.find(1212);
-  */
+//  tree[3]+=1;
+  std::cout<< tree[3]<< std::endl;
+
+//  newit = tree.find(1212);
  
+  auto data = std::make_pair<int,int>(44,44);
+  auto test2 = BSTree<int,int>(data);
 
 
   return 0;

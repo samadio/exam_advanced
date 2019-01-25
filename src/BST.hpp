@@ -41,7 +41,7 @@ class BSTree<K,T>::Iterator {
 
   public:
   Iterator(BSTNode<K,T>* n) : currNode{n} {}
-  std::pair<K,T>& operator*() const {return currNode -> content;}
+  std::pair<const K,T>& operator*() const {return currNode -> content;}
 
 
   BSTNode<K,T>* get() { return currNode; } //returns pointer to the node the iterator is on
@@ -61,13 +61,13 @@ class BSTree<K,T>::ConstIterator : public BSTree<K,T>::Iterator {
  public:
   using parent = BSTree<K,T>::Iterator;
   using parent::Iterator;
-  const std::pair<K,T>& operator*() const { return parent::operator*(); }
+  const std::pair<const K,T>& operator*() const { return parent::operator*(); }
 };
 
 
 
 template <typename K, typename T>
-typename BSTree<K,T>::Iterator BSTree<K,T>::position_of(const K& key) { // need ‘typename’ before ‘BSTree<K, T>::Iterator’ because ‘BSTree<K, T>’ is a dependent scope
+typename BSTree<K,T>::Iterator BSTree<K,T>::position_of(const K& key) const { // need ‘typename’ before ‘BSTree<K, T>::Iterator’ because ‘BSTree<K, T>’ is a dependent scope
 
   auto currNode = root.get();
 
@@ -92,7 +92,7 @@ typename BSTree<K,T>::Iterator BSTree<K,T>::position_of(const K& key) { // need 
   }
   
   std::cout<<"Weird"<<std::endl;
-  return end(); //for when the tree is empty maybe? probably it serves no purpose
+ // return end(); //for when the tree is empty maybe? probably it serves no purpose
   //ERROR HANDLING HERE!
 }
 
@@ -127,13 +127,13 @@ void BSTree<K,T>::insert(const std::pair<const K, T>& d) {
 
 
 template <typename K, typename T>
-typename BSTree<K,T>::Iterator BSTree<K,T>::find(const K& key) {
+typename BSTree<K,T>::Iterator BSTree<K,T>::find(const K& key) const {
 
   auto currNode = this -> position_of(key).get();
 
   if (root == nullptr || currNode ->content.first != key ) {
     std::cout<<"key not found"<<std::endl;
-    return end(); //error handling? No: assignment asks for it
+    return cend(); //error handling? why cend? No: assignment asks for it
   }
 
   return Iterator{currNode};
@@ -148,61 +148,60 @@ void BSTree<K,T>::clear(){
 
 
 template <typename K, typename T>
-void BSTree<K,T>::print(){
-   for (auto it=(*this).begin(); it!=nullptr; ++it){
+void BSTree<K,T>::print() const {
+   for (auto it=(*this).cbegin(); it!=nullptr; ++it){
     std::cout<<(*it).second<<" "<<std::endl;
   }
 }
 
 template <typename K, typename T>
-std::ostream& operator<<(std::ostream& os, const BSTree<K,T>& t){
-
-  for (auto it=t.cbegin();it!=nullptr;++it){
-    os << (*it).first << " " <<(*it).second<< "\n";
-  }
-return os;
-}
-
-/*
-optional implement the value_type& operator[](const key_type& k) function int the const and non-const versions). This functions, should return a reference to the value associated to the key k. If the key is not present, a new node with key k is allocated having the value value_type{}.
-*/
-
-template <typename K, typename T>
-T& BSTree<K,T>::operator[](const K& k){
-  if(find(k)!=end())return (*find(k)).second;
-  std::cout<<"no key found, inserting new node with content default value"<<std::endl;;
-  insert(k,T{});
-  return (*find(k)).second;
-}
-
-template <typename K, typename T>
-const T& BSTree<K,T>::operator[](const K& k) const{
-  if(find(k)!=end())return (*find(k)).second;
-  std::cout<<"no key found, inserting new node with content default value"<<std::endl;;
-  insert(k,T{});
-  return (*find(k)).second;
-}
-
-template <typename K, typename T>
 void BSTree<K,T>::balance(){
-    //create a vector ordered by key containing all the pairs (key,value)
-    std::vector<std::pair<const K,T> > vine;
-    for(auto it=this->begin();it!=this->end();++it){
-      vine.push_back(*it);
-    }
-    this->clear();
-    balance(vine,0,vine.size() -1);
-    //
- }
+  //create a vector ordered by key containing all the pairs (key,value)
+  std::vector<std::pair<const K,T> > vine;
+  for(auto it=this->begin();it!=this->end();++it){
+    vine.push_back(*it);
+  }
+  this->clear();
+  balance(vine,0,vine.size() -1);
+}
  
 template <typename K, typename T>
 void BSTree<K,T>::balance(std::vector<std::pair<const K, T>>& vine, const int&  begin, const int& end){
-        if (begin > end) return;
-    int median = begin + (end-begin)/2;
-    this->insert(vine[median]);
-    balance(vine, begin, median-1);
-    balance(vine, median+1, end);
-  }
+  if (begin > end) return;
+  int median = begin + (end-begin)/2;
+  this->insert(vine[median]);
+  balance(vine, begin, median-1);
+  balance(vine, median+1, end);
+}
 
+
+template <typename K, typename T>
+T& BSTree<K,T>::operator[](const K& k){
+  std::cout<< " non const quadratno" << std::endl;
+  if(find(k)!=end())return (*find(k)).second;
+  std::cout<<"no key found, inserting new node with content default value"<<std::endl;;
+  insert(k,T{});
+  return (*find(k)).second;
+}
+
+/*
+template <typename K, typename T>
+const T& BSTree<K,T>::operator[](const K& k) const{
+  std::cout<< "const quadratno" << std::endl;
+  if(find(k)!=cend())return (*find(k)).second;
+  std::cout<<"no key found, inserting new node with content default value"<<std::endl;;
+  insert(k,T{});
+  return (*find(k)).second;
+}*/
+
+
+template <typename K, typename T>
+std::ostream& operator<<(std::ostream& os, const BSTree<K,T>& t) {
+
+  for (auto it=t.cbegin();it!=nullptr;++it){
+    os << (*it).first << ": " <<(*it).second<< "\n";
+  }
+return os;
+}
 
 #endif
