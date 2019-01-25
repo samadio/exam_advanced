@@ -13,16 +13,15 @@
 
 int main() {
   
-  const int a =1, b=2;
+  const int a =1, b=3;
 //  NodeNamespace::BSTNode<int,int> test;
 
 //  auto test2 = BSTNode<int,int>(a,b);
-//  auto copy = BSTree<int,int>();
+  auto copy = BSTree<int,int>();
   auto tree = BSTree<int,int>();
-//  BSTree<int,int> copy{tree};
 
   tree.insert(8,8);
-  tree.insert(3,3);
+  tree.insert(b,b);
   tree.insert(a,a);
   tree.insert(10,10);
   tree.insert(6,6);
@@ -31,8 +30,15 @@ int main() {
   tree.insert(14,14);
   tree.insert(13,13);
   tree.insert(1,1);
+  
+  copy=tree;
+  copy.print();
+  
+//  BSTree<int,int> copy_tree{tree};
+//  tree.print();
+//  copy_tree.print();
 
-  std::cout<<"Searching for key 3"<<std::endl;
+/*  std::cout<<"Searching for key 3"<<std::endl;
   auto find_it = tree.position_of(3);
   std::cout<<(*find_it).second<<std::endl;
 
@@ -47,7 +53,7 @@ int main() {
   std::cout<<"Content of key 2 is "<<tree[2]<<std::endl;
   //tree.clear();
   
-  //copy=tree;
+  //copy=tree;*/
   
 /*  auto newtree{std::move(tree)};
   std::cout<<"test move ctor"<<std::endl;

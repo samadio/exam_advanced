@@ -13,6 +13,7 @@
 #include <memory>
 #include <utility>
 #include <iostream>
+#include<map>
 
 namespace NodeNamespace {
 
@@ -25,6 +26,7 @@ public:
   std::unique_ptr<BSTNode> left;
   std::unique_ptr<BSTNode> right;
   BSTNode* parent;
+  int insert_order=1;
 
 
   BSTNode() {std::cout<<"CIAO"<<std::endl;};
@@ -73,28 +75,33 @@ class BSTree {
   BSTree() {std::cout<<"Defalut Tree constructor"<<std::endl;};
   ~BSTree() noexcept=default;
   
-  /*copy ctor
-  BSTree (const BSTree& t): root{}, size{0} {
-  std::cout << "copy ctor\n";
-  
+  //  copy ctor
+  BSTree (const BSTree& t): root{}, size{} {
+    std::cout << "copy ctor\n";
+    //creating a map with insert order
+    std::map<int, std::pair<const K,T>> vine;
+    for (auto it=t.cbegin();it!=nullptr;++it){  
+      vine.insert(std::pair<int,std::pair<const K,T>>(it.get()->insert_order,*it));
+    }
+    //inserting nodes in new tree according to insert order
+    for(auto it=vine.begin();it!=vine.end();++it){
+      (*this).insert(it->second);
+//      std::cout<<it->second.first<<std::endl;
+    }
+ 
   }
-
   
   
-  //copy assignment
-  
-  BSTree& operator=(BSTree& t) {
-    root.reset();
-    
-  }
+  //copy assignments
   
   BSTree& operator=(const BSTree& t){
-    root.reset();
-    auto temp= t;
+    this->clear();
+    std::cout<<"copy assignement"<<std::endl;
+    BSTree temp{t};
     (*this) = std::move(temp);
     return *this;
-  }*/
-  
+  }
+    
   // default move semantic works good
   BSTree<K,T>(BSTree<K,T>&&) = default;
   BSTree<K,T>&	 operator=(BSTree<K,T>&&) = default;
@@ -112,6 +119,7 @@ class BSTree {
   
 
   void insert(const K& key, const T& value);
+  void insert(const std::pair<const K, T>& d);
 
   Iterator find(const K& key);
 

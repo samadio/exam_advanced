@@ -113,12 +113,19 @@ void BSTree<K,T>::insert(const K& key, const T& value) {
   if (key > currNode -> content.first){
     currNode -> right.reset( new BSTNode<K,T>(key, value, nullptr, nullptr, currNode->parent)); 
     size += 1;
+    currNode->right->insert_order=size;
   } else if (key < currNode -> content.first){
     currNode -> left.reset( new BSTNode<K,T>(key, value, nullptr, nullptr, currNode));
     size += 1;
+    currNode->left->insert_order=size;
   } else {
     std::cout<<"key already present, nothing happens"<<std::endl;
   }
+}
+
+template <typename K, typename T>
+void BSTree<K,T>::insert(const std::pair<const K, T>& d) {
+  insert(d.first,d.second);
 }
 
 
@@ -146,7 +153,7 @@ void BSTree<K,T>::clear(){
 template <typename K, typename T>
 void BSTree<K,T>::print(){
    for (auto it=(*this).begin(); it!=nullptr; ++it){
-    std::cout<<(*it).second<<std::endl;
+    std::cout<<(*it).second<<" "<<std::endl;
   }
 }
 
