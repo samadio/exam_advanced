@@ -14,6 +14,7 @@
 #include <utility>
 #include <iostream>
 #include<map>
+#include<vector>
 
 namespace NodeNamespace {
 
@@ -48,15 +49,13 @@ public:
       return currNode;
     } else {  //if there's no right child
     return currNode -> parent;	}
-//        currNode = currNode -> parent;
-      //}
-//      return currNode -> parent;	}
     }
 
 
 };
 
 }
+
 
 
 
@@ -105,9 +104,6 @@ class BSTree {
   // default move semantic works good
   BSTree<K,T>(BSTree<K,T>&&) = default;
   BSTree<K,T>&	 operator=(BSTree<K,T>&&) = default;
-
-  //void insert(const K& key, const T& value);
-  //void insert( K&& key, T&& value);
   
   class Iterator;
   class ConstIterator;
@@ -128,6 +124,9 @@ class BSTree {
   void clear();
   
   void print();
+  
+  void balance();
+  void balance(std::vector<std::pair<const K, T>>& vine, const int&  begin, const int& end);
   
   T& operator[](const K& k) ;
   const T& operator[](const K& k) const;

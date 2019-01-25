@@ -16,10 +16,7 @@
 
 # include "BST.h"
 
-
 //NODE IMPLEMENTATION
-
-
 
 //METHODS FOR BSTREE IMPLEMENTATION
 
@@ -118,9 +115,9 @@ void BSTree<K,T>::insert(const K& key, const T& value) {
     currNode -> left.reset( new BSTNode<K,T>(key, value, nullptr, nullptr, currNode));
     size += 1;
     currNode->left->insert_order=size;
-  } else {
+  } else if (key==currNode->content.first){
     std::cout<<"key already present, nothing happens"<<std::endl;
-  }
+  } else {std::cout<<"PRINT ERROR"<<std::endl;}
 }
 
 template <typename K, typename T>
@@ -185,5 +182,27 @@ const T& BSTree<K,T>::operator[](const K& k) const{
   insert(k,T{});
   return (*find(k)).second;
 }
+
+template <typename K, typename T>
+void BSTree<K,T>::balance(){
+    //create a vector ordered by key containing all the pairs (key,value)
+    std::vector<std::pair<const K,T> > vine;
+    for(auto it=this->begin();it!=this->end();++it){
+      vine.push_back(*it);
+    }
+    this->clear();
+    balance(vine,0,vine.size() -1);
+    //
+ }
+ 
+template <typename K, typename T>
+void BSTree<K,T>::balance(std::vector<std::pair<const K, T>>& vine, const int&  begin, const int& end){
+        if (begin > end) return;
+    int median = begin + (end-begin)/2;
+    this->insert(vine[median]);
+    balance(vine, begin, median-1);
+    balance(vine, median+1, end);
+  }
+
 
 #endif

@@ -31,9 +31,13 @@ int main() {
   tree.insert(13,13);
   tree.insert(1,1);
   
-  copy=tree;
-  copy.print();
-  
+  tree.print();
+  std::cout<<"Balancing time"<<std::endl;
+  tree.balance();
+  tree.print();
+/*  for(auto& x:tree){			for works
+  std::cout<<*x<<std::endl;
+  } */
 //  BSTree<int,int> copy_tree{tree};
 //  tree.print();
 //  copy_tree.print();
