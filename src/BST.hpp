@@ -23,7 +23,7 @@
 
 struct error{
   std::string message;
-  error(const std::string& s) noexcept: message{s} {}
+  explicit error(const std::string& s) noexcept: message{s} {}
 };
 
 
@@ -68,7 +68,7 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
 
     public:
   
-    Iterator(BSTNode<K,T>* n) : currNode{n} {}
+    explicit Iterator(BSTNode<K,T>* n) : currNode{n} {}
     std::pair<const K,T>& operator*() const {return currNode -> content;}
 
 
@@ -158,7 +158,7 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
   template <typename K, typename T>
   void BSTree<K,T>::print() const {
     
-     for (auto it=(*this).cbegin(); it!=nullptr; ++it){
+     for (auto it=(*this).cbegin(); it!=(*this).cend(); ++it){
       std::cout<<(*it).second<<" ";
     }
     std::cout<<std::endl;

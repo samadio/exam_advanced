@@ -94,7 +94,7 @@ int main() {
 
     test2 = tree;
     test2.print();
-    std::cout<<"Tree size "<<tree.length()<<std::endl;
+    std::cout<<"Tree size "<<tree.size_of()<<std::endl;
     
     test2.clear();
     test2.find(2);

@@ -28,7 +28,7 @@ public:
 
   BSTNode() = default;
 
-  BSTNode(const std::pair<const K, T>& data): content{data} , left{nullptr}, right{nullptr}, parent{nullptr} {};
+  explicit BSTNode(const std::pair<const K, T>& data): content{data} , left{nullptr}, right{nullptr}, parent{nullptr} {};
   
   BSTNode(const std::pair<const K, T>& data, BSTNode* _parent): content{data} , left{nullptr}, right{nullptr}, parent{_parent} {};
 
@@ -64,7 +64,7 @@ class BSTree {
   
   public:
   
-  int& length(){return this->size;}
+  int& size_of(){return this->size;}
 
   /*!
    * @brief Default BSTree constructor.
@@ -79,7 +79,7 @@ class BSTree {
   /*!
    * @brief BSTree constructor accepting a std::pair<key,value> inserted as root.
    */
-  BSTree(const std::pair<const K, T>& data) : root{}, size{} {insert(data);}
+  explicit BSTree(const std::pair<const K, T>& data) : root{}, size{} {insert(data);}
   
   /*!
    * @brief Default BSTree destructor.
