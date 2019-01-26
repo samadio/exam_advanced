@@ -15,7 +15,7 @@ OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 $(ODIR)/%.o: %.cc $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-$(ODIR)/%.o: %.hpp $(DEPS)
+$(ODIR)/%.o: BST.hpp $(DEPS)
 	$(CC) -c -x c++ -o $@ $< $(CFLAGS)
 
 main.x: $(OBJ) 

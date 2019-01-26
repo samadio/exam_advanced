@@ -232,16 +232,14 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
       } else return Iterator{currNode};
 
     }
-    std::string newmessage{"Your tree is empty or the inserted key ("};
-    std::stringstream keycontent{};
-    std::cout<<"1"<<std::endl;
-    keycontent<<(std::cout<<key ).rdbuf();
-    std::cout<<"1"<<std::endl;
-    newmessage+=keycontent.str()+") of type ";
+ 
+    std::cout<<"Exception throwned: Key inserted: "<<key<<" is of type: ";
     std::stringstream keytype{};
     keytype << (   std::cout<<  (typeid(key).name())  ).rdbuf();
-    newmessage+=keytype.str()+" has undefined behaviour"; 
-    throw error{newmessage}; //prints every object for which << has been overloaded
+    std::cout<<keytype.str()<<std::endl;
+       
+    
+    throw error{"Your tree is empty or the inserted key has undefined behaviour "}; //prints every object for which << has been overloaded
   }
 
 //+ std::string( (std::cout<<typeid(key).name()))+
