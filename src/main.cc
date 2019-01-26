@@ -97,7 +97,12 @@ int main() {
     std::cout<<"Tree size "<<tree.size_of()<<std::endl;
     
     test2.clear();
-    test2.find(2);
+  //  test2.find(a);
+
+    auto err= BSTree<std::string,int>();
+
+    err.insert("Ciao",2);
+//    err.find(2); 		//the compiler stops you either....
     
     return 0;
     
