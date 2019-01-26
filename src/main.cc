@@ -92,6 +92,8 @@ int main() {
   auto data = std::make_pair<int,int>(44,44);
   auto test2 = BSTree<int,int>(data);
 
+  test2 = tree;
+  test2.print();
 
   return 0;
 }
