@@ -12,10 +12,10 @@ DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
 _OBJ = main.o BST.o 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
-$(ODIR)/%.o: %.cc $(DEPS)
+$(ODIR)/%.o: %.cc $(DEPS) BST.hpp
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-$(ODIR)/%.o: BST.hpp $(DEPS)
+$(ODIR)/%.o: %.hpp $(DEPS)
 	$(CC) -c -x c++ -o $@ $< $(CFLAGS)
 
 main.x: $(OBJ) 

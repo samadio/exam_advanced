@@ -97,7 +97,7 @@ int main() {
     std::cout<<"Tree size "<<tree.size_of()<<std::endl;
     
     test2.clear();
-  //  test2.find(a);
+    test2.find(a);
 
     auto err= BSTree<std::string,int>();
 

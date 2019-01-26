@@ -4,11 +4,11 @@
  * @file BST.cc
  * @brief Here all the fancy classes and things will be implemented
  *
- * @author William Wilson
+ * @authors Amadio Simone, Patrick Indri
  *
- * @date 2/2/23
+ * @date 24/01/19
  *
- * Details on the implementation of all the fancy things
+ * Details on the implementation of all methods
 	 */
 
 #ifndef BST_HPP
@@ -112,7 +112,7 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
       return;
     }
     
-    auto currNode = this -> position_of(data.first).get();//it's positioned where you need to append 
+    auto currNode = (this -> position_of(data.first)).get();//it's positioned where you need to append 
     
     if (data > currNode -> content) {
       currNode -> right.reset( new BSTNode<K,T>{data, currNode -> parent}); 
@@ -122,7 +122,15 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
       size += 1;
     } else if (data == currNode -> content) {
       std::cout<<"key already present, nothing happens"<<std::endl;
-    } else{ throw error{"Key not recognized as comparable with the previouses"}; }
+    } else{
+    std::cout<<"Exception throwned: Key inserted: "<<data.first<<" is of type: ";
+    std::stringstream keytype{};
+    keytype << (   std::cout<<  (typeid(data.first).name())  ).rdbuf();
+    std::cout<<keytype.str()<<std::endl;
+       
+    throw error{"Your key's not <,> nor ==  respect to the previous keys"};
+    
+    }
 
   }
 
@@ -232,14 +240,8 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
       } else return Iterator{currNode};
 
     }
- 
-    std::cout<<"Exception throwned: Key inserted: "<<key<<" is of type: ";
-    std::stringstream keytype{};
-    keytype << (   std::cout<<  (typeid(key).name())  ).rdbuf();
-    std::cout<<keytype.str()<<std::endl;
-       
     
-    throw error{"Your tree is empty or the inserted key has undefined behaviour "}; //prints every object for which << has been overloaded
+    throw error{"You're searching in an empty tree or your root is corrupted (nullptr)"}; 
   }
 
 //+ std::string( (std::cout<<typeid(key).name()))+
