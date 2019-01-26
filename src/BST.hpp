@@ -15,6 +15,16 @@
 #define BST_HPP
 
 # include "BST.h"
+#include<typeinfo>
+#include<string>
+#include<sstream>
+
+//Error handling
+
+struct error{
+  std::string message;
+  error(const std::string& s) noexcept: message{s} {}
+};
 
 
 // BSTNode implementation
@@ -90,7 +100,7 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
 
 
 
-// Pubblic methods
+// Public methods
 
 
   template <typename K, typename T>
@@ -107,14 +117,12 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
     if (data > currNode -> content) {
       currNode -> right.reset( new BSTNode<K,T>{data, currNode -> parent}); 
       size += 1;
-      currNode->right->insert_order=size;
     } else if (data < currNode -> content) {
       currNode -> left.reset( new BSTNode<K,T>{data, currNode});
       size += 1;
-      currNode->left->insert_order=size;
     } else if (data == currNode -> content) {
       std::cout<<"key already present, nothing happens"<<std::endl;
-    } else {std::cout<<"PRINT ERROR"<<std::endl;}
+    } else{ throw error{"Key not recognized as comparable with the previouses"}; }
 
   }
 
@@ -224,14 +232,19 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
       } else return Iterator{currNode};
 
     }
-    
-    std::cout<<"Weird"<<std::endl;
-   // return end(); //for when the tree is empty maybe? probably it serves no purpose
-    //ERROR HANDLING HERE!
+    std::string newmessage{"Your tree is empty or the inserted key ("};
+    std::stringstream keycontent{};
+    std::cout<<"1"<<std::endl;
+    keycontent<<(std::cout<<key ).rdbuf();
+    std::cout<<"1"<<std::endl;
+    newmessage+=keycontent.str()+") of type ";
+    std::stringstream keytype{};
+    keytype << (   std::cout<<  (typeid(key).name())  ).rdbuf();
+    newmessage+=keytype.str()+" has undefined behaviour"; 
+    throw error{newmessage}; //prints every object for which << has been overloaded
   }
 
-  
-
+//+ std::string( (std::cout<<typeid(key).name()))+
   template <typename K, typename T>
   void BSTree<K,T>::balance(std::vector<std::pair<const K, T>>& vine, const int&  begin, const int& end) {
 
@@ -255,7 +268,7 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
     return (*find(k)).second;
   }
 
-
+  
   template <typename K, typename T>
   std::ostream& operator<<(std::ostream& os, const BSTree<K,T>& t) {
 
@@ -274,11 +287,7 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
     return *this;
   }
 
-
 #endif
-
-
-
 
 
 /*

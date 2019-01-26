@@ -13,7 +13,6 @@
 #include <memory>
 #include <utility>
 #include <iostream>
-#include<map>
 #include<vector>
 
 namespace NodeNamespace {
@@ -26,8 +25,6 @@ public:
   std::unique_ptr<BSTNode> left;
   std::unique_ptr<BSTNode> right;
   BSTNode* parent;
-  int insert_order=1;
-
 
   BSTNode() = default;
 
@@ -63,9 +60,11 @@ class BSTree {
 
   std::unique_ptr<BSTNode<K,T>> root = nullptr;
 
-public:
-
   int size = 0;
+  
+  public:
+  
+  int& length(){return this->size;}
 
   /*!
    * @brief Default BSTree constructor.
