@@ -11,6 +11,14 @@
 #include"BST.h"
 // Here all the testing will be done
 
+
+//const function to call const[] operator
+template<typename K, typename T>
+const T& BSTree<K,T>::square_bracket_test(const K& key) const{
+  return (*this)[key];
+}
+
+
 int main() {
   try{  
     const int a =1, b=3;
@@ -97,11 +105,14 @@ int main() {
     std::cout<<"Tree size "<<tree.size_of()<<std::endl;
     
     test2.clear();
-    test2.find(a);
+    test2[3]; //it calls the non const [], so inserts
+    if(test2.find(a)==tree.end()) std::cout<<"end returned"<<std::endl;
 
-    auto err= BSTree<std::string,int>();
+    test2.square_bracket_test(4);
+    
+//    auto err= BSTree<std::string,int>();
 
-    err.insert("Ciao",2);
+//    err.insert("Ciao",2);
 //    err.find(2); 		//the compiler stops you either....
     
     return 0;

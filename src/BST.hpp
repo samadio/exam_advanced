@@ -144,12 +144,11 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
 
   template <typename K, typename T>
   typename BSTree<K,T>::Iterator BSTree<K,T>::find(const K& key) const {
-
+       
     auto currNode = this -> position_of(key).get();
 
-    if (root == nullptr || currNode ->content.first != key ) {
-      std::cout<<"key not found"<<std::endl;
-      return cend(); //error handling? why cend? No: assignment asks for it
+    if (root==nullptr|| currNode ->content.first != key ) {
+      return cend();
     }
 
     return Iterator{currNode};
@@ -215,6 +214,7 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
   }
 
 
+//position_of can be called by (find method) on an empty tree, but is not an error because this is managed inside find 
   template <typename K, typename T>
   typename BSTree<K,T>::Iterator BSTree<K,T>::position_of(const K& key) const { 
   // need ‘typename’ before ‘BSTree<K, T>::Iterator’ because ‘BSTree<K, T>’ is a dependent scope
@@ -241,10 +241,10 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
 
     }
     
-    throw error{"You're searching in an empty tree or your root is corrupted (nullptr)"}; 
+    return this->cend();
   }
 
-//+ std::string( (std::cout<<typeid(key).name()))+
+
   template <typename K, typename T>
   void BSTree<K,T>::balance(std::vector<std::pair<const K, T>>& vine, const int&  begin, const int& end) {
 
@@ -262,10 +262,18 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
 
   template <typename K, typename T>
   T& BSTree<K,T>::operator[](const K& k){
-    if(find(k)!=end())return (*find(k)).second;
+    if(find(k)!=cend())return (*find(k)).second;
     std::cout<<"key not found, inserting new node with content default value"<<std::endl;;
     insert(k,T{});
     return (*find(k)).second;
+  }
+
+  
+  template <typename K, typename T>
+  const T& BSTree<K,T>::operator[](const K& k)const{
+    std::cout<<"const [ ]"<<std::endl;
+    if(find(k)!=cend())return (*find(k)).second;
+    throw error{"searching for a key in an empty tree"};
   }
 
   
@@ -288,14 +296,3 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
   }
 
 #endif
-
-
-/*
-template <typename K, typename T>
-const T& BSTree<K,T>::operator[](const K& k) const{
-  std::cout<< "const quadratno" << std::endl;
-  if(find(k)!=cend())return (*find(k)).second;
-  std::cout<<"no key found, inserting new node with content default value"<<std::endl;;
-  insert(k,T{});
-  return (*find(k)).second;
-}*/

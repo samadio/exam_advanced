@@ -212,7 +212,7 @@ class BSTree {
   */
   T& operator[](const K& k) ;
 
-  // const T& operator[](const K& k) const;
+  const T& operator[](const K& k) const;
   
   /*!
    * @brief Operator << to print a BSTree.
@@ -223,6 +223,16 @@ class BSTree {
    * @param t Const reference to the BSTree to be printed.
    * @return Reference to the OutputStream.
    */
+
+
+  /*!
+  * @brief Test function for const[] operator
+  *
+  * Trivial function declared as const which calls the const[] operator
+  * @param key: key to be searched
+  */
+
+  const T& square_bracket_test(const K& key) const;
 
 private:
 
@@ -275,8 +285,7 @@ private:
    * @param end index of the last element to be considered.
    */
   void balance(std::vector<std::pair<const K, T>>& vine, const int&  begin, const int& end);
-
-
+  
 };
 
 
