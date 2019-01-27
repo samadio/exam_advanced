@@ -273,7 +273,8 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
   const T& BSTree<K,T>::operator[](const K& k)const{
     std::cout<<"const [ ]"<<std::endl;
     if(find(k)!=cend())return (*find(k)).second;
-    throw error{"searching for a key in an empty tree"};
+    if(root==nullptr)throw error{"searching for a key in an empty or corrupted tree: root==nullptr"};
+    throw error{"searching for a non existent key"};
   }
 
   

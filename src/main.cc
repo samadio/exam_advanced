@@ -105,15 +105,17 @@ int main() {
     std::cout<<"Tree size "<<tree.size_of()<<std::endl;
     
     test2.clear();
-    test2[3]; //it calls the non const [], so inserts
+//    test2.square_bracket_test(4);  //error: empty tree
+
+    test2[3]; //it calls the non const [], so inserts a new node
     if(test2.find(a)==tree.end()) std::cout<<"end returned"<<std::endl;
 
-    test2.square_bracket_test(4);
+    test2.square_bracket_test(4);  //error:non existent key
     
 //    auto err= BSTree<std::string,int>();
 
 //    err.insert("Ciao",2);
-//    err.find(2); 		//the compiler stops you either....
+//    err.find(2); 		//the compiler stops you either
     
     return 0;
     
