@@ -13,18 +13,30 @@
 
 
 //const function to call const[] operator
-template<typename K, typename T>
-const T& BSTree<K,T>::square_bracket_test(const K& key) const{
+template<typename K, typename T, typename C>
+const T& BSTree<K,T,C>::square_bracket_test(const K& key) const{
   return (*this)[key];
 }
 
 
-int main() {
-  try{  
-    const int a =1, b=3;
-    //  NodeNamespace::BSTNode<int,int> test;
+    struct RandomKey_explicit {
+      int one, two, three;
+    };
 
-    //  auto test2 = BSTNode<int,int>(a,b);
+    struct compareh {
+      bool operator()(RandomKey_explicit bingo, RandomKey_explicit bango) const {
+        return bingo.two < bango.two;
+      }
+    };
+
+
+
+int main() {
+  
+  std::cout<<"at least it starts"<<std::endl;
+
+    const int a =1;
+
     auto tree = BSTree<int,int>();
 
 
@@ -49,84 +61,53 @@ int main() {
     BSTree<int,int> test_copy{tree};
     test_copy.print();
 
-   // tree.clear();
-   // auto empty_tree{tree};
-   // std::cout<<"printin empty tree"<<std::endl;
-   // std::cout<<empty_tree<<std::endl;
+    // test struct that contains three number, to be used as key.
+    // the ordering should be done comparing the 'two' variable
+    // apparently it works, as if std::less<K> is using the overloaded operator
+    // which is not really expected (but welcomed)
+    // ergo: there is no need to explicitely define a custom comparison function
+    struct RandomKey {
+      int one, two, three;
+      bool operator<(RandomKey other) const {
+        return two < other.two;
+      }
+    };
 
-    /*  for(auto& x:tree){			for works
-    std::cout<<*x<<std::endl;
-    } */
-    //  BSTree<int,int> copy_tree{tree};
-    //  tree.print();
-    //  copy_tree.print();
+    auto tree1 = BSTree<RandomKey, int>();
+    tree1.insert(RandomKey{0,8,41}, 8);
+    tree1.insert(RandomKey{11,3,51}, 3);
+    tree1.insert(RandomKey{13,10,1}, 10);
+    tree1.insert(RandomKey{21,6,17}, 6);
+    tree1.insert(RandomKey{1,4,18}, 4);
 
-    /*  std::cout<<"Searching for key 3"<<std::endl;
-    auto find_it = tree.position_of(3);
-    std::cout<<(*find_it).second<<std::endl;
 
-    std::cout<<"tree print"<<std::endl;
-    tree.print();
-  
-    std::cout<<"cout tree"<<std::endl;
-    std::cout<<tree<<std::endl;
-    tree.insert(5,5);
-    tree.insert(6,6);
-    tree.print();
-    std::cout<<"Content of key 2 is "<<tree[2]<<std::endl;
-    //tree.clear();
-  
-    //copy=tree;*/
-  
-    /*  auto newtree{std::move(tree)};
-    std::cout<<"test move ctor"<<std::endl;
-
-    tree.print();
-    tree.insert(71,71); //works because tree.root==nullptr
-    tree.print();
-    newtree.print(); //check's fine
-    newtree= std::move(tree);
-    newtree.print(); //check's fine
-    tree.insert(42,42); 
-    tree.print();
-    */
-
-    //  auto newit = tree.find(3);
-    //  std::cout<<(*newit).first<<std::endl;
-    // (*newit).first = 223432; // compiler errror, as expected
-    //  (*newit).second = 223432; // compiler errror, as expected
-
-    //  tree[3]+=1;
-    std::cout<< tree[3]<< std::endl;
-
-    //  newit = tree.find(1212);
- 
-    auto data = std::make_pair<int,int>(44,44);
-    auto test2 = BSTree<int,int>(data);
-
-    test2 = tree;
-    test2.print();
-    std::cout<<"Tree size "<<tree.size_of()<<std::endl;
-    
-    test2.clear();
-//    test2.square_bracket_test(4);  //error: empty tree
-
-    test2[3]; //it calls the non const [], so inserts a new node
-    if(test2.find(a)==tree.end()) std::cout<<"end returned"<<std::endl;
-
-    test2.square_bracket_test(4);  //error:non existent key
-    
-//    auto err= BSTree<std::string,int>();
-
-//    err.insert("Ciao",2);
-//    err.find(2); 		//the compiler stops you either
-    
-    return 0;
-    
-    
-  } catch(const error& e){
-    std::cerr<<"Exception encountered: "<< e.message<<std::endl;
-    return 1;
+    std::cout<<"Printing tree using custom key, with operator< overloading"<<std::endl;
+    for (auto it=tree1.cbegin();it!=tree1.cend();++it) {
+      std::cout<<(*it).first.two<<": "<<(*it).second<<std::endl;
     }
+
+
+
+
+    // this works too, it requires the functor compareh()
+    // if compareh() is omitted, the code does not compile
+    // here an error message would be good, since in this case the
+    // compiler gets quite verbose and quite uninformative. I do not think
+    // handling exceptions is easy, because the use of the functor is not 
+    // required if the struct used as key overloads the operator<
+
+    auto tree2 = BSTree<RandomKey_explicit, int, compareh>();
+    tree2.insert(RandomKey_explicit{0,8,41}, 8);
+    tree2.insert(RandomKey_explicit{11,3,51}, 3);
+    tree2.insert(RandomKey_explicit{13,10,1}, 10);
+    tree2.insert(RandomKey_explicit{21,6,17}, 6);
+    tree2.insert(RandomKey_explicit{1,4,18}, 4);
+
+
+    std::cout<<"Printing tree using custom key, functor"<<std::endl;
+    for (auto it=tree2.cbegin();it!=tree2.cend();++it) {
+      std::cout<<(*it).first.two<<": "<<(*it).second<<std::endl;
+    }
+
 
 }

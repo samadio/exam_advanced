@@ -55,15 +55,17 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
  *
  *
  */
-template <typename K, typename T>
+template <typename K, typename T, typename C = std::less<K>>
 class BSTree {
 
 
   std::unique_ptr<BSTNode<K,T>> root = nullptr;
 
   int size = 0;
+
   
   public:
+  C compare_f;
   
   const int& size_of() const noexcept {return this -> size;}
   
@@ -79,12 +81,12 @@ class BSTree {
   /*!
    * @brief BSTree constructor accepting a key and a value, inserted as root.
    */
-  BSTree(const K& key, const T& value) : root{}, size{} {insert(key, value);}
+  BSTree(const K& key, const T& value, C comp = C{}) : root{}, size{}, compare_f{comp} {insert(key, value);}
 
   /*!
    * @brief BSTree constructor accepting a std::pair<key,value> inserted as root.
    */
-  explicit BSTree(const std::pair<const K, T>& data) : root{}, size{} {insert(data);}
+  explicit BSTree(const std::pair<const K, T>& data) : root{}, size{}, compare_f{} {insert(data);}
   
   /*!
    * @brief Default BSTree destructor.
@@ -110,10 +112,10 @@ class BSTree {
   BSTree& operator=(const BSTree& t);
   
   /*! @brief Default move constructor for a BSTree. */
-  BSTree<K,T>(BSTree<K,T>&&) noexcept  = default;
+  BSTree<K,T,C>(BSTree<K,T,C>&&) noexcept  = default;
 
   /*! @brief Default move assignment for a BSTree. */
-  BSTree<K,T>& operator=(BSTree<K,T>&&) noexcept = default;
+  BSTree<K,T,C>& operator=(BSTree<K,T,C>&&) noexcept = default;
   
 
   /*! @brief BSTree iterator */

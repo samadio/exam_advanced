@@ -61,8 +61,8 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
 
 // Subclasses
 
-  template <typename K, typename T>
-  class BSTree<K,T>::Iterator {
+  template <typename K, typename T, typename C>
+  class BSTree<K,T,C>::Iterator {
 
     BSTNode<K,T>* currNode;
 
@@ -86,12 +86,12 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
 
 
 
-  template <typename K,typename T>
-  class BSTree<K,T>::ConstIterator : public BSTree<K,T>::Iterator {
+  template <typename K,typename T, typename C>
+  class BSTree<K,T,C>::ConstIterator : public BSTree<K,T,C>::Iterator {
    
     public:
     
-    using parent = BSTree<K,T>::Iterator;
+    using parent = BSTree<K,T,C>::Iterator;
     using parent::Iterator;
     
     const std::pair<const K,T>& operator*() const { return parent::operator*(); }
@@ -103,8 +103,8 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
 // Public methods
 
 
-  template <typename K, typename T>
-  bool BSTree<K,T>::insert(const std::pair<const K, T>& data) {
+  template <typename K, typename T, typename C>
+  bool BSTree<K,T,C>::insert(const std::pair<const K, T>& data) {
 
 
     if (root == nullptr) {
@@ -113,45 +113,38 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
       return true;
     }
     
-    auto currNode = (this -> position_of(data.first)).get();//it's positioned where you need to append 
+    // find the position where to append
+    auto currNode = (this -> position_of(data.first)).get();
     
-    if (data > currNode -> content) {
+    if ( compare_f(currNode -> content.first, data.first) ) {
       currNode -> right.reset( new BSTNode<K,T>{data, currNode -> parent}); 
       size += 1;
       return true;
-    } else if (data < currNode -> content) {
+    } else if ( compare_f(data.first, currNode -> content.first) ) {
       currNode -> left.reset( new BSTNode<K,T>{data, currNode});
       size += 1;
       return true;
-    } else if (data == currNode -> content) {
+    } else {
       std::cout<<"key already present, nothing happens"<<std::endl;
       return false;
-    } else {
-    std::cout<<"Exception throwned: Key inserted: "<<data.first<<" is of type: ";
-    std::stringstream keytype{};
-    keytype << (   std::cout<<  (typeid(data.first).name())  ).rdbuf();
-    std::cout<<keytype.str()<<std::endl;
-       
-    throw error{"Your key's not <,> nor ==  respect to the previous keys"};
-    }
-  
+    } 
 
   }
 
 
-  template<typename K, typename T>
-  bool BSTree<K,T>::insert(const K& key, const T& value) {
+  template<typename K, typename T, typename C>
+  bool BSTree<K,T,C>::insert(const K& key, const T& value) {
     std::pair <const K, T> data (key, value);
     return insert(data);
   }
 
 
-  template <typename K, typename T>
-  typename BSTree<K,T>::Iterator BSTree<K,T>::find(const K& key) const {
+  template <typename K, typename T, typename C>
+  typename BSTree<K,T,C>::Iterator BSTree<K,T,C>::find(const K& key) const {
        
     auto currNode = this -> position_of(key).get();
 
-    if (root==nullptr|| currNode -> content.first != key ) {
+    if ( root==nullptr || !( compare_f(key, currNode -> content.first) || compare_f(currNode -> content.first, key) ) ) {
       return cend();
     }
 
@@ -159,16 +152,16 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
   }
 
 
-  template <typename K, typename T>
-  void BSTree<K,T>::clear() noexcept {
+  template <typename K, typename T, typename C>
+  void BSTree<K,T,C>::clear() noexcept {
     root.reset();
     size = 0;
     std::cout<<"Emptying your tree."<<std::endl;
   }
 
 
-  template <typename K, typename T>
-  void BSTree<K,T>::print() const {
+  template <typename K, typename T, typename C>
+  void BSTree<K,T,C>::print() const {
     
     std::cout<<*this<<std::endl;
      /*for (auto it=(*this).cbegin(); it!=(*this).cend(); ++it){
@@ -179,8 +172,8 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
   }
 
 
-  template <typename K, typename T>
-  void BSTree<K,T>::balance(){
+  template <typename K, typename T, typename C>
+  void BSTree<K,T,C>::balance(){
     
     //create a vector ordered by key containing all the pairs (key,value)
     std::vector<std::pair<const K,T> > vine;
@@ -197,8 +190,8 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
 
 // Private methods
 
-  template <typename K, typename T>
-  BSTNode<K,T>* BSTree<K,T>::get_most_left(BSTNode<K,T>* currNode) const noexcept {
+  template <typename K, typename T, typename C>
+  BSTNode<K,T>* BSTree<K,T,C>::get_most_left(BSTNode<K,T>* currNode) const noexcept {
 
     auto tmp = currNode;
     
@@ -210,8 +203,8 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
   }
 
 
-  template <typename K, typename T>
-  void BSTree<K,T>::copy_tree(const BSTNode<K,T>* currNode) {
+  template <typename K, typename T, typename C>
+  void BSTree<K,T,C>::copy_tree(const BSTNode<K,T>* currNode) {
     
     if (currNode != nullptr) {
       insert(currNode -> content);
@@ -222,28 +215,27 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
 
 
 //position_of can be called by (find method) on an empty tree, but is not an error because this is managed inside find 
-  template <typename K, typename T>
-  typename BSTree<K,T>::Iterator BSTree<K,T>::position_of(const K& key) const { 
+  template <typename K, typename T, typename C>
+  typename BSTree<K,T,C>::Iterator BSTree<K,T,C>::position_of(const K& key) const { 
   // need ‘typename’ before ‘BSTree<K, T>::Iterator’ because ‘BSTree<K, T>’ is a dependent scope
 
     auto currNode = root.get();
 
     while (currNode) {
       
-      if (key < currNode -> content.first) {
+      if ( compare_f(key, currNode -> content.first) ) {
         if (currNode -> hasLChild()) {
           currNode = currNode -> left.get();
         } else {
           return Iterator{currNode};
         }        
-      } else if (key > currNode -> content.first) {
+      } else if ( compare_f(currNode -> content.first, key) ) {
         if (currNode -> hasRChild()) {
           currNode = currNode -> right.get();
         } else {
           return Iterator{currNode};
         }
-
-      } else return Iterator{currNode};
+      } else { return Iterator{currNode}; }
 
     }
     
@@ -251,8 +243,8 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
   }
 
 
-  template <typename K, typename T>
-  void BSTree<K,T>::balance(std::vector<std::pair<const K, T>>& vine, const int&  begin, const int& end) {
+  template <typename K, typename T, typename C>
+  void BSTree<K,T,C>::balance(std::vector<std::pair<const K, T>>& vine, const int&  begin, const int& end) {
 
     if (begin > end) return;
 
@@ -266,8 +258,8 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
 
 // Operators
 
-  template <typename K, typename T>
-  T& BSTree<K,T>::operator[](const K& k){
+  template <typename K, typename T, typename C>
+  T& BSTree<K,T,C>::operator[](const K& k){
     if(find(k)!=cend())return (*find(k)).second;
     std::cout<<"key not found, inserting new node with content default value"<<std::endl;;
     insert(k,T{});
@@ -275,8 +267,8 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
   }
 
   
-  template <typename K, typename T>
-  const T& BSTree<K,T>::operator[](const K& k)const{
+  template <typename K, typename T, typename C>
+  const T& BSTree<K,T,C>::operator[](const K& k)const{
     std::cout<<"const [ ]"<<std::endl;
     if (find(k)!=cend()) return (*find(k)).second;
     if (root==nullptr) throw error{"searching for a key in an empty or corrupted tree: root==nullptr"};
@@ -284,8 +276,8 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
   }
 
   
-  template <typename K, typename T>
-  std::ostream& operator<<(std::ostream& os, const BSTree<K,T>& t) {
+  template <typename K, typename T, typename C>
+  std::ostream& operator<<(std::ostream& os, const BSTree<K,T,C>& t) {
 
     if (t.get_root() == nullptr) throw error{"Printing an empty tree"};    
 
@@ -296,10 +288,10 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
   }
 
 
-  template <typename K, typename T>
-  BSTree<K,T>& BSTree<K,T>::operator=(const BSTree<K,T>& t) {
+  template <typename K, typename T, typename C>
+  BSTree<K,T,C>& BSTree<K,T,C>::operator=(const BSTree<K,T,C>& t) {
     this -> clear();
-    BSTree<K,T> temp{t};
+    BSTree<K,T,C> temp{t};
     (*this) = std::move(temp);
     return *this;
   }
