@@ -35,10 +35,10 @@ public:
 
   ~BSTNode() noexcept = default;
 
-  bool hasLChild(){ return left!=nullptr; }
-  bool hasRChild(){ return right!=nullptr; }
+  bool hasLChild() const noexcept { return left!=nullptr; }
+  bool hasRChild() const noexcept { return right!=nullptr; }
 
-  BSTNode* get_next();
+  BSTNode* get_next() noexcept;
 
 };
 
@@ -58,13 +58,18 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
 template <typename K, typename T>
 class BSTree {
 
+
   std::unique_ptr<BSTNode<K,T>> root = nullptr;
 
   int size = 0;
   
   public:
   
-  int& size_of(){return this->size;}
+  const int& size_of() const noexcept {return this -> size;}
+  
+  bool is_empty() const noexcept {return (root == nullptr && size == 0);}
+
+  const BSTNode<K,T>* get_root() const {return root.get();}
 
   /*!
    * @brief Default BSTree constructor.
@@ -84,7 +89,7 @@ class BSTree {
   /*!
    * @brief Default BSTree destructor.
    */
-  ~BSTree() noexcept=default;
+  ~BSTree() noexcept = default;
   
 
   /*!
@@ -94,7 +99,7 @@ class BSTree {
    *
    * @param t BSTree to be copied, passed by const reference.
    */
-  BSTree (const BSTree& t) { copy_tree(t.get_root()); }
+  BSTree (const BSTree& t) { copy_tree(t.root.get()); }
  
   /*!
    * @brief Copy assignment of a BSTree.
@@ -105,10 +110,10 @@ class BSTree {
   BSTree& operator=(const BSTree& t);
   
   /*! @brief Default move constructor for a BSTree. */
-  BSTree<K,T>(BSTree<K,T>&&) = default;
+  BSTree<K,T>(BSTree<K,T>&&) noexcept  = default;
 
   /*! @brief Default move assignment for a BSTree. */
-  BSTree<K,T>& operator=(BSTree<K,T>&&) = default;
+  BSTree<K,T>& operator=(BSTree<K,T>&&) noexcept = default;
   
 
   /*! @brief BSTree iterator */
@@ -142,23 +147,27 @@ class BSTree {
   
   /*!
    * @brief Inserts a BSTNode passing a std::pair<key,value>.
-   * Separates std::pair and calls insert(key, value).
-   *
-   * @param data Pair of key-value.
-   * @return none
-   */
-  void insert(const std::pair<const K, T>& data);
-
-  /*!
-   * @brief Inserts a node passing a key and a value separately.
    * Calls position_of(key) to find where the node should be appended. If the key
    * is already present, does nothing. Otherwise a new node is created.
    *
+   * @param data Pair of key-value.
+   * @return bool Boolean which is true if a new node was inserted,
+   * false if the key was already present.
+   */
+  bool insert(const std::pair<const K, T>& data);
+
+  /*!
+   * @brief Inserts a node passing a key and a value separately.
+   *
+   *
+   * Key and value are grouped in an std::pair<key, value>, insert() is
+   * then called passing the std::pair<key,value>.
+   *
    * @param key key entry of the node.
    * @param value content associated to key.
-   * @return none
+   * @return bool
    */
-  void insert(const K& key, const T& value);
+   bool insert(const K& key, const T& value);
 
   /*!
    * @brief Returns, if found, an iterator to the node labelled by key.
@@ -181,7 +190,7 @@ class BSTree {
    * @param none
    * @return none
    */
-  void clear();
+  void clear() noexcept;
   
   /*! 
    * @brief Prints the value in all the nodes, traversing the tree in order.
@@ -234,6 +243,7 @@ class BSTree {
 
   const T& square_bracket_test(const K& key) const;
 
+
 private:
 
   /*!
@@ -242,15 +252,7 @@ private:
    * @param currNode The root node of the subtree to be considered.
    * @return Pointer to the leftmost element.
    */
-  BSTNode<K,T>* get_most_left(BSTNode<K,T>* currNode) const; 
-
-  /*!
-   * @brief Auxiliary function for the copy constructor
-   *
-   * @param none
-   * @return Pointer to root node.
-   */
-  BSTNode<K,T>* get_root() const {return root.get();}
+  BSTNode<K,T>* get_most_left(BSTNode<K,T>* currNode) const noexcept; 
 
   /*!
    * @brief Auxiliary function for the copy constructor, performs a deep copy.

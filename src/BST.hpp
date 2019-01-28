@@ -32,7 +32,7 @@ struct error{
 // Public methods
 
 template <typename K, typename T>
-NodeNamespace::BSTNode<K,T>* NodeNamespace::BSTNode<K,T>::get_next() {
+NodeNamespace::BSTNode<K,T>* NodeNamespace::BSTNode<K,T>::get_next() noexcept {
   auto currNode = this;
   if (currNode -> hasRChild()) {
     currNode = currNode ->right.get();
@@ -74,13 +74,13 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
 
     BSTNode<K,T>* get() { return currNode; } //returns pointer to the node the iterator is on
 
-    Iterator& operator++() {
+    Iterator& operator++() noexcept {
       currNode = currNode -> get_next();
       return *this;
     }
 
-    bool operator==(const Iterator& other) { return currNode == other.currNode; }
-    bool operator!=(const Iterator& other) { return !(*this == other); }
+    bool operator==(const Iterator& other) const noexcept { return currNode == other.currNode; }
+    bool operator!=(const Iterator& other) const noexcept { return !(*this == other); }
 
   };
 
@@ -104,12 +104,13 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
 
 
   template <typename K, typename T>
-  void BSTree<K,T>::insert(const std::pair<const K, T>& data) {
+  bool BSTree<K,T>::insert(const std::pair<const K, T>& data) {
+
 
     if (root == nullptr) {
       root.reset(new BSTNode<K,T>{data});
       size = 1;
-      return;
+      return true;
     }
     
     auto currNode = (this -> position_of(data.first)).get();//it's positioned where you need to append 
@@ -117,28 +118,31 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
     if (data > currNode -> content) {
       currNode -> right.reset( new BSTNode<K,T>{data, currNode -> parent}); 
       size += 1;
+      return true;
     } else if (data < currNode -> content) {
       currNode -> left.reset( new BSTNode<K,T>{data, currNode});
       size += 1;
+      return true;
     } else if (data == currNode -> content) {
       std::cout<<"key already present, nothing happens"<<std::endl;
-    } else{
+      return false;
+    } else {
     std::cout<<"Exception throwned: Key inserted: "<<data.first<<" is of type: ";
     std::stringstream keytype{};
     keytype << (   std::cout<<  (typeid(data.first).name())  ).rdbuf();
     std::cout<<keytype.str()<<std::endl;
        
     throw error{"Your key's not <,> nor ==  respect to the previous keys"};
-    
     }
+  
 
   }
 
 
   template<typename K, typename T>
-  void BSTree<K,T>::insert(const K& key, const T& value) {
+  bool BSTree<K,T>::insert(const K& key, const T& value) {
     std::pair <const K, T> data (key, value);
-    insert(data);
+    return insert(data);
   }
 
 
@@ -147,7 +151,7 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
        
     auto currNode = this -> position_of(key).get();
 
-    if (root==nullptr|| currNode ->content.first != key ) {
+    if (root==nullptr|| currNode -> content.first != key ) {
       return cend();
     }
 
@@ -156,19 +160,22 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
 
 
   template <typename K, typename T>
-  void BSTree<K,T>::clear(){
+  void BSTree<K,T>::clear() noexcept {
     root.reset();
-    std::cout<<"Emptying your tree"<<std::endl;
+    size = 0;
+    std::cout<<"Emptying your tree."<<std::endl;
   }
 
 
   template <typename K, typename T>
   void BSTree<K,T>::print() const {
     
-     for (auto it=(*this).cbegin(); it!=(*this).cend(); ++it){
+    std::cout<<*this<<std::endl;
+     /*for (auto it=(*this).cbegin(); it!=(*this).cend(); ++it){
       std::cout<<(*it).second<<" ";
     }
     std::cout<<std::endl;
+    */
   }
 
 
@@ -191,7 +198,7 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
 // Private methods
 
   template <typename K, typename T>
-  BSTNode<K,T>* BSTree<K,T>::get_most_left(BSTNode<K,T>* currNode) const {
+  BSTNode<K,T>* BSTree<K,T>::get_most_left(BSTNode<K,T>* currNode) const noexcept {
 
     auto tmp = currNode;
     
@@ -227,9 +234,8 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
         if (currNode -> hasLChild()) {
           currNode = currNode -> left.get();
         } else {
-          return Iterator{currNode}; 
-        }
-        
+          return Iterator{currNode};
+        }        
       } else if (key > currNode -> content.first) {
         if (currNode -> hasRChild()) {
           currNode = currNode -> right.get();
@@ -272,8 +278,8 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
   template <typename K, typename T>
   const T& BSTree<K,T>::operator[](const K& k)const{
     std::cout<<"const [ ]"<<std::endl;
-    if(find(k)!=cend())return (*find(k)).second;
-    if(root==nullptr)throw error{"searching for a key in an empty or corrupted tree: root==nullptr"};
+    if (find(k)!=cend()) return (*find(k)).second;
+    if (root==nullptr) throw error{"searching for a key in an empty or corrupted tree: root==nullptr"};
     throw error{"searching for a non existent key"};
   }
 
@@ -281,7 +287,9 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
   template <typename K, typename T>
   std::ostream& operator<<(std::ostream& os, const BSTree<K,T>& t) {
 
-    for (auto it=t.cbegin();it!=nullptr;++it){
+    if (t.get_root() == nullptr) throw error{"Printing an empty tree"};    
+
+    for (auto it=t.cbegin();it!=t.cend();++it){
       os << (*it).first << ": " <<(*it).second<< "\n";
     }
   return os;

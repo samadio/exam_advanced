@@ -49,6 +49,10 @@ int main() {
     BSTree<int,int> test_copy{tree};
     test_copy.print();
 
+   // tree.clear();
+   // auto empty_tree{tree};
+   // std::cout<<"printin empty tree"<<std::endl;
+   // std::cout<<empty_tree<<std::endl;
 
     /*  for(auto& x:tree){			for works
     std::cout<<*x<<std::endl;
