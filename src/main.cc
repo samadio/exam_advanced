@@ -19,16 +19,37 @@ const T& BSTree<K,T,C>::square_bracket_test(const K& key) const{
 }
 
 
-    struct RandomKey_explicit {
-      int one, two, three;
-    };
+struct RandomKey_explicit {
+  int one, two, three;
+};
 
-    struct compareh {
-      bool operator()(RandomKey_explicit bingo, RandomKey_explicit bango) const {
+struct compareh {
+   bool operator()(RandomKey_explicit bingo, RandomKey_explicit bango) const {
         return bingo.two < bango.two;
+   }
+};
+
+    // test struct that contains three number, to be used as key.
+    // the ordering should be done comparing the 'two' variable
+    // apparently it works, as if std::less<K> is using the overloaded operator
+    // which is not really expected (but welcomed)
+    // ergo: there is no need to explicitely define a custom comparison function
+    struct RandomKey {
+      int one, two, three;
+      bool operator<(RandomKey other) const {
+        return two < other.two;
       }
     };
 
+
+//in order to do cout simply on RandomKey
+
+std::ostream& operator<<(std::ostream& os, const RandomKey& k) {
+
+    os << k.one << ", " <<k.two<< ", "<<k.three;
+    
+  return os;
+  }
 
 
 int main() {
@@ -56,23 +77,12 @@ int main() {
     tree.balance();
   
     tree.print();
-
+e
 
     BSTree<int,int> test_copy{tree};
     test_copy.print();
 
 */
-    // test struct that contains three number, to be used as key.
-    // the ordering should be done comparing the 'two' variable
-    // apparently it works, as if std::less<K> is using the overloaded operator
-    // which is not really expected (but welcomed)
-    // ergo: there is no need to explicitely define a custom comparison function
-    struct RandomKey {
-      int one, two, three;
-      bool operator<(RandomKey other) const {
-        return two < other.two;
-      }
-    };
 
     auto tree1 = BSTree<RandomKey, int>();
     tree1.insert(RandomKey{0,8,41}, 8);
@@ -94,7 +104,9 @@ int main() {
 
     std::cout<<"finding 0 8 41, expecting 8 as output. Get: " << pair.second <<std::endl;
     
-    auto pair2=*(tree1.find(RandomKey{1,8,51}));
+    auto key=RandomKey{1,8,51};
+    
+    auto pair2=*(tree1.find(key));
 
     std::cout<<"finding 1 8 51, expecting 8 as output? Get: " << pair2.second <<std::endl;
 
@@ -104,8 +116,20 @@ int main() {
     //Even though they're different keys, in the order given they're the same. In reverse: If we
     //said that the keys are equal if and only if all the elements are equal, how should we append a node
     // node with the same second element as a previous? It's user responsability to give a proper order
-    //So I think we're actually fine, but it's something to be aware of.
+    // So I think we're actually fine, but it's something to be aware of.
     
+    std::cout<<"finding 1 8 51 with [], expecting 8 as output. Get: " << tree1[key] <<std::endl;
+    
+    std::cout<<"finding 1 8 51 with const [], expecting 8 as output. Get: \n" << tree1.square_bracket_test(key) <<std::endl;
+    
+    BSTree<RandomKey, int> tree2{tree1}; //copy ctor
+    std::cout<<"tree2 copy ctor from previous "<<tree2<<std::endl;
+    tree2.clear();
+    std::cout<<"tree2 empty"<<tree2<<std::endl;
+    tree2=tree1;
+    std::cout<<"tree2 copy assign from previous "<<tree2<<std::endl;	
+    BSTree<RandomKey, int> tree3{std::move(tree2)}; //move ctor
+    tree2=std::move(tree1); //move assign
     
     // this works too, it requires the functor compareh()
     // if compareh() is omitted, the code does not compile
