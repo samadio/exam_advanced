@@ -53,6 +53,8 @@ std::ostream& operator<<(std::ostream& os, const RandomKey& k) {
 
 
 int main() {
+
+try{
   
   std::cout<<"at least it starts"<<std::endl;
 
@@ -125,7 +127,7 @@ e
     BSTree<RandomKey, int> tree2{tree1}; //copy ctor
     std::cout<<"tree2 copy ctor from previous "<<tree2<<std::endl;
     tree2.clear();
-    std::cout<<"tree2 empty"<<tree2<<std::endl;
+//    std::cout<<"tree2 empty "<<tree2<<std::endl;  //error works
     tree2=tree1;
     std::cout<<"tree2 copy assign from previous "<<tree2<<std::endl;	
     BSTree<RandomKey, int> tree3{std::move(tree2)}; //move ctor
@@ -150,6 +152,11 @@ e
     for (auto it=tree2.cbegin();it!=tree2.cend();++it) {
       std::cout<<(*it).first.two<<": "<<(*it).second<<std::endl;
     }*/
+    
+    }catch(const error& e){
+    std::cerr<<"Exception encountered: "<< e.message<<std::endl;
+    return 1;
+    }
 
 
 }
