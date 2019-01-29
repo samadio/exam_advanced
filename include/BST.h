@@ -86,7 +86,7 @@ class BSTree {
   /*!
    * @brief BSTree constructor accepting a std::pair<key,value> inserted as root.
    */
-  explicit BSTree(const std::pair<const K, T>& data) : root{}, size{}, compare_f{} {insert(data);}
+  BSTree(const std::pair<const K, T>& data, C comp = C{}) : root{}, size{}, compare_f{comp} {insert(data);}
   
   /*!
    * @brief Default BSTree destructor.

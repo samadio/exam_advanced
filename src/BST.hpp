@@ -143,11 +143,10 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
   typename BSTree<K,T,C>::Iterator BSTree<K,T,C>::find(const K& key) const {
        
     auto currNode = this -> position_of(key).get();
-
-    if ( root==nullptr || !( compare_f(key, currNode -> content.first) || compare_f(currNode -> content.first, key) ) ) {
+    
+    if ( root==nullptr || ( compare_f(key, currNode -> content.first) || compare_f(currNode -> content.first, key) ) ) {
       return cend();
     }
-
     return Iterator{currNode};
   }
 
