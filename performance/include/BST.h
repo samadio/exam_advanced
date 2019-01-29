@@ -65,6 +65,7 @@ class BSTree {
 
   
   public:
+    
   C compare_f;
   
   const int& size_of() const noexcept {return this -> size;}

@@ -10,6 +10,7 @@
 #include <memory>
 #include <chrono>
 #include"BST.h"
+#include<map>
 
 
 //const function to call const[] operator
@@ -30,10 +31,13 @@ struct compareh {
     // which is not really expected (but welcomed)
     // ergo: there is no need to explicitely define a custom comparison function
 struct RandomKey {
-  int one, two, three;
+  double one, two, three;
   bool operator<(RandomKey other) const {
     return two < other.two;
-  }
+ }
+ 
+    RandomKey(const double& _one,const double& _two,const double& _three ) : one{_one}, two{_two}, three{_three} {};
+  
 };
 
 
@@ -42,43 +46,89 @@ int main() {
 try{
   
   
-    int N=10000; //dimension of the trees
     auto tree1 = BSTree<double, double>();
+    std::map<double,double> map;
 
-    std::cout<<"test on default types"<<std::endl;
-    std::vector<double> keys,values;
+    std::vector<double> values;
+    std::vector<double> keys;
     
     
+    int N=128000; //size of the tree
+    int Ntries=10;
+    
+    std::cout<<"on trees of size "<< N <<std::endl;
+    unsigned int average_tree=0;  //not balanced
+    int average_tree_b=0; //balanced
+    int average_map=0;  //map
+    
+
+for(int j=0;j<Ntries;j++){    
+        
     for(int i=0;i<N;i++){
-     keys.push_back(((double) rand() / (RAND_MAX)));
+     keys.push_back(rand()/(double)RAND_MAX);
      values.push_back(rand()% 100/1.0);
     }
     
     for(int i=0;i<N;i++){
      tree1.insert(keys[i],values[i]);
+     map[keys[i]]=values[i];
     }
+
     
-    auto key=keys[10];
     auto t0 = std::chrono::high_resolution_clock::now();
-    tree1[key];
     auto t1 = std::chrono::high_resolution_clock::now();
     
-    std::cout<<"Time for lookup <double,double>: "<< std::chrono::duration_cast<std::chrono::nanoseconds>(t1 - t0).count() <<std::endl;
+    int interval=0;
+    for(int i=0;i<N;i++){
+      t0= std::chrono::high_resolution_clock::now();
+      tree1.find(keys[i]);
+      t1 = std::chrono::high_resolution_clock::now();
+      interval+=std::chrono::duration_cast<std::chrono::nanoseconds>(t1 - t0).count();
+    }
     
-    std::cout<<"Balancing tree1<double,double>"<<std::endl;
-    t0 = std::chrono::high_resolution_clock::now();
+//    std::cout<<"Time for lookup <double,double>: "<< interval <<std::endl;
+    
+//    std::cout<<"Balancing tree1<double,double>"<<std::endl;
     tree1.balance();
-    t1 = std::chrono::high_resolution_clock::now();
- 
-    std::cout<<"Time for balancing: "<< std::chrono::duration_cast<std::chrono::nanoseconds>(t1 - t0).count() <<std::endl;
     
+    int interval2=0;
+    for(int i=0;i<N;i++){
+      t0= std::chrono::high_resolution_clock::now();
+      tree1.find(keys[i]);
+      t1 = std::chrono::high_resolution_clock::now();
+      interval2+=std::chrono::duration_cast<std::chrono::nanoseconds>(t1 - t0).count();
+    }
     
-    auto t2 = std::chrono::high_resolution_clock::now();
-    tree1[key];
-    auto t3 = std::chrono::high_resolution_clock::now();
+    int map_time=0;
+    for(int i=0;i<N;i++){
+      t0= std::chrono::high_resolution_clock::now();
+      map.find(keys[i]);
+      t1 = std::chrono::high_resolution_clock::now();
+      map_time+=std::chrono::duration_cast<std::chrono::nanoseconds>(t1 - t0).count();
+    }
+
     
-    std::cout<<"Time for lookup <double,double> balanced: "<< std::chrono::duration_cast<std::chrono::nanoseconds>(t3 - t2).count() <<std::endl;
+//    std::cout<<"Time for lookup <double,double> balanced: "<< interval2 <<std::endl;
     
+//    std::cout<<"Percentage gain: "<<  gain <<std::endl;
+
+    average_tree+=interval;  //not balanced
+    average_tree_b+=interval2; //balanced
+    average_map+=map_time;  //map
+    
+    tree1.clear();
+    keys.clear();
+    values.clear();
+    map.clear();
+}    
+average_tree=average_tree/Ntries;
+average_tree_b=average_tree_b/Ntries;
+average_map=average_map/Ntries;
+
+std::cout<<"Average time on " << Ntries << " tries of tree: "<< average_tree <<std::endl;
+std::cout<<"Average time on " << Ntries << " tries of tree_balanced: "<< average_tree_b <<std::endl;
+std::cout<<"Average time on " << Ntries << " tries of map: "<< average_map <<std::endl;
+
 /*
     tree1.insert(RandomKey{0,8,41}, 8);
     tree1.insert(RandomKey{11,3,51}, 3);
