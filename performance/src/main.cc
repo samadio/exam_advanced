@@ -53,13 +53,13 @@ try{
     std::vector<double> keys;
     
     
-    int N=128000; //size of the tree
-    int Ntries=10;
+    int N=2000; //size of the tree
+    int Ntries=10000;
     
     std::cout<<"on trees of size "<< N <<std::endl;
     unsigned int average_tree=0;  //not balanced
-    int average_tree_b=0; //balanced
-    int average_map=0;  //map
+    unsigned int average_tree_b=0; //balanced
+    unsigned int average_map=0;  //map
     
 
 for(int j=0;j<Ntries;j++){    
@@ -78,7 +78,7 @@ for(int j=0;j<Ntries;j++){
     auto t0 = std::chrono::high_resolution_clock::now();
     auto t1 = std::chrono::high_resolution_clock::now();
     
-    int interval=0;
+    unsigned int interval=0;
     for(int i=0;i<N;i++){
       t0= std::chrono::high_resolution_clock::now();
       tree1.find(keys[i]);
@@ -91,7 +91,7 @@ for(int j=0;j<Ntries;j++){
 //    std::cout<<"Balancing tree1<double,double>"<<std::endl;
     tree1.balance();
     
-    int interval2=0;
+    unsigned int interval2=0;
     for(int i=0;i<N;i++){
       t0= std::chrono::high_resolution_clock::now();
       tree1.find(keys[i]);
@@ -99,7 +99,7 @@ for(int j=0;j<Ntries;j++){
       interval2+=std::chrono::duration_cast<std::chrono::nanoseconds>(t1 - t0).count();
     }
     
-    int map_time=0;
+    unsigned int map_time=0;
     for(int i=0;i<N;i++){
       t0= std::chrono::high_resolution_clock::now();
       map.find(keys[i]);

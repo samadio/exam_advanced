@@ -125,7 +125,7 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
       size += 1;
       return true;
     } else {
-      std::cout<<"key already present, nothing happens"<<std::endl;
+//      std::cout<<"key already present, nothing happens"<<std::endl;
       return false;
     } 
 
