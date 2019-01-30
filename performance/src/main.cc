@@ -51,12 +51,13 @@ try{
 
     std::vector<double> values;
     std::vector<double> keys;
+
     
-    
-    int N=2000; //size of the tree
-    int Ntries=10000;
-    
-    std::cout<<"on trees of size "<< N <<std::endl;
+    std::vector<int> N{20000000}; //size of the tree
+    int Ntries=5;
+
+for(int k=0;k<1;k++){    
+    std::cout<<"on trees of size "<< N[k] <<std::endl;
     unsigned int average_tree=0;  //not balanced
     unsigned int average_tree_b=0; //balanced
     unsigned int average_map=0;  //map
@@ -64,12 +65,12 @@ try{
 
 for(int j=0;j<Ntries;j++){    
         
-    for(int i=0;i<N;i++){
+    for(int i=0;i<N[k];i++){
      keys.push_back(rand()/(double)RAND_MAX);
      values.push_back(rand()% 100/1.0);
     }
     
-    for(int i=0;i<N;i++){
+    for(int i=0;i<N[k];i++){
      tree1.insert(keys[i],values[i]);
      map[keys[i]]=values[i];
     }
@@ -79,11 +80,11 @@ for(int j=0;j<Ntries;j++){
     auto t1 = std::chrono::high_resolution_clock::now();
     
     unsigned int interval=0;
-    for(int i=0;i<N;i++){
+    for(int i=0;i<N[k];i++){
       t0= std::chrono::high_resolution_clock::now();
       tree1.find(keys[i]);
       t1 = std::chrono::high_resolution_clock::now();
-      interval+=std::chrono::duration_cast<std::chrono::nanoseconds>(t1 - t0).count();
+      interval+=std::chrono::duration_cast<std::chrono::microseconds>(t1 - t0).count();
     }
     
 //    std::cout<<"Time for lookup <double,double>: "<< interval <<std::endl;
@@ -92,19 +93,19 @@ for(int j=0;j<Ntries;j++){
     tree1.balance();
     
     unsigned int interval2=0;
-    for(int i=0;i<N;i++){
+    for(int i=0;i<N[k];i++){
       t0= std::chrono::high_resolution_clock::now();
       tree1.find(keys[i]);
       t1 = std::chrono::high_resolution_clock::now();
-      interval2+=std::chrono::duration_cast<std::chrono::nanoseconds>(t1 - t0).count();
+      interval2+=std::chrono::duration_cast<std::chrono::microseconds>(t1 - t0).count();
     }
     
     unsigned int map_time=0;
-    for(int i=0;i<N;i++){
+    for(int i=0;i<N[k];i++){
       t0= std::chrono::high_resolution_clock::now();
       map.find(keys[i]);
       t1 = std::chrono::high_resolution_clock::now();
-      map_time+=std::chrono::duration_cast<std::chrono::nanoseconds>(t1 - t0).count();
+      map_time+=std::chrono::duration_cast<std::chrono::microseconds>(t1 - t0).count();
     }
 
     
@@ -128,7 +129,7 @@ average_map=average_map/Ntries;
 std::cout<<"Average time on " << Ntries << " tries of tree: "<< average_tree <<std::endl;
 std::cout<<"Average time on " << Ntries << " tries of tree_balanced: "<< average_tree_b <<std::endl;
 std::cout<<"Average time on " << Ntries << " tries of map: "<< average_map <<std::endl;
-
+}
 /*
     tree1.insert(RandomKey{0,8,41}, 8);
     tree1.insert(RandomKey{11,3,51}, 3);
