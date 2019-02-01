@@ -1,5 +1,6 @@
 reset
 set logscale y 10
+set format x "%2.0t{/Symbol \264}10^{%L}"
 set xlabel "Number of nodes"
 set ylabel "log(time)"
 set key right bottom

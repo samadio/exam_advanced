@@ -1,8 +1,8 @@
 /**
  * @file main.cc
- * @brief main file for the exam
+ * @brief Performance test file for the exam
  * 
- * @author William WIlson
+ * @author Amadio Simone, Patrick Indri
  * 
  * @date 1/2/23
  */
@@ -11,11 +11,13 @@
 #include <chrono>
 #include"BST.h"
 #include<map>
+#include<algorithm>
+#include<random>
 
 
 
 
-int main(int argc, char *argv[]) {
+int main() {
 
 try{
   
@@ -23,9 +25,9 @@ try{
   std::map<double,double> map;
 
 //  int tree_size = atoi(argv[1]);
-  int tree_size = 10000;
+//  int tree_size = 10000;
 
-  std::cout<<tree_size<<std::endl;
+//  std::cout<<tree_size<<std::endl;
   
   int Ntries=5;
 
@@ -38,15 +40,23 @@ try{
   unsigned int BSTree_balanced_time = 0;
   unsigned int map_time = 0;
 
+  auto rng = std::default_random_engine {}; // random seed to shuffle key and value vectors
 
-  for(int k=10000;k<1000000;k = k + 50000){ 
- 
+
+  for(int k=50000;k<1000000;k = k + 50000){ // cicling trough different tree sizes 
+  
+   // std::cout<<"tree dimension: "<<k<<std::endl;
+
     for(int j=0;j<Ntries;j++){    
-      for(int i=0;i<k;i++){
-      key.push_back(rand()/(double)RAND_MAX);
-      value.push_back(rand()/(double)RAND_MAX);
 
+      for(int i=0;i<k;i++){
+        key.push_back((i*1.0)/(k*1.0));
+        value.push_back((i*1.0)/(k*1.0));
       }
+
+      std::shuffle(begin(key), end(key), rng);
+      std::shuffle(begin(value), end(value), rng);
+
   
       for(int i=0;i<k;i++){
       tree.insert(key[i], value[i]);
@@ -82,7 +92,7 @@ try{
       key.clear();
     }    
 
-    std::cout<<k<<"\t"<<BSTree_time/Ntries<<"\t"<<BSTree_balanced_time/Ntries<<"\t"<<map_time/Ntries<<std::endl;
+    std::cout<<k<<"\t"<<BSTree_time/(k*Ntries*1.0)<<"\t"<<BSTree_balanced_time/(k*Ntries*1.0)<<"\t"<<map_time/(k*Ntries*1.0)<<std::endl;
     
   }
 
