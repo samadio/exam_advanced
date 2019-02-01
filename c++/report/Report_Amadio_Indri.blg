@@ -1,0 +1,9 @@
+[0] Config.pm:302> INFO - This is Biber 2.9
+[0] Config.pm:305> INFO - Logfile is 'Report_Amadio_Indri.blg'
+[28] biber:313> INFO - === Thu Jan 31, 2019, 16:57:02
+[58] Biber.pm:371> INFO - Reading 'Report_Amadio_Indri.bcf'
+[108] Biber.pm:857> INFO - Found 0 citekeys in bib section 0
+[116] Utils.pm:169> WARN - The file 'Report_Amadio_Indri.bcf' does not contain any citations!
+[123] bbl.pm:617> INFO - Writing 'Report_Amadio_Indri.bbl' with encoding 'UTF-8'
+[123] bbl.pm:720> INFO - Output to Report_Amadio_Indri.bbl
+[123] Biber.pm:110> INFO - WARNINGS: 1

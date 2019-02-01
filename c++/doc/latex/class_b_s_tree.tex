@@ -1,0 +1,518 @@
+\hypertarget{class_b_s_tree}{}\section{B\+S\+Tree$<$ K, T, C $>$ Class Template Reference}
+\label{class_b_s_tree}\index{B\+S\+Tree$<$ K, T, C $>$@{B\+S\+Tree$<$ K, T, C $>$}}
+
+
+{\ttfamily \#include $<$B\+S\+T.\+h$>$}
+
+\subsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \hyperlink{class_b_s_tree_1_1_const_iterator}{Const\+Iterator}
+\item 
+class \hyperlink{class_b_s_tree_1_1_iterator}{Iterator}
+\end{DoxyCompactItemize}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+const int \& \hyperlink{class_b_s_tree_a176f1ccfb16c72f653d27c0a8a02fbb5}{size\+\_\+of} () const noexcept
+\begin{DoxyCompactList}\small\item\em Returns the number of elements of the tree. \end{DoxyCompactList}\item 
+bool \hyperlink{class_b_s_tree_a8002c1bc948d8ef1085fb53949562fc0}{is\+\_\+empty} () const noexcept
+\begin{DoxyCompactList}\small\item\em Check if the tree is empty. \end{DoxyCompactList}\item 
+const \hyperlink{class_node_namespace_1_1_b_s_t_node}{B\+S\+T\+Node}$<$ K, T $>$ $\ast$ \hyperlink{class_b_s_tree_add1b6b6c2b9b5a871d6ae06ba2ab174f}{get\+\_\+root} () const
+\begin{DoxyCompactList}\small\item\em Returns a pointer to the root node. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_b_s_tree_a31f5f4929f634ab6eeeed262158a407f}\label{class_b_s_tree_a31f5f4929f634ab6eeeed262158a407f}} 
+\hyperlink{class_b_s_tree_a31f5f4929f634ab6eeeed262158a407f}{B\+S\+Tree} ()=default
+\begin{DoxyCompactList}\small\item\em Default \hyperlink{class_b_s_tree}{B\+S\+Tree} constructor. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_b_s_tree_a4c7cc79e77368b2196be5463ce51dabb}\label{class_b_s_tree_a4c7cc79e77368b2196be5463ce51dabb}} 
+\hyperlink{class_b_s_tree_a4c7cc79e77368b2196be5463ce51dabb}{B\+S\+Tree} (const K \&key, const T \&value, C comp=C\{\})
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_b_s_tree}{B\+S\+Tree} constructor accepting a key and a value, inserted as root. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_b_s_tree_aa688700e2b3298d2c59ecb505522daf2}\label{class_b_s_tree_aa688700e2b3298d2c59ecb505522daf2}} 
+\hyperlink{class_b_s_tree_aa688700e2b3298d2c59ecb505522daf2}{B\+S\+Tree} (const std\+::pair$<$ const K, T $>$ \&data, C comp=C\{\})
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_b_s_tree}{B\+S\+Tree} constructor accepting a std\+::pair$<$key,value$>$ inserted as root. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_b_s_tree_a875eb7debc36c3972bc9fb6b486cd64d}\label{class_b_s_tree_a875eb7debc36c3972bc9fb6b486cd64d}} 
+\hyperlink{class_b_s_tree_a875eb7debc36c3972bc9fb6b486cd64d}{$\sim$\+B\+S\+Tree} () noexcept=default
+\begin{DoxyCompactList}\small\item\em Default \hyperlink{class_b_s_tree}{B\+S\+Tree} destructor. \end{DoxyCompactList}\item 
+\hyperlink{class_b_s_tree_ab02cf77eca992f95d44c4ada43a914c0}{B\+S\+Tree} (const \hyperlink{class_b_s_tree}{B\+S\+Tree} \&t)
+\begin{DoxyCompactList}\small\item\em Copy constructor for a \hyperlink{class_b_s_tree}{B\+S\+Tree}. Calls the auxiliary function \hyperlink{class_b_s_tree_ad34bd4cfe46ab5a5376cc242b1901f2b}{copy\+\_\+tree()} which performs a deep copy of the tree. \end{DoxyCompactList}\item 
+\hyperlink{class_b_s_tree}{B\+S\+Tree} \& \hyperlink{class_b_s_tree_a51e883c53f2604130eeabecc73a2a95a}{operator=} (const \hyperlink{class_b_s_tree}{B\+S\+Tree} \&t)
+\begin{DoxyCompactList}\small\item\em Copy assignment of a \hyperlink{class_b_s_tree}{B\+S\+Tree}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_b_s_tree_a6f8861897a87ab1944edbaf7754648b4}\label{class_b_s_tree_a6f8861897a87ab1944edbaf7754648b4}} 
+\hyperlink{class_b_s_tree_a6f8861897a87ab1944edbaf7754648b4}{B\+S\+Tree} (\hyperlink{class_b_s_tree}{B\+S\+Tree}$<$ K, T, C $>$ \&\&) noexcept=default
+\begin{DoxyCompactList}\small\item\em Default move constructor for a \hyperlink{class_b_s_tree}{B\+S\+Tree}. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_b_s_tree_a555de0952655377d903ecbc1ce6bdec3}\label{class_b_s_tree_a555de0952655377d903ecbc1ce6bdec3}} 
+\hyperlink{class_b_s_tree}{B\+S\+Tree}$<$ K, T, C $>$ \& \hyperlink{class_b_s_tree_a555de0952655377d903ecbc1ce6bdec3}{operator=} (\hyperlink{class_b_s_tree}{B\+S\+Tree}$<$ K, T, C $>$ \&\&) noexcept=default
+\begin{DoxyCompactList}\small\item\em Default move assignment for a \hyperlink{class_b_s_tree}{B\+S\+Tree}. \end{DoxyCompactList}\item 
+\hyperlink{class_b_s_tree_1_1_iterator}{Iterator} \hyperlink{class_b_s_tree_afb41cae2749cded61f805bb1b902f811}{begin} ()
+\begin{DoxyCompactList}\small\item\em first element for iterating a \hyperlink{class_b_s_tree}{B\+S\+Tree}. \end{DoxyCompactList}\item 
+\hyperlink{class_b_s_tree_1_1_iterator}{Iterator} \hyperlink{class_b_s_tree_af08ce4b341b8503949ede9d4e6af8c8b}{end} ()
+\begin{DoxyCompactList}\small\item\em last element for iterating a \hyperlink{class_b_s_tree}{B\+S\+Tree} \end{DoxyCompactList}\item 
+\hyperlink{class_b_s_tree_1_1_const_iterator}{Const\+Iterator} \hyperlink{class_b_s_tree_a575273bc2b272f20f8b6802f2b0a756f}{cbegin} () const
+\begin{DoxyCompactList}\small\item\em first element for iterating a \hyperlink{class_b_s_tree}{B\+S\+Tree}. \end{DoxyCompactList}\item 
+\hyperlink{class_b_s_tree_1_1_const_iterator}{Const\+Iterator} \hyperlink{class_b_s_tree_a562638580a40643c76913e51dd06c13b}{cend} () const
+\begin{DoxyCompactList}\small\item\em last element for iterating a \hyperlink{class_b_s_tree}{B\+S\+Tree} \end{DoxyCompactList}\item 
+bool \hyperlink{class_b_s_tree_a23746c31f7583acad81c9b7f08159003}{insert} (const std\+::pair$<$ const K, T $>$ \&data)
+\begin{DoxyCompactList}\small\item\em Inserts a B\+S\+T\+Node passing a std\+::pair$<$key,value$>$. Calls position\+\_\+of(key) to find where the node should be appended. If the key is already present, does nothing. Otherwise a new node is created. \end{DoxyCompactList}\item 
+bool \hyperlink{class_b_s_tree_a00ca543914dbdaa89b9c9f6fae7d6555}{insert} (const K \&key, const T \&value)
+\begin{DoxyCompactList}\small\item\em Inserts a node passing a key and a value separately. \end{DoxyCompactList}\item 
+\hyperlink{class_b_s_tree_1_1_iterator}{Iterator} \hyperlink{class_b_s_tree_a739cf62b2b972cd063928357dd2aba9a}{find} (const K \&key) const
+\begin{DoxyCompactList}\small\item\em Returns, if found, an iterator to the node labelled by key. \end{DoxyCompactList}\item 
+void \hyperlink{class_b_s_tree_ae5362c45ed2bc96c9c72fdef689bd078}{clear} () noexcept
+\begin{DoxyCompactList}\small\item\em Wipes out the tree. Resets the root to nullptr, causing all the other nodes to be deleted. The tree is left uninitialized, but still usable. \end{DoxyCompactList}\item 
+void \hyperlink{class_b_s_tree_a468dcc29b6786ddc5de05c314d644ce1}{print} () const
+\begin{DoxyCompactList}\small\item\em Prints the value in all the nodes, traversing the tree in order. \end{DoxyCompactList}\item 
+void \hyperlink{class_b_s_tree_a955848e883b93312a467c0ee103db8df}{balance} ()
+\begin{DoxyCompactList}\small\item\em Balances the tree. \end{DoxyCompactList}\item 
+T \& \hyperlink{class_b_s_tree_adb6e522a0dbbedd33ad21724b4dca0f6}{operator\mbox{[}$\,$\mbox{]}} (const K \&k)
+\begin{DoxyCompactList}\small\item\em Operator \mbox{[}\mbox{]} to access/insert a B\+S\+T\+Node. Returns the value associated with key if found. Otherwise, appends a node with the desired key and the default value. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_b_s_tree_a265ffc422b631fee4e51531db590a957}\label{class_b_s_tree_a265ffc422b631fee4e51531db590a957}} 
+const T \& {\bfseries operator\mbox{[}$\,$\mbox{]}} (const K \&k) const
+\item 
+const T \& \hyperlink{class_b_s_tree_a8b5a7600d91dee310ece37c10cbceb6a}{square\+\_\+bracket\+\_\+test} (const K \&key) const
+\begin{DoxyCompactList}\small\item\em Operator $<$$<$ to print a \hyperlink{class_b_s_tree}{B\+S\+Tree}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_b_s_tree_abf0711d0f2e62ed4a6fee153ad717833}\label{class_b_s_tree_abf0711d0f2e62ed4a6fee153ad717833}} 
+C {\bfseries compare\+\_\+f}
+\end{DoxyCompactItemize}
+\subsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_node_namespace_1_1_b_s_t_node}{B\+S\+T\+Node}$<$ K, T $>$ $\ast$ \hyperlink{class_b_s_tree_ab77c72f33d88ca3311286744370138bb}{get\+\_\+most\+\_\+left} (\hyperlink{class_node_namespace_1_1_b_s_t_node}{B\+S\+T\+Node}$<$ K, T $>$ $\ast$curr\+Node) const noexcept
+\begin{DoxyCompactList}\small\item\em Returns a pointer to the leftmost element of a subtree. \end{DoxyCompactList}\item 
+void \hyperlink{class_b_s_tree_ad34bd4cfe46ab5a5376cc242b1901f2b}{copy\+\_\+tree} (const \hyperlink{class_node_namespace_1_1_b_s_t_node}{B\+S\+T\+Node}$<$ K, T $>$ $\ast$curr\+Node)
+\begin{DoxyCompactList}\small\item\em Auxiliary function for the copy constructor, performs a deep copy. \end{DoxyCompactList}\item 
+\hyperlink{class_b_s_tree_1_1_iterator}{Iterator} \hyperlink{class_b_s_tree_a0a386f0ffde9a0fe2e5df8562b719184}{position\+\_\+of} (const K \&key) const
+\begin{DoxyCompactList}\small\item\em Auxiliary function for the insert(key, value) and find(key) methods. \end{DoxyCompactList}\item 
+void \hyperlink{class_b_s_tree_a3ae6d9b52f23edb005289f52200b0b70}{balance} (std\+::vector$<$ std\+::pair$<$ const K, T $>$$>$ \&vine, const int \&\hyperlink{class_b_s_tree_afb41cae2749cded61f805bb1b902f811}{begin}, const int \&\hyperlink{class_b_s_tree_af08ce4b341b8503949ede9d4e6af8c8b}{end})
+\begin{DoxyCompactList}\small\item\em Iteratively builds a balanced tree starting from an ordered std\+::vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_b_s_tree_aa0d1b3c092ac0616ed758c37eeae28ae}\label{class_b_s_tree_aa0d1b3c092ac0616ed758c37eeae28ae}} 
+std\+::unique\+\_\+ptr$<$ \hyperlink{class_node_namespace_1_1_b_s_t_node}{B\+S\+T\+Node}$<$ K, T $>$ $>$ {\bfseries root} = nullptr
+\item 
+\mbox{\Hypertarget{class_b_s_tree_a32a650287c9c6ac09282d0c12a34997b}\label{class_b_s_tree_a32a650287c9c6ac09282d0c12a34997b}} 
+int {\bfseries size} = 0
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\subsubsection*{template$<$typename K, typename T, typename C = std\+::less$<$\+K$>$$>$\newline
+class B\+S\+Tree$<$ K, T, C $>$}
+
+Binary Search Tree implementation.
+
+Implementation of a Binary Search Tree. The tree is made of nodes which store a key/value pair. It requires a compare structure to order keys. If none is provided, it uses std\+::less$<$\+K$>$, where K is the key type. 
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_b_s_tree_ab02cf77eca992f95d44c4ada43a914c0}\label{class_b_s_tree_ab02cf77eca992f95d44c4ada43a914c0}} 
+\index{B\+S\+Tree@{B\+S\+Tree}!B\+S\+Tree@{B\+S\+Tree}}
+\index{B\+S\+Tree@{B\+S\+Tree}!B\+S\+Tree@{B\+S\+Tree}}
+\subsubsection{\texorpdfstring{B\+S\+Tree()}{BSTree()}}
+{\footnotesize\ttfamily template$<$typename K, typename T, typename C = std\+::less$<$\+K$>$$>$ \\
+\hyperlink{class_b_s_tree}{B\+S\+Tree}$<$ K, T, C $>$\+::\hyperlink{class_b_s_tree}{B\+S\+Tree} (\begin{DoxyParamCaption}\item[{const \hyperlink{class_b_s_tree}{B\+S\+Tree}$<$ K, T, C $>$ \&}]{t }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Copy constructor for a \hyperlink{class_b_s_tree}{B\+S\+Tree}. Calls the auxiliary function \hyperlink{class_b_s_tree_ad34bd4cfe46ab5a5376cc242b1901f2b}{copy\+\_\+tree()} which performs a deep copy of the tree. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & \hyperlink{class_b_s_tree}{B\+S\+Tree} to be copied, passed by const reference. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_b_s_tree_a955848e883b93312a467c0ee103db8df}\label{class_b_s_tree_a955848e883b93312a467c0ee103db8df}} 
+\index{B\+S\+Tree@{B\+S\+Tree}!balance@{balance}}
+\index{balance@{balance}!B\+S\+Tree@{B\+S\+Tree}}
+\subsubsection{\texorpdfstring{balance()}{balance()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename K , typename T , typename C $>$ \\
+void \hyperlink{class_b_s_tree}{B\+S\+Tree}$<$ K, T, C $>$\+::balance (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Balances the tree. 
+
+The tree is linearized into a vector of std\+::pair$<$key,value$>$. Then calls \hyperlink{class_b_s_tree_ae5362c45ed2bc96c9c72fdef689bd078}{clear()} and the auxiliary function balance(vector, begin, end).
+
+
+\begin{DoxyParams}{Parameters}
+{\em none} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_b_s_tree_a3ae6d9b52f23edb005289f52200b0b70}\label{class_b_s_tree_a3ae6d9b52f23edb005289f52200b0b70}} 
+\index{B\+S\+Tree@{B\+S\+Tree}!balance@{balance}}
+\index{balance@{balance}!B\+S\+Tree@{B\+S\+Tree}}
+\subsubsection{\texorpdfstring{balance()}{balance()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename K , typename T , typename C $>$ \\
+void \hyperlink{class_b_s_tree}{B\+S\+Tree}$<$ K, T, C $>$\+::balance (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::pair$<$ const K, T $>$$>$ \&}]{vine,  }\item[{const int \&}]{begin,  }\item[{const int \&}]{end }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Iteratively builds a balanced tree starting from an ordered std\+::vector. 
+
+Builds a balanced tree appending the middle element of the vector, and then iteratively calling itself to append the middle element of the two halves, with begin and end as the extremes of the halves.
+
+
+\begin{DoxyParams}{Parameters}
+{\em vine} & std\+::vector of std\+::pair$<$key, value$>$ ordered by key. \\
+\hline
+{\em begin} & index of the first element to be considered. \\
+\hline
+{\em end} & index of the last element to be considered. \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_b_s_tree_afb41cae2749cded61f805bb1b902f811}\label{class_b_s_tree_afb41cae2749cded61f805bb1b902f811}} 
+\index{B\+S\+Tree@{B\+S\+Tree}!begin@{begin}}
+\index{begin@{begin}!B\+S\+Tree@{B\+S\+Tree}}
+\subsubsection{\texorpdfstring{begin()}{begin()}}
+{\footnotesize\ttfamily template$<$typename K, typename T, typename C = std\+::less$<$\+K$>$$>$ \\
+\hyperlink{class_b_s_tree_1_1_iterator}{Iterator} \hyperlink{class_b_s_tree}{B\+S\+Tree}$<$ K, T, C $>$\+::begin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+first element for iterating a \hyperlink{class_b_s_tree}{B\+S\+Tree}. 
+
+\begin{DoxyReturn}{Returns}
+iterator to the leftmost node. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_b_s_tree_a575273bc2b272f20f8b6802f2b0a756f}\label{class_b_s_tree_a575273bc2b272f20f8b6802f2b0a756f}} 
+\index{B\+S\+Tree@{B\+S\+Tree}!cbegin@{cbegin}}
+\index{cbegin@{cbegin}!B\+S\+Tree@{B\+S\+Tree}}
+\subsubsection{\texorpdfstring{cbegin()}{cbegin()}}
+{\footnotesize\ttfamily template$<$typename K, typename T, typename C = std\+::less$<$\+K$>$$>$ \\
+\hyperlink{class_b_s_tree_1_1_const_iterator}{Const\+Iterator} \hyperlink{class_b_s_tree}{B\+S\+Tree}$<$ K, T, C $>$\+::cbegin (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+first element for iterating a \hyperlink{class_b_s_tree}{B\+S\+Tree}. 
+
+\begin{DoxyReturn}{Returns}
+constiterator to the leftmost node. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_b_s_tree_a562638580a40643c76913e51dd06c13b}\label{class_b_s_tree_a562638580a40643c76913e51dd06c13b}} 
+\index{B\+S\+Tree@{B\+S\+Tree}!cend@{cend}}
+\index{cend@{cend}!B\+S\+Tree@{B\+S\+Tree}}
+\subsubsection{\texorpdfstring{cend()}{cend()}}
+{\footnotesize\ttfamily template$<$typename K, typename T, typename C = std\+::less$<$\+K$>$$>$ \\
+\hyperlink{class_b_s_tree_1_1_const_iterator}{Const\+Iterator} \hyperlink{class_b_s_tree}{B\+S\+Tree}$<$ K, T, C $>$\+::cend (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+last element for iterating a \hyperlink{class_b_s_tree}{B\+S\+Tree} 
+
+\begin{DoxyReturn}{Returns}
+cosntiterator to nullptr. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_b_s_tree_ae5362c45ed2bc96c9c72fdef689bd078}\label{class_b_s_tree_ae5362c45ed2bc96c9c72fdef689bd078}} 
+\index{B\+S\+Tree@{B\+S\+Tree}!clear@{clear}}
+\index{clear@{clear}!B\+S\+Tree@{B\+S\+Tree}}
+\subsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily template$<$typename K , typename T , typename C $>$ \\
+void \hyperlink{class_b_s_tree}{B\+S\+Tree}$<$ K, T, C $>$\+::clear (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Wipes out the tree. Resets the root to nullptr, causing all the other nodes to be deleted. The tree is left uninitialized, but still usable. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em none} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_b_s_tree_ad34bd4cfe46ab5a5376cc242b1901f2b}\label{class_b_s_tree_ad34bd4cfe46ab5a5376cc242b1901f2b}} 
+\index{B\+S\+Tree@{B\+S\+Tree}!copy\+\_\+tree@{copy\+\_\+tree}}
+\index{copy\+\_\+tree@{copy\+\_\+tree}!B\+S\+Tree@{B\+S\+Tree}}
+\subsubsection{\texorpdfstring{copy\+\_\+tree()}{copy\_tree()}}
+{\footnotesize\ttfamily template$<$typename K , typename T , typename C $>$ \\
+void \hyperlink{class_b_s_tree}{B\+S\+Tree}$<$ K, T, C $>$\+::copy\+\_\+tree (\begin{DoxyParamCaption}\item[{const \hyperlink{class_node_namespace_1_1_b_s_t_node}{B\+S\+T\+Node}$<$ K, T $>$ $\ast$}]{curr\+Node }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Auxiliary function for the copy constructor, performs a deep copy. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em curr\+Node} & Pointer to the root of the subtree to be copied. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_b_s_tree_af08ce4b341b8503949ede9d4e6af8c8b}\label{class_b_s_tree_af08ce4b341b8503949ede9d4e6af8c8b}} 
+\index{B\+S\+Tree@{B\+S\+Tree}!end@{end}}
+\index{end@{end}!B\+S\+Tree@{B\+S\+Tree}}
+\subsubsection{\texorpdfstring{end()}{end()}}
+{\footnotesize\ttfamily template$<$typename K, typename T, typename C = std\+::less$<$\+K$>$$>$ \\
+\hyperlink{class_b_s_tree_1_1_iterator}{Iterator} \hyperlink{class_b_s_tree}{B\+S\+Tree}$<$ K, T, C $>$\+::end (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+last element for iterating a \hyperlink{class_b_s_tree}{B\+S\+Tree} 
+
+\begin{DoxyReturn}{Returns}
+iterator to nullptr. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_b_s_tree_a739cf62b2b972cd063928357dd2aba9a}\label{class_b_s_tree_a739cf62b2b972cd063928357dd2aba9a}} 
+\index{B\+S\+Tree@{B\+S\+Tree}!find@{find}}
+\index{find@{find}!B\+S\+Tree@{B\+S\+Tree}}
+\subsubsection{\texorpdfstring{find()}{find()}}
+{\footnotesize\ttfamily template$<$typename K , typename T , typename C $>$ \\
+\hyperlink{class_b_s_tree}{B\+S\+Tree}$<$ K, T, C $>$\+::\hyperlink{class_b_s_tree_1_1_iterator}{Iterator} \hyperlink{class_b_s_tree}{B\+S\+Tree}$<$ K, T, C $>$\+::find (\begin{DoxyParamCaption}\item[{const K \&}]{key }\end{DoxyParamCaption}) const}
+
+
+
+Returns, if found, an iterator to the node labelled by key. 
+
+Calls the auxiliary function position\+\_\+of(key) which returns, if key is found, an iterator pointing to the node that contains key. If the key is not found or the \hyperlink{class_b_s_tree}{B\+S\+Tree} is empty, retuns a \hyperlink{class_b_s_tree_1_1_const_iterator}{Const\+Iterator} to nullptr.
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & Key to be found. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{class_b_s_tree_1_1_iterator}{Iterator} to the node containing the requested key or to nullptr. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_b_s_tree_ab77c72f33d88ca3311286744370138bb}\label{class_b_s_tree_ab77c72f33d88ca3311286744370138bb}} 
+\index{B\+S\+Tree@{B\+S\+Tree}!get\+\_\+most\+\_\+left@{get\+\_\+most\+\_\+left}}
+\index{get\+\_\+most\+\_\+left@{get\+\_\+most\+\_\+left}!B\+S\+Tree@{B\+S\+Tree}}
+\subsubsection{\texorpdfstring{get\+\_\+most\+\_\+left()}{get\_most\_left()}}
+{\footnotesize\ttfamily template$<$typename K , typename T , typename C $>$ \\
+\hyperlink{class_node_namespace_1_1_b_s_t_node}{B\+S\+T\+Node}$<$ K, T $>$ $\ast$ \hyperlink{class_b_s_tree}{B\+S\+Tree}$<$ K, T, C $>$\+::get\+\_\+most\+\_\+left (\begin{DoxyParamCaption}\item[{\hyperlink{class_node_namespace_1_1_b_s_t_node}{B\+S\+T\+Node}$<$ K, T $>$ $\ast$}]{curr\+Node }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [noexcept]}}
+
+
+
+Returns a pointer to the leftmost element of a subtree. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em curr\+Node} & The root node of the subtree to be considered. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the leftmost element. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_b_s_tree_add1b6b6c2b9b5a871d6ae06ba2ab174f}\label{class_b_s_tree_add1b6b6c2b9b5a871d6ae06ba2ab174f}} 
+\index{B\+S\+Tree@{B\+S\+Tree}!get\+\_\+root@{get\+\_\+root}}
+\index{get\+\_\+root@{get\+\_\+root}!B\+S\+Tree@{B\+S\+Tree}}
+\subsubsection{\texorpdfstring{get\+\_\+root()}{get\_root()}}
+{\footnotesize\ttfamily template$<$typename K, typename T, typename C = std\+::less$<$\+K$>$$>$ \\
+const \hyperlink{class_node_namespace_1_1_b_s_t_node}{B\+S\+T\+Node}$<$K,T$>$$\ast$ \hyperlink{class_b_s_tree}{B\+S\+Tree}$<$ K, T, C $>$\+::get\+\_\+root (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns a pointer to the root node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em none} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to root B\+S\+T\+Node. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_b_s_tree_a23746c31f7583acad81c9b7f08159003}\label{class_b_s_tree_a23746c31f7583acad81c9b7f08159003}} 
+\index{B\+S\+Tree@{B\+S\+Tree}!insert@{insert}}
+\index{insert@{insert}!B\+S\+Tree@{B\+S\+Tree}}
+\subsubsection{\texorpdfstring{insert()}{insert()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily template$<$typename K , typename T , typename C $>$ \\
+bool \hyperlink{class_b_s_tree}{B\+S\+Tree}$<$ K, T, C $>$\+::insert (\begin{DoxyParamCaption}\item[{const std\+::pair$<$ const K, T $>$ \&}]{data }\end{DoxyParamCaption})}
+
+
+
+Inserts a B\+S\+T\+Node passing a std\+::pair$<$key,value$>$. Calls position\+\_\+of(key) to find where the node should be appended. If the key is already present, does nothing. Otherwise a new node is created. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Pair of key-\/value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool Boolean which is true if a new node was inserted, false if the key was already present. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_b_s_tree_a00ca543914dbdaa89b9c9f6fae7d6555}\label{class_b_s_tree_a00ca543914dbdaa89b9c9f6fae7d6555}} 
+\index{B\+S\+Tree@{B\+S\+Tree}!insert@{insert}}
+\index{insert@{insert}!B\+S\+Tree@{B\+S\+Tree}}
+\subsubsection{\texorpdfstring{insert()}{insert()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily template$<$typename K , typename T , typename C $>$ \\
+bool \hyperlink{class_b_s_tree}{B\+S\+Tree}$<$ K, T, C $>$\+::insert (\begin{DoxyParamCaption}\item[{const K \&}]{key,  }\item[{const T \&}]{value }\end{DoxyParamCaption})}
+
+
+
+Inserts a node passing a key and a value separately. 
+
+Key and value are grouped in an std\+::pair$<$key, value$>$, \hyperlink{class_b_s_tree_a23746c31f7583acad81c9b7f08159003}{insert()} is then called passing the std\+::pair$<$key,value$>$.
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & key entry of the node. \\
+\hline
+{\em value} & content associated to key. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+bool 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_b_s_tree_a8002c1bc948d8ef1085fb53949562fc0}\label{class_b_s_tree_a8002c1bc948d8ef1085fb53949562fc0}} 
+\index{B\+S\+Tree@{B\+S\+Tree}!is\+\_\+empty@{is\+\_\+empty}}
+\index{is\+\_\+empty@{is\+\_\+empty}!B\+S\+Tree@{B\+S\+Tree}}
+\subsubsection{\texorpdfstring{is\+\_\+empty()}{is\_empty()}}
+{\footnotesize\ttfamily template$<$typename K, typename T, typename C = std\+::less$<$\+K$>$$>$ \\
+bool \hyperlink{class_b_s_tree}{B\+S\+Tree}$<$ K, T, C $>$\+::is\+\_\+empty (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Check if the tree is empty. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em none} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the tree is empty, false otherwise. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_b_s_tree_a51e883c53f2604130eeabecc73a2a95a}\label{class_b_s_tree_a51e883c53f2604130eeabecc73a2a95a}} 
+\index{B\+S\+Tree@{B\+S\+Tree}!operator=@{operator=}}
+\index{operator=@{operator=}!B\+S\+Tree@{B\+S\+Tree}}
+\subsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily template$<$typename K , typename T , typename C $>$ \\
+\hyperlink{class_b_s_tree}{B\+S\+Tree}$<$ K, T, C $>$ \& \hyperlink{class_b_s_tree}{B\+S\+Tree}$<$ K, T, C $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \hyperlink{class_b_s_tree}{B\+S\+Tree}$<$ K, T, C $>$ \&}]{t }\end{DoxyParamCaption})}
+
+
+
+Copy assignment of a \hyperlink{class_b_s_tree}{B\+S\+Tree}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em t} & the \hyperlink{class_b_s_tree}{B\+S\+Tree} to be copied. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The newly copied \hyperlink{class_b_s_tree}{B\+S\+Tree}. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_b_s_tree_adb6e522a0dbbedd33ad21724b4dca0f6}\label{class_b_s_tree_adb6e522a0dbbedd33ad21724b4dca0f6}} 
+\index{B\+S\+Tree@{B\+S\+Tree}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!B\+S\+Tree@{B\+S\+Tree}}
+\subsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily template$<$typename K , typename T , typename C $>$ \\
+T \& \hyperlink{class_b_s_tree}{B\+S\+Tree}$<$ K, T, C $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const K \&}]{k }\end{DoxyParamCaption})}
+
+
+
+Operator \mbox{[}\mbox{]} to access/insert a B\+S\+T\+Node. Returns the value associated with key if found. Otherwise, appends a node with the desired key and the default value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em k} & key to be found/inserted. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+the value associated with the key k. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_b_s_tree_a0a386f0ffde9a0fe2e5df8562b719184}\label{class_b_s_tree_a0a386f0ffde9a0fe2e5df8562b719184}} 
+\index{B\+S\+Tree@{B\+S\+Tree}!position\+\_\+of@{position\+\_\+of}}
+\index{position\+\_\+of@{position\+\_\+of}!B\+S\+Tree@{B\+S\+Tree}}
+\subsubsection{\texorpdfstring{position\+\_\+of()}{position\_of()}}
+{\footnotesize\ttfamily template$<$typename K , typename T , typename C $>$ \\
+\hyperlink{class_b_s_tree}{B\+S\+Tree}$<$ K, T, C $>$\+::\hyperlink{class_b_s_tree_1_1_iterator}{Iterator} \hyperlink{class_b_s_tree}{B\+S\+Tree}$<$ K, T, C $>$\+::position\+\_\+of (\begin{DoxyParamCaption}\item[{const K \&}]{key }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Auxiliary function for the insert(key, value) and find(key) methods. 
+
+If the requested key is present, returns and iterator pointing to the node that contains it (exploited by find(key)). Otherwise, it returns an iterator pointing to the node N. The key should be contained in a node inserted as a child of N (exploited by the insert(key,value)).
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & key to be found. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+iterator to node required. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_b_s_tree_a468dcc29b6786ddc5de05c314d644ce1}\label{class_b_s_tree_a468dcc29b6786ddc5de05c314d644ce1}} 
+\index{B\+S\+Tree@{B\+S\+Tree}!print@{print}}
+\index{print@{print}!B\+S\+Tree@{B\+S\+Tree}}
+\subsubsection{\texorpdfstring{print()}{print()}}
+{\footnotesize\ttfamily template$<$typename K , typename T , typename C $>$ \\
+void \hyperlink{class_b_s_tree}{B\+S\+Tree}$<$ K, T, C $>$\+::print (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+Prints the value in all the nodes, traversing the tree in order. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em none} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+none 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_b_s_tree_a176f1ccfb16c72f653d27c0a8a02fbb5}\label{class_b_s_tree_a176f1ccfb16c72f653d27c0a8a02fbb5}} 
+\index{B\+S\+Tree@{B\+S\+Tree}!size\+\_\+of@{size\+\_\+of}}
+\index{size\+\_\+of@{size\+\_\+of}!B\+S\+Tree@{B\+S\+Tree}}
+\subsubsection{\texorpdfstring{size\+\_\+of()}{size\_of()}}
+{\footnotesize\ttfamily template$<$typename K, typename T, typename C = std\+::less$<$\+K$>$$>$ \\
+const int\& \hyperlink{class_b_s_tree}{B\+S\+Tree}$<$ K, T, C $>$\+::size\+\_\+of (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Returns the number of elements of the tree. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em none} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+const int\& Number of elements of the tree. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_b_s_tree_a8b5a7600d91dee310ece37c10cbceb6a}\label{class_b_s_tree_a8b5a7600d91dee310ece37c10cbceb6a}} 
+\index{B\+S\+Tree@{B\+S\+Tree}!square\+\_\+bracket\+\_\+test@{square\+\_\+bracket\+\_\+test}}
+\index{square\+\_\+bracket\+\_\+test@{square\+\_\+bracket\+\_\+test}!B\+S\+Tree@{B\+S\+Tree}}
+\subsubsection{\texorpdfstring{square\+\_\+bracket\+\_\+test()}{square\_bracket\_test()}}
+{\footnotesize\ttfamily template$<$typename K , typename T , typename C $>$ \\
+const T \& \hyperlink{class_b_s_tree}{B\+S\+Tree}$<$ K, T, C $>$\+::square\+\_\+bracket\+\_\+test (\begin{DoxyParamCaption}\item[{const K \&}]{key }\end{DoxyParamCaption}) const}
+
+
+
+Operator $<$$<$ to print a \hyperlink{class_b_s_tree}{B\+S\+Tree}. 
+
+Iterates the tree using const iterators and prints \char`\"{}key\+: value\char`\"{} for each node.
+
+
+\begin{DoxyParams}{Parameters}
+{\em os} & Output\+Stream, where the content of the \hyperlink{class_b_s_tree}{B\+S\+Tree} should be printed. \\
+\hline
+{\em t} & Const reference to the \hyperlink{class_b_s_tree}{B\+S\+Tree} to be printed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Reference to the Output\+Stream.
+\end{DoxyReturn}
+Test function for const\mbox{[}\mbox{]} operator
+
+Trivial function declared as const which calls the const\mbox{[}\mbox{]} operator 
+\begin{DoxyParams}{Parameters}
+{\em key} & key to be searched \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/w-\/wilson/\+D\+S\+S\+C/first\+\_\+year/exam\+\_\+advanced/test/include/\hyperlink{_b_s_t_8h}{B\+S\+T.\+h}\item 
+/home/w-\/wilson/\+D\+S\+S\+C/first\+\_\+year/exam\+\_\+advanced/test/src/B\+S\+T.\+hpp\item 
+/home/w-\/wilson/\+D\+S\+S\+C/first\+\_\+year/exam\+\_\+advanced/test/src/\hyperlink{main_8cc}{main.\+cc}\end{DoxyCompactItemize}

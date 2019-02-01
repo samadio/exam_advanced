@@ -1,0 +1,156 @@
+\ProvidesPackage{mystyle}
+
+
+
+
+
+
+\usepackage[T1]{fontenc}
+\usepackage[english,italian]{babel}
+
+\usepackage{graphicx}
+\usepackage{wrapfig,lipsum}
+\usepackage[utf8]{inputenc}
+\usepackage{gensymb}
+\usepackage{float}
+\usepackage{braket}
+\usepackage{amsmath}
+\usepackage[dvipsnames,table]{xcolor}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage[table]{xcolor}
+\usepackage{caption}
+\usepackage{booktabs}
+\usepackage{courier}
+\usepackage{CJKutf8}
+
+
+
+\usepackage{svg}
+
+
+
+\usepackage{lmodern}
+\usepackage{listings}
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+\lstset{
+frame = tb,
+basicstyle=\footnotesize\ttfamily,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=[95]Fortran,                 % the language of the code
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=4,                       % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files
+}
+
+
+
+
+
+
+
+\usepackage[tableposition=above]{caption}
+\usepackage{pifont}
+
+
+
+
+\usepackage{subfig}
+\usepackage{hyperref}
+
+\usepackage{xcolor}
+\hypersetup{
+    colorlinks,
+    linkcolor={red!50!black},
+    citecolor={red!50!black},
+    urlcolor={blue!50!black}
+}
+
+
+\setlength\parindent{12pt}
+
+\usepackage{caption}
+\captionsetup[figure]{name=Fig.}
+\captionsetup[table]{name=Tab.}
+%\renewcommand{\lstlistingname}{Listato}
+\usepackage[font=small,labelfont=bf]{caption}
+
+
+\newcommand{\refpar}[1] {\hyperref[#1]{(\ref{#1})}}
+
+\newcommand{\reftab}[1] {\hyperref[#1]{Tab. \ref{#1}}}
+
+\newcommand{\reffig}[1] {\hyperref[#1]{Fig. \ref{#1}}}
+
+\newcommand{\refsec}[1] {\hyperref[#1]{Sez. \ref{#1}}}
+
+
+
+
+\renewcommand{\contentsname}{Indice}
+\renewcommand{\listfigurename}{Elenco delle figure}
+
+\interfootnotelinepenalty=10000
+
+\numberwithin{equation}{section}
+\numberwithin{figure}{section}
+\numberwithin{table}{section}
+
+
+\usepackage{chngcntr}
+\usepackage[export]{adjustbox}
+
+\renewcommand{\thefootnote}{(\arabic{footnote})}
+
+\usepackage[hang,flushmargin]{footmisc}
+
+
+
+
+
+
+
+
+
+%%% Custom sectioning
+\usepackage{sectsty}
+\allsectionsfont{ \normalfont\scshape}
+
+
+%%% Custom headers/footers (fancyhdr package)
+\usepackage{fancyhdr}
+\pagestyle{fancyplain}
+\fancyhead{}											% No page header
+\fancyfoot[L]{}											% Empty 
+\fancyfoot[C]{}											% Empty
+\fancyfoot[R]{\thepage}									% Pagenumbering
+\renewcommand{\headrulewidth}{0pt}			% Remove header underlines
+\renewcommand{\footrulewidth}{0pt}				% Remove footer underlines
+\setlength{\headheight}{13.6pt}
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,110 @@
+\begin{theindex}
+
+  \item {/home/w-\/wilson/\+D\+S\+S\+C/first\+\_\+year/exam\+\_\+advanced/test/include/\+B\+S\+T.\+h}, 
+		\hyperpage{21}
+  \item {/home/w-\/wilson/\+D\+S\+S\+C/first\+\_\+year/exam\+\_\+advanced/test/src/main.\+cc}, 
+		\hyperpage{23}
+
+  \indexspace
+
+  \item {B\+S\+Tree}
+    \subitem {B\+S\+Tree}, \hyperpage{10}
+    \subitem {balance}, \hyperpage{11}
+    \subitem {begin}, \hyperpage{11}
+    \subitem {cbegin}, \hyperpage{11}
+    \subitem {cend}, \hyperpage{11}
+    \subitem {clear}, \hyperpage{12}
+    \subitem {end}, \hyperpage{12}
+    \subitem {find}, \hyperpage{12}
+    \subitem {get\+\_\+root}, \hyperpage{13}
+    \subitem {insert}, \hyperpage{13}
+    \subitem {is\+\_\+empty}, \hyperpage{14}
+    \subitem {operator=}, \hyperpage{14}
+    \subitem {operator[]}, \hyperpage{15}
+    \subitem {print}, \hyperpage{15}
+    \subitem {size\+\_\+of}, \hyperpage{15}
+    \subitem {square\+\_\+bracket\+\_\+test}, \hyperpage{16}
+  \item {B\+S\+Tree$<$ K, T, C $>$}, \hyperpage{9}
+  \item {B\+S\+Tree$<$ K, T, C $>$\+::\+Const\+Iterator}, 
+		\hyperpage{17}
+  \item {B\+S\+Tree$<$ K, T, C $>$\+::\+Iterator}, \hyperpage{18}
+  \item {balance}
+    \subitem {B\+S\+Tree}, \hyperpage{11}
+  \item {begin}
+    \subitem {B\+S\+Tree}, \hyperpage{11}
+
+  \indexspace
+
+  \item {cbegin}
+    \subitem {B\+S\+Tree}, \hyperpage{11}
+  \item {cend}
+    \subitem {B\+S\+Tree}, \hyperpage{11}
+  \item {clear}
+    \subitem {B\+S\+Tree}, \hyperpage{12}
+  \item {compareh}, \hyperpage{16}
+
+  \indexspace
+
+  \item {end}
+    \subitem {B\+S\+Tree}, \hyperpage{12}
+  \item {error}, \hyperpage{18}
+
+  \indexspace
+
+  \item {find}
+    \subitem {B\+S\+Tree}, \hyperpage{12}
+
+  \indexspace
+
+  \item {get\+\_\+next}
+    \subitem {Node\+Namespace\+::\+B\+S\+T\+Node}, \hyperpage{8}
+  \item {get\+\_\+root}
+    \subitem {B\+S\+Tree}, \hyperpage{13}
+
+  \indexspace
+
+  \item {has\+L\+Child}
+    \subitem {Node\+Namespace\+::\+B\+S\+T\+Node}, \hyperpage{8}
+  \item {has\+R\+Child}
+    \subitem {Node\+Namespace\+::\+B\+S\+T\+Node}, \hyperpage{8}
+
+  \indexspace
+
+  \item {insert}
+    \subitem {B\+S\+Tree}, \hyperpage{13}
+  \item {is\+\_\+empty}
+    \subitem {B\+S\+Tree}, \hyperpage{14}
+
+  \indexspace
+
+  \item {Node\+Namespace\+::\+B\+S\+T\+Node}
+    \subitem {get\+\_\+next}, \hyperpage{8}
+    \subitem {has\+L\+Child}, \hyperpage{8}
+    \subitem {has\+R\+Child}, \hyperpage{8}
+  \item {Node\+Namespace\+::\+B\+S\+T\+Node$<$ K, T $>$}, \hyperpage{7}
+
+  \indexspace
+
+  \item {operator=}
+    \subitem {B\+S\+Tree}, \hyperpage{14}
+  \item {operator[]}
+    \subitem {B\+S\+Tree}, \hyperpage{15}
+
+  \indexspace
+
+  \item {print}
+    \subitem {B\+S\+Tree}, \hyperpage{15}
+
+  \indexspace
+
+  \item {Random\+Key}, \hyperpage{19}
+  \item {Random\+Key\+\_\+explicit}, \hyperpage{19}
+
+  \indexspace
+
+  \item {size\+\_\+of}
+    \subitem {B\+S\+Tree}, \hyperpage{15}
+  \item {square\+\_\+bracket\+\_\+test}
+    \subitem {B\+S\+Tree}, \hyperpage{16}
+
+\end{theindex}
