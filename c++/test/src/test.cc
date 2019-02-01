@@ -19,12 +19,12 @@ const T& BSTree<K,T,C>::square_bracket_test(const K& key) const{
 }
 
 
-struct RandomKey_explicit {
+struct CustomKey_explicit {
   int one, two, three;
 };
 
 struct compareh {
-   bool operator()(RandomKey_explicit bingo, RandomKey_explicit bango) const {
+   bool operator()(CustomKey_explicit bingo, RandomKey_explicit bango) const {
         return bingo.two < bango.two;
    }
 };
@@ -34,17 +34,17 @@ struct compareh {
     // apparently it works, as if std::less<K> is using the overloaded operator
     // which is not really expected (but welcomed)
     // ergo: there is no need to explicitely define a custom comparison function
-    struct RandomKey {
+    struct CustomKey {
       int one, two, three;
-      bool operator<(RandomKey other) const {
+      bool operator<(CustomKey other) const {
         return two < other.two;
       }
     };
 
 
-//in order to do cout simply on RandomKey
+//in order to do cout simply on CustomKey
 
-std::ostream& operator<<(std::ostream& os, const RandomKey& k) {
+std::ostream& operator<<(std::ostream& os, const CustomKey& k) {
 
     os << k.one << ", " <<k.two<< ", "<<k.three;
     
@@ -86,14 +86,14 @@ try{
     test_copy.print();
 
     //tree with custom class as key
-    auto tree1 = BSTree<RandomKey, int>();
-    tree1.insert(RandomKey{0,8,41}, 8);
-    tree1.insert(RandomKey{11,3,51}, 3);
-    tree1.insert(RandomKey{13,10,1}, 10);
-    tree1.insert(RandomKey{21,6,17}, 6);
-    tree1.insert(RandomKey{1,4,18}, 4);
-    tree1.insert(RandomKey{1,5,18}, 10);
-    tree1.insert(RandomKey{1,4,18}, 72); //inserting identicals
+    auto tree1 = BSTree<CustomKey, int>();
+    tree1.insert(CustomKey{0,8,41}, 8);
+    tree1.insert(CustomKey{11,3,51}, 3);
+    tree1.insert(CustomKey{13,10,1}, 10);
+    tree1.insert(CustomKey{21,6,17}, 6);
+    tree1.insert(CustomKey{1,4,18}, 4);
+    tree1.insert(CustomKey{1,5,18}, 10);
+    tree1.insert(CustomKey{1,4,18}, 72); //inserting identicals
     
 
     std::cout<<"Printing tree using custom key, with operator < overloading"<<std::endl;
@@ -102,11 +102,11 @@ try{
     }
 
     //find test: find works
-    auto pair=*(tree1.find(RandomKey{0,8,41}));
+    auto pair=*(tree1.find(CustomKey{0,8,41}));
 
     std::cout<<"finding 0 8 41, expecting 8 as output. Get: " << pair.second <<std::endl;
     
-    auto key=RandomKey{1,8,51};
+    auto key=CustomKey{1,8,51};
     
     auto pair2=*(tree1.find(key));
 
@@ -124,24 +124,24 @@ try{
     
     std::cout<<"finding 1 8 51 with const [], expecting 8 as output. Get: \n" << tree1.square_bracket_test(key) <<std::endl;
     
-    BSTree<RandomKey, int> tree2{tree1}; //copy ctor for custom class
+    BSTree<CustomKey, int> tree2{tree1}; //copy ctor for custom class
     std::cout<<"tree2 copy ctor from previous \n"<<tree2<<std::endl;
     tree2.clear(); //clear test for custom class
 //    std::cout<<"tree2 empty "<<tree2<<std::endl;  //error works
     tree2=tree1;
     std::cout<<"tree2 copy assign from previous \n"<<tree2<<std::endl;	//using putto overloaded
-    BSTree<RandomKey, int> tree3{std::move(tree2)}; //move ctor
+    BSTree<CustomKey, int> tree3{std::move(tree2)}; //move ctor
     tree2=std::move(tree1); //move assign
     
     // the following works too, it requires the functor compareh()
     // if compareh() is omitted, the code does not compile
 
-/*    auto tree2 = BSTree<RandomKey_explicit, int, compareh>();
-    tree2.insert(RandomKey_explicit{0,8,41}, 8);
-    tree2.insert(RandomKey_explicit{11,3,51}, 3);
-    tree2.insert(RandomKey_explicit{13,10,1}, 10);
-    tree2.insert(RandomKey_explicit{21,6,17}, 6);
-    tree2.insert(RandomKey_explicit{1,4,18}, 4);
+/*    auto tree2 = BSTree<CustomKey_explicit, int, compareh>();
+    tree2.insert(CustomKey_explicit{0,8,41}, 8);
+    tree2.insert(CustomKey_explicit{11,3,51}, 3);
+    tree2.insert(CustomKey_explicit{13,10,1}, 10);
+    tree2.insert(CustomKey_explicit{21,6,17}, 6);
+    tree2.insert(CustomKey_explicit{1,4,18}, 4);
 
 
     std::cout<<"Printing tree using custom key, functor"<<std::endl;
