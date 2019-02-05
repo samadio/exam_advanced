@@ -3,7 +3,10 @@ from collections import defaultdict
 
 class PostcardList: 
     def __init__(self):
-        self._file = "" #keep track of multiple file
+        '''
+        constructor
+        '''
+        self._file = list() #keep track of multiple file
         self._postcards = []
         self._date= {} #dict(str(date),list(indexes where data is))
         self._from= {}
@@ -11,51 +14,91 @@ class PostcardList:
 #date are stored as string, because we are required to do so, otherwise it's even
  #possible to store them directly as dates
         
-        
+    def __delitem__(self):
+        '''
+        destructor
+        '''
+        del self._file
+        del self._postcards
+        del self._date #dict(str(date),list(indexes where data is))
+        del self._from
+        del self._to
+    
+    def clear(self): #Not sure: which is to be preferred?
+        '''
+        clear content of variable
+        '''
+        del self
+        self=PostcardList()
+        #self._file = list() #keep track of multiple file
+        #self._postcards = []
+        #self._date= {} #dict(str(date),list(indexes where data is))
+        #self._from= {}
+        #self._to= {}
+    
     def getNumberOfPostcards(self):
+        '''
+        returns number of postcards in PostcardList
+        '''
         return len(self._postcards)
     
-    def parsePostcards(self):
-        #here I might need to reset all the dictionaries
-        for i,card in enumerate(self._postcards):
+    def parsePostcards(self,start=0):
+        '''
+        given the postcards inserted in self._postcards, it updates dictionaries of self._date,._from and ._to
+        '''
+        tmp=self._postcards[start:] #tmp is new postcards added
+        for i,card in enumerate(tmp):
             card = card.split(";")
             card[0]=card[0].replace('date:','') #date: is deleted
             card[1]=card[1].replace(" from:","")
             card[2]=card[2].replace(" to:","")
             if card[0] not in self._date:
                 self._date[card[0]] = []
-            self._date[card[0]].append(i)   
+            self._date[card[0]].append(start+i)   
             if card[1] not in self._from:
                 self._from[card[1]] = []
-            self._from[card[1]].append(i)   
+            self._from[card[1]].append(start+i)   
             if card[2] not in self._to:
                 self._to[card[2]] = []
-            self._to[card[2]].append(i)   
+            self._to[card[2]].append(start+i)   
 
     
     def readFile(self,filename):
-        self._postcards = [] ##delete everything?
-        self._file = filename
+        '''
+        read postcards from formatted file and create new Postcardlist
+        '''
+        self.clear()
+        self._file = [filename]
         with open(filename,'r') as f:
             for i in f:
                 self._postcards.append(i)
         self.parsePostcards()
-    
+
     def writeFile(self,filename):
+        '''
+        write a new file named "filename" with formatted content of self
+        '''
         with open(filename,'w') as f:
             for i in self._postcards:
                 print(i,file=f)
     
-    #updateLists(self,...): as read but appending to self._postcards
     def updateLists(self,newfilename):
-        self._file = newfilename
+        '''
+        appends elements from a new or updated file to self
+        '''
+        self._file.append(newfilename)
+        previous_size=len(self._postcards)
         with open(newfilename,'r') as f:
             for i in f:
                 self._postcards.append(i)
-        #self.parsePostcards()  # this may couse trouble
-        # if I want to do this, I need to reset all the dictionaries
+        self.parsePostcards(previous_size)
+        
+        
         
     def updateFile(self,filename):
+        '''
+        Update a file named "filename" with the content of self
+        '''
         with open(filename,'a+') as f:
             for i in self._postcards:
                 print(i,file=f)
@@ -65,8 +108,10 @@ class PostcardList:
     #range methods            
                 
     def getPostcardsByDateRange(self,date_range):  #data range assumed to be a list of strings
-        l = []
-    
+        '''
+        takes date_range as list [lower_bound,upper_b] and return self._postcards with date in that range
+        '''
+        l = []    
         for i in (self._date).keys():  #cycle through the dict keys (date string)
             tmp=dt.strptime(i, "%Y-%m-%d")
             if (date_range[0]<=tmp<=date_range[1]):
