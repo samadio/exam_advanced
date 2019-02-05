@@ -6,9 +6,10 @@ To do (C++):
  - [x] where to use const keyword;
  - [x] where to use pairs instead of the single K,T;
  - [x] noexcept and error handling;
- - [ ] tests
- - [ ] report
+ - [x] tests
+ - [ ] check report
 
 To do (Python):
- - [ ] everything
+ - [x] pass tests
+ - [ ] clean and *pythonyze* the code
 
