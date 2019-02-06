@@ -1,11 +1,11 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2019.2.6)  6 FEB 2019 19:24
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.12.27)  6 FEB 2019 20:18
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **Report_Amadio_Indri.tex
 (./Report_Amadio_Indri.tex
 LaTeX2e <2017-04-15>
-Babel <3.18> and hyphenation patterns for 34 language(s) loaded.
+Babel <3.18> and hyphenation patterns for 84 language(s) loaded.
 (/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrartcl.cls
 Document Class: scrartcl 2017/09/07 v3.24 KOMA-Script document class (article)
 (/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrkbase.sty
@@ -378,8 +378,6 @@ File: babel.def 2018/02/14 3.18 Babel common definitions
 (/usr/share/texlive/texmf-dist/tex/generic/babel/txtbabel.def)
 \bbl@dirlevel=\count277
 )
-\l@british = a dialect from \language\l@english 
-\l@UKenglish = a dialect from \language\l@english 
 \l@canadian = a dialect from \language\l@american 
 \l@australian = a dialect from \language\l@british 
 \l@newzealand = a dialect from \language\l@british 
@@ -1204,7 +1202,7 @@ Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 )
 \Hy@SectionHShift=\skip84
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 84.
+Package hyperref Info: Option `colorlinks' set `true' on input line 83.
 
 (/usr/share/texlive/texmf-dist/tex/latex/chngcntr/chngcntr.sty
 Package: chngcntr 2009/09/02 v1.0a change counter resetting
@@ -1289,7 +1287,7 @@ Class scrartcl Warning: Usage of package `fancyhdr' together
 (scrartcl)              `\addtokomafont' for the page style elements need
 (scrartcl)              explicite user intervention to work.
 (scrartcl)              Nevertheless, using requested
-(scrartcl)              package `fancyhdr' on input line 139.
+(scrartcl)              package `fancyhdr' on input line 138.
 
 (/usr/share/texlive/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
 Package: fancyhdr 2017/06/30 v3.9a Extensive control of page headers and footer
@@ -1535,16 +1533,6 @@ LaTeX Font Info:    Try loading font information for T1+lmtt on input line 16.
 (/usr/share/texmf/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
-! Undefined control sequence.
-l.19 ...} with user defined classes such as \textt
-                                                  {CustomKey} and \texttt{Cu...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-
 Underfull \hbox (badness 10000) in paragraph at lines 16--20
 
  []
@@ -1558,35 +1546,7 @@ LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <12> not available
  [1
 
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]
-! Undefined control sequence.
-l.44 ...separately or contained within an \textttt
-                                                  {std::pair}. If the key ch...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.44 ...method returns a boolean which is \textttt
-                                                  {True} if a new node was a...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Undefined control sequence.
-l.44 ...True} if a new node was appended, \textttt
-                                                  {False} if the key was alr...
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-[2]
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <8> on input line 68.
 LaTeX Font Info:    External font `lmex10' loaded for size
@@ -1598,78 +1558,41 @@ Underfull \hbox (badness 10000) in paragraph at lines 67--69
 
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <10.95> on input line 75.
-
-LaTeX Warning: File `img/plotO0.pdf' not found on input line 77.
-
-
-! Package pdftex.def Error: File `img/plotO0.pdf' not found: using draft settin
-g.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.77 ...hics[width=0.85\textwidth]{img/plotO0.pdf}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
+<img/plotO0.pdf, id=38, 642.4pt x 383.4325pt>
+File: img/plotO0.pdf Graphic file (type pdf)
+<use img/plotO0.pdf>
+Package pdftex.def Info: img/plotO0.pdf  used on input line 77.
+(pdftex.def)             Requested size: 380.91403pt x 227.3641pt.
 [3]
-
-LaTeX Warning: File `img/plotO3.pdf' not found on input line 85.
-
-
-! Package pdftex.def Error: File `img/plotO3.pdf' not found: using draft settin
-g.
-
-See the pdftex.def package documentation for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.85 ...hics[width=0.85\textwidth]{img/plotO3.pdf}
-                                                  
-Try typing  <return>  to proceed.
-If that doesn't work, type  X <return>  to quit.
-
-[4]
+<img/plotO3.pdf, id=45, 642.4pt x 383.4325pt>
+File: img/plotO3.pdf Graphic file (type pdf)
+<use img/plotO3.pdf>
+Package pdftex.def Info: img/plotO3.pdf  used on input line 85.
+(pdftex.def)             Requested size: 380.91403pt x 227.3641pt.
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 93.
- [5]
+ [4 <./img/plotO0.pdf> <./img/plotO3.pdf
+
+pdfTeX warning: /usr/bin/pdflatex (file ./img/plotO3.pdf): PDF inclusion: multi
+ple pdfs with page group included in a single page
+>] [5]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 93.
  (./Report_Amadio_Indri.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 93.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 93.
-
-
-Package rerunfilecheck Warning: File `Report_Amadio_Indri.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `Report_Amadio_Indri.out':
-(rerunfilecheck)             Before: 5ACD8C8A18FE0A8702BF3939580DFF86;89
-(rerunfilecheck)             After:  73958A7F614B6FBADB39A612C3CCC32C;234.
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-
-Package biblatex Warning: Please (re)run Biber on the file:
-(biblatex)                Report_Amadio_Indri
-(biblatex)                and rerun LaTeX afterwards.
-
+Package rerunfilecheck Info: File `Report_Amadio_Indri.out' has not changed.
+(rerunfilecheck)             Checksum: 73958A7F614B6FBADB39A612C3CCC32C;234.
 Package logreq Info: Writing requests to 'Report_Amadio_Indri.run.xml'.
 \openout1 = `Report_Amadio_Indri.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 21553 strings out of 494260
- 349835 string characters out of 6162498
- 1018602 words of memory out of 5000000
- 24487 multiletter control sequences out of 15000+600000
+ 21567 strings out of 492982
+ 350211 string characters out of 6134895
+ 1021885 words of memory out of 5000000
+ 24707 multiletter control sequences out of 15000+600000
  62709 words of font info for 51 fonts, out of 8000000 for 9000
- 395 hyphenation exceptions out of 8191
- 54i,12n,77p,8830b,1218s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 1141 hyphenation exceptions out of 8191
+ 54i,12n,77p,8830b,1548s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dv
 ips/lm/lm-mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-ec.enc}{/usr/share
 /texmf/fonts/enc/dvips/lm/lm-mathsy.enc}</usr/share/texmf/fonts/type1/public/lm
@@ -1679,10 +1602,10 @@ i12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fon
 ts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr17.pfb>
 </usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type
 1/public/lm/lmtt12.pfb>
-Output written on Report_Amadio_Indri.pdf (5 pages, 172707 bytes).
+Output written on Report_Amadio_Indri.pdf (5 pages, 200329 bytes).
 PDF statistics:
- 90 PDF objects out of 1000 (max. 8388607)
- 73 compressed objects within 1 object stream
+ 131 PDF objects out of 1000 (max. 8388607)
+ 103 compressed objects within 2 object streams
  13 named destinations out of 1000 (max. 500000)
- 17 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 51 words of extra memory for PDF output out of 10000 (max. 10000000)
 
