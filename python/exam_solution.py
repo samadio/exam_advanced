@@ -1,72 +1,127 @@
-from datetime import datetime as dt# use this module to deal with dates:  https://docs.python.org/3/library/datetime.html
-from collections import defaultdict
+"""
+File: exam_solution.py
+Authors: Amadio Simone, Indri Patrick
+Date: February 5, 2019
+
+Contains the PostcardList class, solution to the exam request.
+"""
+
+from datetime import datetime as dt # Used to deal with dates.
 
 class PostcardList: 
+    """
+    Class that reads/writes Postcard message from/to a properly formatted file.
+    Each record is a Postcard.
+    The Postcard format is "date:$(DATE); from:$(SENDER); to:$(RECEIVER);"
+
+    Attributes
+    ----------
+    _file : list
+        List of file names, to keep track of multiple files.
+    _postcards : list
+        List of postcards read from _file.
+    _date : dict
+        Dict where the key is the str date, and the value is a list of indices.
+        Each index refers to the corresponding record.
+    _from: dict
+        Dict where the key is the str sender, and the value is a list of indices.
+        Each index refers to the corresponding record.
+    _to: dict
+        Dict where the key is the str receiver, and the value is a list of indices.
+        Each index refers to the corresponding record.
+
+    Methods
+    -------
+    clear()
+        Clears attributes, resetting the PostcardList to an empty one.
+    getNumberOfPostcards()
+        Returns the number of records.
+    parsePostcards(start = 0)
+        Parses the postcards in self._postcards.
+        It updates the self._date, ._from and ._to dicts.
+    readFile(filename)
+        Reads and parses poscards from a file, overwriting the attributes.
+    writeFile(filename)
+        Writes to file the records in self._postcards.
+    updateLists(newfilename)
+        Reads records from file and appends to self._postcards.
+        Then parses the newly added records, updating the dicts. 
+    updateFile(filename)
+        Appends to file the records in self._postcards.
+    getPostcardsByDateRange(date_range)
+        Takes date_range as list [l_bound, u_bount].
+        Returns a list of the records in self._postcards within the date_range.
+    getPostcardsBySender(sender)
+        Returns a list of the records in self._postcards sent by sender.
+    getPostcardsByReceiver(receiver)
+        Returns a list of the records in self._postcards received by receiver.
+    """
+
+
     def __init__(self):
-        '''
-        constructor
-        '''
-        self._file = list() #keep track of multiple file
-        self._postcards = []
-        self._date= {} #dict(str(date),list(indexes where data is))
-        self._from= {}
-        self._to= {}
-#date are stored as string, because we are required to do so, otherwise it's even
- #possible to store them directly as dates
-        
-    def __delitem__(self):
-        '''
-        destructor
-        '''
-        del self._file
-        del self._postcards
-        del self._date #dict(str(date),list(indexes where data is))
-        del self._from
-        del self._to
-    
+
+        self.clear()
+
     def clear(self): #Not sure: which is to be preferred?
-        '''
-        clear content of variable
-        '''
-        del self
-        self=PostcardList()
-        #self._file = list() #keep track of multiple file
-        #self._postcards = []
-        #self._date= {} #dict(str(date),list(indexes where data is))
-        #self._from= {}
-        #self._to= {}
+        """
+        Clears attributes, resetting the PostcardList to an empty one.
+        """
+        self._file = []
+        self._postcards = []
+        self._date = {} # Dates will be stored as str, as requested.
+                        # Alternatively, they can be stored as datetime.date
+        self._from = {}
+        self._to = {}
     
     def getNumberOfPostcards(self):
-        '''
-        returns number of postcards in PostcardList
-        '''
+        """
+        Returns the number of records.
+        """
+
         return len(self._postcards)
     
     def parsePostcards(self,start=0):
-        '''
-        given the postcards inserted in self._postcards, it updates dictionaries of self._date,._from and ._to
-        '''
-        tmp=self._postcards[start:] #tmp is new postcards added
+        """
+        Parses the postcards in self._postcards from the start record on.
+        It updates the self._date, ._from and ._to dicts.
+
+        Parameters
+        ----------
+        start : int
+            The record from which the parsing should start.
+        """
+
+        tmp = self._postcards[start:] # Newly added records.
+
         for i,card in enumerate(tmp):
             card = card.split(";")
-            card[0]=card[0].replace('date:','') #date: is deleted
-            card[1]=card[1].replace(" from:","")
-            card[2]=card[2].replace(" to:","")
-            if card[0] not in self._date:
-                self._date[card[0]] = []
-            self._date[card[0]].append(start+i)   
-            if card[1] not in self._from:
-                self._from[card[1]] = []
-            self._from[card[1]].append(start+i)   
-            if card[2] not in self._to:
-                self._to[card[2]] = []
-            self._to[card[2]].append(start+i)   
+
+            # Cleaning entries correcting format.
+            date = card[0].replace('date:','')
+            sender = card[1].replace(" from:","")
+            receiver = card[2].replace(" to:","")
+
+            if date not in self._date:
+                self._date[date] = []
+            self._date[date].append(start+i)   
+            if sender not in self._from:
+                self._from[sender] = []
+            self._from[sender].append(start+i)   
+            if receiver not in self._to:
+                self._to[receiver] = []
+            self._to[receiver].append(start+i)   
 
     
     def readFile(self,filename):
-        '''
-        read postcards from formatted file and create new Postcardlist
-        '''
+        """
+        Reads and parses poscards from a file, overwriting the attributes.
+
+        Parameters
+        ----------
+        filename : str
+            Name of the file from which records should be read.
+        """
+
         self.clear()
         self._file = [filename]
         with open(filename,'r') as f:
@@ -74,18 +129,33 @@ class PostcardList:
                 self._postcards.append(i)
         self.parsePostcards()
 
+
     def writeFile(self,filename):
-        '''
-        write a new file named "filename" with formatted content of self
-        '''
+        """
+        Writes to file the records in self._postcards.
+
+        Parameters
+        ----------
+        filename : str
+            Name of the file on which records should be written.
+        """
+
         with open(filename,'w') as f:
             for i in self._postcards:
                 print(i,file=f)
     
+
     def updateLists(self,newfilename):
-        '''
-        appends elements from a new or updated file to self
-        '''
+        """
+        Reads records from file and appends to self._postcards.
+        Then parses the newly added records, updating the dicts. 
+
+        Parameters
+        ----------
+        newfilename : str
+            Name of the file from which records should be read.
+        """
+
         self._file.append(newfilename)
         previous_size=len(self._postcards)
         with open(newfilename,'r') as f:
@@ -96,41 +166,64 @@ class PostcardList:
         
         
     def updateFile(self,filename):
-        '''
-        Update a file named "filename" with the content of self
-        '''
+        """
+        Appends to file the records in self._postcards.
+
+        Parameters
+        ----------
+        filename : str
+            Name of the file on which records should be appended.
+        """
+
         with open(filename,'a+') as f:
             for i in self._postcards:
                 print(i,file=f)
                 
-                
-                
-    #range methods            
-                
-    def getPostcardsByDateRange(self,date_range):  #data range assumed to be a list of strings
-        '''
-        takes date_range as list [lower_bound,upper_b] and return self._postcards with date in that range
-        '''
+
+    def getPostcardsByDateRange(self,date_range):
+        """
+        Takes date_range as list [l_bound, u_bount].
+        Returns a list of the records in self._postcards within the date_range.
+
+        Parameters
+        ----------
+        date_range : list
+        List containing [l_bound, u_bound], assumed to be a list of str.
+        """
+
         l = []    
+
         for i in (self._date).keys():  #cycle through the dict keys (date string)
             tmp=dt.strptime(i, "%Y-%m-%d")
             if (date_range[0]<=tmp<=date_range[1]):
                 for j in self._date[i]:
                     l.append(   (self._postcards[j])   )
+
         return l
     
-   # added list comprehension, more pythonic 
     
     def getPostcardsBySender(self, sender):
-        '''
-        returns a list with the postcards from a given sender
-        '''
+        """
+        Returns a list of the records in self._postcards sent by sender.
+
+        Parameters
+        ---------
+        sender : str
+            The sender whose records should be returned.
+        """
+
         return [self._postcards[i] for i in self._from.get(sender, [])]
     
     
     def getPostcardsByReceiver(self, receiver):
-        '''
-        returns a list with the postcards from a given receiver
-        '''
+        """
+        Returns a list of the records in self._postcards received by receiver.
+
+        Parameters
+        ----------
+        receiver : str
+            The receiver whose records should be returned.
+        """
+
         return [self._postcards[i] for i in self._to.get(receiver, [])]
         

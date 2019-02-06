@@ -11,5 +11,5 @@ To do (C++):
 
 To do (Python):
  - [x] pass tests
- - [ ] clean and *pythonyze* the code
+ - [x] clean and *pythonyze* the code
 
