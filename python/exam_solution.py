@@ -90,10 +90,9 @@ class PostcardList:
         start : int
             The record from which the parsing should start.
         """
+        
 
-        tmp = self._postcards[start:] # Newly added records.
-
-        for i,card in enumerate(tmp):
+        for i,card in enumerate(self._postcards[start:]):   # Newly added records.
             card = card.split(";")
 
             # Cleaning entries correcting format.
@@ -182,13 +181,13 @@ class PostcardList:
 
     def getPostcardsByDateRange(self,date_range):
         """
-        Takes date_range as list [l_bound, u_bount].
+        Takes date_range as list [l_bound, u_bound].
         Returns a list of the records in self._postcards within the date_range.
 
         Parameters
         ----------
         date_range : list
-        List containing [l_bound, u_bound], assumed to be a list of str.
+        List containing [l_bound, u_bound], assumed to be a list of dates.
         """
 
         l = []    
