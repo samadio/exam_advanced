@@ -24,7 +24,7 @@ struct CustomKey_explicit {
 };
 
 struct compareh {
-   bool operator()(CustomKey_explicit bingo, RandomKey_explicit bango) const {
+   bool operator()(CustomKey_explicit bingo, CustomKey_explicit bango) const {
         return bingo.two < bango.two;
    }
 };

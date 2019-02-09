@@ -1,28 +1,34 @@
-IDIR=../include
-CC=g++
-CFLAGS=-O0 -ggdb -Wall -Wextra -std=c++11 -I$(IDIR)
+CXX = g++
+CXXFLAGS = -O0 -ggdb -Wall -Wextra -std=c++11 -I$(IDIR)
+EXE = main.x 
 
-ODIR=obj
+IDIR = ../include
+ODIR = obj
 
-_DEPS = BST.h
-# $(patsubst pattern,replacement,text)
-# here pattern=%, which acts as a wildcard
-DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))
+_DEPS = BST.h															# $(patsubst pattern,replacement,text)
+DEPS = $(patsubst %,$(IDIR)/%,$(_DEPS))		# here pattern=%, which acts as a wildcard
 
 _OBJ = main.o BST.o 
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
-$(ODIR)/%.o: %.cc $(DEPS) BST.hpp
-	$(CC) -c -o $@ $< $(CFLAGS)
+
+all: $(EXE)
+
+$(ODIR)/%.o: %.cc $(DEPS) 
+	$(CXX) -c -o $@ $< $(CXXFLAGS)
 
 $(ODIR)/%.o: %.hpp $(DEPS)
-	$(CC) -c -x c++ -o $@ $< $(CFLAGS)
+	$(CXX) -c -x c++ -o $@ $< $(CXXFLAGS)
 
-main.x: $(OBJ) 
-	$(CC) -o $@ $^ $(CFLAGS)
+$(EXE): $(OBJ) 
+	$(CXX) -o $@ $^ $(CXXFLAGS)
 
-
-.PHONY: clean
 
 clean:
-	rm -f $(ODIR)/*.o *~ core $(INCDIR)/*~
+	rm -f $(ODIR)/*.o *.x *~
+
+
+.PHONY: clean all
+
+main.o: BST.h
+BST.o: BST.h
