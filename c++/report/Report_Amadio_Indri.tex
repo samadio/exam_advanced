@@ -15,8 +15,8 @@
 \section{Introduction}
 	The aim of the project is to implement a binary search tree. Its performance should then be compared with \texttt{std::map}.\\
     The tree is templated on key and value type. A third template allows user defined class to be used as key, if a compare structure is provided. As default, the tree uses \texttt{std::less} to compare two keys.\\\\
-    The work is organised in two main folders: \texttt{test} and \texttt{performance}.\\
-In the \texttt{test} folder, we tested the funtionalities and features of our class, using \texttt{std::cout} to show what method is being called and verify its validity, verifying error handling as well. Furthermore, we tested the correct behaviour of our \texttt{BSTree} with user defined classes such as \texttt{CustomKey} and \texttt{CustomKey\_Explicit}.
+    The code is organized in two folders: \texttt{include/}, which contains a header file, and \texttt{src/} which contains the implementation of the binary search tree and the \texttt{makefile}. The latter should be used to generate the executables to test and benchmark the implemented class. Please follow the instructions on the provided \texttt{README.md}.\\
+    \texttt{test.cc} is used to test the functionalities and features of our class, using \texttt{std::cout} to show what method is being called and verify its validity, verifying error handling as well. Furthermore, we tested the correct behaviour of our \texttt{BSTree} with user defined classes such as \texttt{CustomKey} and \texttt{CustomKey\_Explicit}.
 	
 \section{Classes}
 	\begin{itemize}
@@ -64,7 +64,7 @@ In the \texttt{test} folder, we tested the funtionalities and features of our cl
 	
 	
 	\section{Benchmark}
-	In the \texttt{performance} folder, we provide the code we used to benchmark our BSTree.\\
+	\texttt{benchmark.cc} provides the code we used to benchmark our \texttt{BSTree}.\\
 	We tested the effectiveness of our \texttt{find()} function and compared it with \texttt{std::map}. We tested both on a random unbalanced tree and on its balanced conversion. We chose double variables as keys. First, we populate a \texttt{std::vector} with an increasing sequence of doubles, in interval $[0,1]$. Then, we randomly shuffle the vector: this procedure generates a random vector of doubles with no repetitions. We finally insert each element in a \texttt{BSTree}. This procedure should result in randomly generated trees.\\
 	
 	\noindent We used the \texttt{find()} function to search through all the keys in the data structures and sum up the time taken. For each dimension we took the average performance over 5 random trees, in order to minimise fluctuations. The results are shown in the following plots.
@@ -86,8 +86,8 @@ In the \texttt{test} folder, we tested the funtionalities and features of our cl
     \end{figure}
     
     	
-	We ran our test both on O0 and O3 optimisation levels. It seems that using O0 the std::map is faster than our tree, probably because it's implemented in an optimised fashion. Using O3 on the other hand, our code runs faster, probably because our simpler code can be more easily optimised.
+	We ran our test both on \texttt{-O0} and \texttt{-O3} optimisation levels. It seems that using \texttt{-O0} the \texttt{std::map} is faster than our tree, probably because it's implemented in an optimised fashion. Using \texttt{-O3} on the other hand, our code runs faster, probably because our simpler code can be more easily optimised.
 	
-	We expect the balanced tree and std::map to have a log(N) complexity for the find function, resulting in a linear behaviour in the plots. We can see that for a sufficient number of nodes, this hypothesis seems to hold. 
+	We expect the balanced tree and \texttt{std::map} to have a $log(N)$ complexity for the find function, resulting in a linear behaviour in the plots. We can see that for a sufficient number of nodes, this hypothesis seems to hold. 
 	
 \end{document}

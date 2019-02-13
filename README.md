@@ -1,15 +1,9 @@
-Private repository for advanced programming exam.
+## Advanced Programming exam
 
-To do (C++):
- - [x] discuss and implement balance();
- - [x] discuss const operator[];
- - [x] where to use const keyword;
- - [x] where to use pairs instead of the single K,T;
- - [x] noexcept and error handling;
- - [x] tests
- - [ ] check report
+This repository contains the final project for the Advanced Programming course, part of the DSSC Master Degree.
 
-To do (Python):
- - [x] pass tests
- - [x] clean and *pythonyze* the code
 
+
+
+
+Authors: Amadio Simone, Indri Patrick.
