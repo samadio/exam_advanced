@@ -155,7 +155,12 @@ class BSTree {
    *
    * @param t BSTree to be copied, passed by const reference.
    */
-  BSTree (const BSTree& t) { copy_tree(t.root.get()); }
+  BSTree (const BSTree& t) {
+#ifdef VERBOSE
+     std::cout<<"copy constructor"<<std::endl;
+#endif
+     copy_tree(t.root.get());
+  }
  
   /*!
    * @brief Copy assignment of a BSTree.

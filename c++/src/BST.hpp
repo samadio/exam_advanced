@@ -155,12 +155,14 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
   void BSTree<K,T,C>::clear() noexcept {
     root.reset();
     size = 0;
+#ifdef VERBOSE
+    std::cout<<"Emptying your tree."<<std::endl;
+#endif
   }
 
 
   template <typename K, typename T, typename C>
   void BSTree<K,T,C>::print() const {
-    
     std::cout<<*this<<std::endl;
   }
 
@@ -283,11 +285,11 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
 
   template <typename K, typename T, typename C>
   BSTree<K,T,C>& BSTree<K,T,C>::operator=(const BSTree<K,T,C>& t) {
+    std::cout<<"copy assign"<<std::endl;
     this -> clear();
     BSTree<K,T,C> temp{t};
     (*this) = std::move(temp);
     return *this;
   }
-
 
 #endif
