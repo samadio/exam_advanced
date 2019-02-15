@@ -284,20 +284,12 @@ class BSTree {
 
   const T& operator[](const K& k) const;
   
-  /*!
-   * @brief Operator << to print a BSTree.
-   *
-   * Iterates the tree using const iterators and prints "key: value" for each node.
-   *
-   * @param os OutputStream, where the content of the BSTree should be printed.
-   * @param t Const reference to the BSTree to be printed.
-   * @return Reference to the OutputStream.
-   */
    
    /*!
-   * @brief Operator == to confront the content of two BSTrees.
+   * @brief Operators == to confront the content of two BSTrees.
    *
    * Iterates the tree using const iterators and check if their content is the same.
+   * Operator != is provided as well 
    *
    * @param another Tree to be confronted
    * @return Boolean: True if the trees have the same content
