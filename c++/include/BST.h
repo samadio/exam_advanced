@@ -282,41 +282,45 @@ class BSTree {
   */
   T& operator[](const K& k) ;
 
+  /*! 
+  * @brief Constant operator [] to access a BSTNode.
+  * Returns the value associated with key if found.
+  *
+  * @param k key to be found.
+  * @return the value associated with the key k.
+  */
   const T& operator[](const K& k) const;
-  
-   
-   /*!
-   * @brief Operators == to confront the content of two BSTrees.
+
+  /*!
+   * @brief Operator == compare BSTrees.
    *
-   * Iterates the tree using const iterators and check if their content is the same.
-   * Operator != is provided as well 
+   * Iterates the tree using const iterators, comparing each node. The
+   * trees are equal if they have the same size and the same noes.
+   * The structure of the tree is not required to be the same.
    *
-   * @param another Tree to be confronted
-   * @return Boolean: True if the trees have the same content
+   * @param another const reference to the BSTree to be compared.
+   * @return bool True if the BSTrees are identical, False otherwise.
    */
+  bool operator==(const BSTree& another);
 
-
-  bool operator==(const BSTree& another){
-    
-    bool res=1;
-    if( (*this).size!=another.size)return 0;
-    ConstIterator it1{(*this).root.get()};
-    ConstIterator it2{another.root.get()};
-    for(;it1!=(*this).cend() && it2!=another.cend(); ++it1, ++it2){
-      res*=(*it1==*it2);
-    }
-    return res;
-  }
-  
+  /*!
+   * @brief Operator != compare BSTrees.
+   *
+   * Iterates the tree using const iterators, comparing each node. The
+   * trees are equal if they have the same size and the same noes.
+   * The structure of the tree is not required to be the same.
+   *
+   * @param another const reference to the BSTree to be compared.
+   * @return bool True if the BSTrees are not identical, False otherwise.
+   */
   bool operator!=(const BSTree& another){  return !(*this==another);}
-  
+
   /*!
   * @brief Test function for const[] operator
   *
   * Trivial function declared as const which calls the const[] operator
   * @param key: key to be searched
   */
-
   const T& square_bracket_test(const K& key) const;
 
 
@@ -366,6 +370,19 @@ private:
   
 };
 
+
+
+/*!                                                                               
+* @brief Operator << to print a BSTree.                                           
+*                                                                                 
+* Iterates the tree using const iterators and prints "key: value" for each node.  
+*                                                                                 
+* @param os OutputStream, where the content of the BSTree should be printed.      
+* @param t Const reference to the BSTree to be printed.                           
+* @return Reference to the OutputStream.                                          
+*/        
+template <typename K, typename T, typename C>
+std::ostream& operator<<(std::ostream& os, const BSTree<K,T,C>& t);
 
 #include "../src/BST.hpp"
 

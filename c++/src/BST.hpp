@@ -272,15 +272,20 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
 
   
   template <typename K, typename T, typename C>
-  std::ostream& operator<<(std::ostream& os, const BSTree<K,T,C>& t) {
+  bool BSTree<K,T,C>::operator==(const BSTree<K,T,C>& another) {
+    bool res = 1;
+    if ( (*this).size != another.size ) return 0;
 
-    if (t.get_root() == nullptr) throw error{"Printing an empty tree"};    
+    ConstIterator it1{ (*this).root.get() };
+    ConstIterator it2{ (*this).root.get() };
 
-    for (auto it=t.cbegin();it!=t.cend();++it){
-      os << (*it).first << ": " <<(*it).second<< "\n";
+    for ( ; it1 != (*this).cend() && it2 != another.cend(); ++it1, ++it2) {
+      res *= ( *it1 == *it2 );
     }
-  return os;
+
+    return res;
   }
+
 
 
   template <typename K, typename T, typename C>
@@ -290,6 +295,18 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
     BSTree<K,T,C> temp{t};
     (*this) = std::move(temp);
     return *this;
+  }
+
+
+  template <typename K, typename T, typename C>
+  std::ostream& operator<<(std::ostream& os, const BSTree<K,T,C>& t) {
+
+    if (t.get_root() == nullptr) throw error{"Printing an empty tree"};    
+
+    for (auto it=t.cbegin();it!=t.cend();++it){
+      os << (*it).first << ": " <<(*it).second<< "\n";
+    }
+  return os;
   }
 
 #endif
