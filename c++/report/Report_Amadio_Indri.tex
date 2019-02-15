@@ -49,6 +49,8 @@
     In the \texttt{const} version, searching for a non-existent key throws an exception, since the tree is not supposed to be modified.
     
     In the non-\texttt{const} version, searching for a non-existent key provokes a new node to be created, containing the given key and the default value for the value type. This new insertion is advised to the user through a printed message.
+    
+    \item \texttt{operator==}. Returns \texttt{True} if the sizes of the trees and the content of every node are the same. It does not check the structure of the tree (insert-order dependent). If the same structure is needed, balancing the trees whose \texttt{==} returned \texttt{True} will achieve the aim.
 \end{itemize}
 
 
