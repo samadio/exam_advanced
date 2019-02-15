@@ -41,7 +41,7 @@ struct CustomKey {
 };
 
 
-// Overloading operator<< in order to simply print CustomKey
+// Overloading operator<< in order to easily print CustomKey
 std::ostream& operator<<(std::ostream& os, const CustomKey& k) {
     os << k.one << ", " <<k.two<< ", "<<k.three;
   return os;
@@ -89,7 +89,8 @@ int main() {
     std::cout << "\nPrinting tree and copy tree constructed with copy ctor, they're equal" << std::endl;
     BSTree<int,int> test_copy{tree};
     test_copy.print();
-
+    std::cout<<"Using == operator for trees"<<std::endl;
+    std::cout<< std::boolalpha<< (test_copy==tree) <<std::endl;
 
     // Custom key testing
     std::cout << "\nTesting BSTree with custom keys" << std::endl;
@@ -107,7 +108,7 @@ int main() {
       std::cout << (*it).first.two << ": " << (*it).second << std::endl;
     }
 
-    // Testinf find() for custom keys
+    // Testing find() for custom keys
     auto pair=*(tree1.find(CustomKey{0,8,41}));
 
     std::cout << "\nFinding 0 8 41, expecting 8 as output. Get: " << pair.second << std::endl;
@@ -121,10 +122,8 @@ int main() {
 
     // Is this a problem of coding? Not really: the user gave a "not biective" key: if u use for example the sum of all 
     // the three int of the keys as criteria, you'd have the same problem between (1 3 5) and (3 3 3).
-    // Even though they're different keys, in the order given they're the same. In reverse: If we
-    // said that the keys are equal if and only if all the elements are equal, how should we append a node
-    // node with the same second element as a previous? It's user responsability to give a proper order
-    // So I think we're actually fine, but it's something to be aware of.
+    // Even though they're different keys, in the order given they're the same. It's user responsability to give a proper
+    // order. So I think we're actually fine, but it's something to be aware of.
     
     std::cout << "Finding 1 8 51 with [], expecting 8 as output. Get: " << tree1[key] << std::endl;
     

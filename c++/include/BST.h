@@ -294,7 +294,19 @@ class BSTree {
    * @return Reference to the OutputStream.
    */
 
-
+  bool operator==(const BSTree& another){
+    
+    bool res=1;
+    if( (*this).size!=another.size)return 0;
+    ConstIterator it1{(*this).root.get()};
+    ConstIterator it2{another.root.get()};
+    for(;it1!=(*this).cend() && it2!=another.cend(); ++it1, ++it2){
+      res*=(*it1==*it2);
+    }
+    return res;
+  }
+  
+  bool operator!=(const BSTree& another){  return !(*this==another);}
   /*!
   * @brief Test function for const[] operator
   *
