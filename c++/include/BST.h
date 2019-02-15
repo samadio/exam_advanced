@@ -307,7 +307,7 @@ class BSTree {
    * @brief Operator != compare BSTrees.
    *
    * Iterates the tree using const iterators, comparing each node. The
-   * trees are equal if they have the same size and the same noes.
+   * trees are equal if they have the same size and the same content in every node.
    * The structure of the tree is not required to be the same.
    *
    * @param another const reference to the BSTree to be compared.
