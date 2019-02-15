@@ -293,6 +293,16 @@ class BSTree {
    * @param t Const reference to the BSTree to be printed.
    * @return Reference to the OutputStream.
    */
+   
+   /*!
+   * @brief Operator == to confront the content of two BSTrees.
+   *
+   * Iterates the tree using const iterators and check if their content is the same.
+   *
+   * @param another Tree to be confronted
+   * @return Boolean: True if the trees have the same content
+   */
+
 
   bool operator==(const BSTree& another){
     
@@ -307,6 +317,7 @@ class BSTree {
   }
   
   bool operator!=(const BSTree& another){  return !(*this==another);}
+  
   /*!
   * @brief Test function for const[] operator
   *
