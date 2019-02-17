@@ -62,7 +62,7 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
 // Subclasses
 
   template <typename K, typename T, typename C>
-  class BSTree<K,T,C>::Iterator {
+  class BSTree<K,T,C>::Iterator : public std::iterator<std::forward_iterator_tag, K,T,C>{
 
     BSTNode<K,T>* currNode;
 
