@@ -280,7 +280,8 @@ using BSTNode =  NodeNamespace::BSTNode<K,T>;
     ConstIterator it2{ (*this).root.get() };
 
     for ( ; it1 != (*this).cend() && it2 != another.cend(); ++it1, ++it2) {
-      res *= ( *it1 == *it2 );
+      res *= !( compare_f((*it1).first,(*it2).first) + compare_f((*it2).first, (*it1).first ) );
+      res *= (*it1).second==(*it2).second;
     }
 
     return res;

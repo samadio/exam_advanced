@@ -137,6 +137,9 @@ int main() {
     BSTree<CustomKey, int> tree2{tree1};
 
     std::cout << "\ntree2 copy ctor from previous \n" << tree2 << std::endl;
+    std::cout<<"Using == operator for trees"<<std::endl;
+    std::cout<< std::boolalpha<< (tree2==tree1) <<std::endl;
+
     tree2.clear(); //clear test for custom class
 
     // Testing exception handling: printing an empty tree
@@ -144,6 +147,9 @@ int main() {
 
     tree2 = tree1;
     std::cout << "tree2 copy assign from previous \n" << tree2 << std::endl;
+    std::cout<<"Using == operator for trees"<<std::endl;
+    std::cout<< std::boolalpha<< (tree2==tree1) <<std::endl;
+
     BSTree<CustomKey, int> tree3{std::move(tree2)}; // Move ctor
     tree2 = std::move(tree1); // Move assign
     
