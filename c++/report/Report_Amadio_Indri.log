@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.12.27)  15 FEB 2019 18:29
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017/Debian) (preloaded format=pdflatex 2018.12.27)  17 FEB 2019 11:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1548,38 +1548,38 @@ LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <12> not available
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}] [2]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 70.
+(Font)              <8> on input line 71.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 70.
+(Font)              <6> on input line 71.
 
-Underfull \hbox (badness 10000) in paragraph at lines 69--71
+Underfull \hbox (badness 10000) in paragraph at lines 70--72
 
  []
 
+[3]
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 77.
-<img/plotO0.pdf, id=38, 642.4pt x 383.4325pt>
+(Font)              <10.95> on input line 78.
+<img/plotO0.pdf, id=44, 642.4pt x 383.4325pt>
 File: img/plotO0.pdf Graphic file (type pdf)
 <use img/plotO0.pdf>
-Package pdftex.def Info: img/plotO0.pdf  used on input line 79.
+Package pdftex.def Info: img/plotO0.pdf  used on input line 80.
 (pdftex.def)             Requested size: 380.91403pt x 227.3641pt.
-[3]
 <img/plotO3.pdf, id=45, 642.4pt x 383.4325pt>
 File: img/plotO3.pdf Graphic file (type pdf)
 <use img/plotO3.pdf>
-Package pdftex.def Info: img/plotO3.pdf  used on input line 87.
+Package pdftex.def Info: img/plotO3.pdf  used on input line 88.
 (pdftex.def)             Requested size: 380.91403pt x 227.3641pt.
  [4 <./img/plotO0.pdf> <./img/plotO3.pdf
 
 pdfTeX warning: /usr/bin/pdflatex (file ./img/plotO3.pdf): PDF inclusion: multi
 ple pdfs with page group included in a single page
 >]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 95.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 96.
  [5]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 95.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 96.
  (./Report_Amadio_Indri.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 95.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 95.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 96.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 96.
 Package rerunfilecheck Info: File `Report_Amadio_Indri.out' has not changed.
 (rerunfilecheck)             Checksum: 73958A7F614B6FBADB39A612C3CCC32C;234.
 Package logreq Info: Writing requests to 'Report_Amadio_Indri.run.xml'.
@@ -1603,7 +1603,7 @@ i12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fon
 ts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr17.pfb>
 </usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/texmf/fonts/type
 1/public/lm/lmtt12.pfb>
-Output written on Report_Amadio_Indri.pdf (5 pages, 204221 bytes).
+Output written on Report_Amadio_Indri.pdf (5 pages, 204786 bytes).
 PDF statistics:
  131 PDF objects out of 1000 (max. 8388607)
  103 compressed objects within 2 object streams

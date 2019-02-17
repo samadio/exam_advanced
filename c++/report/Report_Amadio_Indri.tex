@@ -64,6 +64,7 @@
 		\item Overload the operator less than "<" with respect to the key class. Our code uses as default std::less, which, unless specified, exploit the "<" operator. In this case, there is no need to pass anything as a third template.
 	\end{itemize}
 	
+	\noindent The user should be aware that if two keys are not greater (\texttt{<}) nor  smaller (\texttt{>}) with respect to each other, in this class they will be considered as equal.
 	
 	\section{Benchmark}
 	\texttt{benchmark.cc} provides the code we used to benchmark our \texttt{BSTree}.\\
