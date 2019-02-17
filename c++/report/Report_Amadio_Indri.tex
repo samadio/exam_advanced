@@ -16,7 +16,8 @@
 	The aim of the project is to implement a binary search tree. Its performance should then be compared with \texttt{std::map}.\\
     The tree is templated on key and value type. A third template allows user defined class to be used as key, if a compare structure is provided. As default, the tree uses \texttt{std::less} to compare two keys.\\\\
     The code is organized in two folders: \texttt{include/}, which contains a header file, and \texttt{src/} which contains the implementation of the binary search tree and the \texttt{makefile}. The latter should be used to generate the executables to test and benchmark the implemented class. Please follow the instructions on the provided \texttt{README.md}.\\
-    \texttt{test.cc} is used to test the functionalities and features of our class, using \texttt{std::cout} to show what method is being called and verify its validity, verifying error handling as well. Furthermore, we tested the correct behaviour of our \texttt{BSTree} with user defined classes such as \texttt{CustomKey} and \texttt{CustomKey\_Explicit}.
+    \texttt{test.cc} is used to test the functionalities and features of our class, using \texttt{std::cout} to show what method is being called and verify its validity, verifying error handling as well. Furthermore, we tested the correct behaviour of our \texttt{BSTree} with user defined classes such as \texttt{CustomKey} and \texttt{CustomKey\_Explicit}.\\
+     A \texttt{makefile} with the following rules is provided: \texttt{make all} (or simply \texttt{make}) generates the testing executable, \texttt{make benchmark} generates the executable used for sampling the performance of our code, and \texttt{make clean} removes all the object files and executables.
 	
 \section{Classes}
 	\begin{itemize}

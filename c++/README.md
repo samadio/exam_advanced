@@ -1,6 +1,6 @@
 ## How to
 
-To compile the code, please use the `makefile` included in the `src/` folder.
+To compile the code, please use the `makefile`.
 
 #### Testing
 
