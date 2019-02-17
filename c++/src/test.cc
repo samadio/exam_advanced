@@ -87,6 +87,13 @@ int main() {
     std::cout << "\nBalancing tree" << std::endl;
     tree.balance();
     
+    std::cout<<"Test for is_empty(),expected true"<<std::endl;
+    auto test_tree = BSTree<int,int>();
+    std::cout<< std::boolalpha<< (test_tree.is_empty()) <<std::endl;
+
+    
+    std::cout<<"Test for operator != between trees,expected true"<<std::endl;
+    std::cout<< std::boolalpha<< (test_tree!=tree) <<std::endl;
 
     // Copy constructor
     std::cout << "\nPrinting tree and copy tree constructed with copy ctor, they're equal" << std::endl;
@@ -94,6 +101,7 @@ int main() {
     test_copy.print();
     std::cout<<"Using == operator for trees"<<std::endl;
     std::cout<< std::boolalpha<< (test_copy==tree) <<std::endl;
+    
 
     // Custom key testing
     std::cout << "\nTesting BSTree with custom keys" << std::endl;
