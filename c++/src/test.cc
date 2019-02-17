@@ -81,6 +81,9 @@ int main() {
     std::cout << "\nPrinting the BSTree" << std::endl;
     std::cout << tree <<std::endl;  // Overloading of operator<<
 
+    std::cout << "\nGetting the size of tree" << std::endl;
+    std::cout<< tree.size_of() << std::endl;
+
     std::cout << "\nBalancing tree" << std::endl;
     tree.balance();
     

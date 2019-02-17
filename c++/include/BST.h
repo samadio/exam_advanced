@@ -96,7 +96,7 @@ class BSTree {
 
   std::unique_ptr<BSTNode<K,T>> root = nullptr;
 
-  int size = 0;
+  std::size_t size = 0;
 
   
   public:
@@ -109,7 +109,7 @@ class BSTree {
    * @param none
    * @return const int& Number of elements of the tree.
    */
-  const int& size_of() const noexcept {return this -> size;}
+  const size_t& size_of() const noexcept {return this -> size;}
  
  /*!
   * @brief Check if the tree is empty.
